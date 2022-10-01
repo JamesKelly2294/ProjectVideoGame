@@ -18,15 +18,15 @@ public class Attackable : MonoBehaviour
     {
         get
         {
-            return _health > 0;
+            return Health > 0;
         }
     }
 
-    private int _health;
+    public int Health;
 
     void Start()
     {
-        _health = TotalHealth;
+        Health = TotalHealth;
     }
 
     /// <summary>
@@ -35,6 +35,6 @@ public class Attackable : MonoBehaviour
     /// <param name="amount">The amount of damage to inflict.</param>
     public void InflictDamage(int amount)
     {
-        _health = Math.Max(0, amount);
+        Health = Math.Max(0, amount);
     }
 }
