@@ -21,6 +21,12 @@ public class Beam : MonoBehaviour
 
     public float damagePerSecond;
 
+    public AudioSource fireSound, cooldownSound;
+    public float fireSoundNormalVolume = 1f;
+    public float cooldownSoundNormalVolume = 0.25f;
+    public float fireSoundCooldownTime = 0f;
+    public float fireSoundCooldownTotalTime = 0.25f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,11 +59,22 @@ public class Beam : MonoBehaviour
             if (beamFireTime > (beamFireTotalTime * beamFireSpeed)) {
                 isFiring = false;
                 beamFireTime = 0;
+                cooldownSound.Play();
             }
         } else {
             mat = preFireMat;
             strength = preFireBeamStrength.Evaluate(spookyGameManager.timerTime / spookyGameManager.timerTotalTime);
             spotColor = new Color(1f, 0f, 0f);
+
+            if (fireSoundCooldownTime < fireSoundCooldownTotalTime) {
+                fireSoundCooldownTime += Time.deltaTime;
+                if (fireSoundCooldownTime >= fireSoundCooldownTotalTime) {
+                    fireSound.Stop();
+                } 
+            }
+            
+            fireSound.volume = fireSoundNormalVolume * (1 - (fireSoundCooldownTime / fireSoundCooldownTotalTime));
+            cooldownSound.volume = cooldownSoundNormalVolume * (fireSoundCooldownTime / fireSoundCooldownTotalTime);
         }
 
         beam.SetActive(strength > 0.005);
@@ -71,5 +88,9 @@ public class Beam : MonoBehaviour
     public void Fire() {
         isFiring = true;
         beamFireTime = 0;
+        fireSound.Play();
+        fireSound.volume = fireSoundNormalVolume;
+        cooldownSound.volume = 0;
+        fireSoundCooldownTime = 0;
     }
 }
