@@ -45,6 +45,10 @@ public class DeathAnimation : MonoBehaviour
         if (attacker != null) {
             attacker.enabled = false;
         }
+
+        PubSubSender sender = GetComponent<PubSubSender>();
+        if (sender == null) { sender = gameObject.AddComponent<PubSubSender>(); }
+        sender.Publish("i.died", gameObject);
     }
 
     // Update is called once per frame

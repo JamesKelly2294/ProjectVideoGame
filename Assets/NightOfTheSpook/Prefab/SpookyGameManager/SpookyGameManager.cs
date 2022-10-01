@@ -8,7 +8,7 @@ public class SpookyGameManager : MonoBehaviour
     public float timerTime = 0f;
     public float timerTotalTime = 10f;
 
-    public int money = 231;
+    public int money = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +29,13 @@ public class SpookyGameManager : MonoBehaviour
     void Fire()
     {
         this.GetComponent<PubSubSender>().Publish("timer.didFire");
+    }
+
+    public void IDiedHandler(PubSubListenerEvent e) {
+
+        Enemy enemy = (e.value as GameObject).GetComponent<Enemy>();
+        if (enemy != null) {
+            money += enemy.experienceValue;
+        }
     }
 }
