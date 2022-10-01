@@ -48,6 +48,7 @@ public class PlayerInventoryGUI : MonoBehaviour
                 slotGUI.equipmentIcon.enabled = true;
                 slotGUI.equipmentIcon.sprite = inventorySlot.configuration.inventoryIcon;
                 slotGUI.equipmentCountText.text = inventorySlot.currentCharges + "/" + inventorySlot.configuration.baseMaxCharges;
+                slotGUI.equipmentSelection.enabled = _playerInventory.SelectedSlot == inventorySlot;
             }
         }
     }

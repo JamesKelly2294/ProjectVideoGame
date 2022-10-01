@@ -12,6 +12,14 @@ public class InventorySlot
 [RequireComponent(typeof(PubSubSender))]
 public class PlayerInventory : MonoBehaviour
 {
+    private int _selectedSlotIndex = 0;
+    public InventorySlot SelectedSlot
+    {
+        get
+        {
+            return slots[_selectedSlotIndex];
+        }
+    }
     public List<InventorySlot> slots;
     private PubSubSender _pubSub;
 
@@ -35,10 +43,29 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    private void SetSelectedSlotIndex(int index)
+    {
+        if (index < 0 || index >= InventoryCapacity)
+        {
+            return;
+        }
+
+        _selectedSlotIndex = index;
+        _pubSub.Publish("InventoryChanged");
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { SetSelectedSlotIndex(0); }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) { SetSelectedSlotIndex(1); }
+        else if(Input.GetKeyDown(KeyCode.Alpha3)) { SetSelectedSlotIndex(2); }
+        else if(Input.GetKeyDown(KeyCode.Alpha4)) { SetSelectedSlotIndex(3); }
+        else if(Input.GetKeyDown(KeyCode.Alpha5)) { SetSelectedSlotIndex(4); }
+        else if(Input.GetKeyDown(KeyCode.Alpha6)) { SetSelectedSlotIndex(5); }
+        else if(Input.GetKeyDown(KeyCode.Alpha7)) { SetSelectedSlotIndex(6); }
+        else if(Input.GetKeyDown(KeyCode.Alpha8)) { SetSelectedSlotIndex(7); }
+        else if(Input.GetKeyDown(KeyCode.Alpha9)) { SetSelectedSlotIndex(8); }
     }
 
     private InventorySlot SlotForEquipment(EquipmentConfiguration configuration)
@@ -67,7 +94,6 @@ public class PlayerInventory : MonoBehaviour
 
     private void PickUpEquipment(EquipmentPickup pickup)
     {
-        Debug.Log("Pick up equipment");
         var configuration = pickup.configuration;
         if (configuration == null) { return; }
 
