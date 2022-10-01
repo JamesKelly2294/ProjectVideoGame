@@ -281,18 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3924711561227873625, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068133568121338763, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_Height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068133568121338763, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_Center.y
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 7733621537679148744, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -360,6 +348,7 @@ GameObject:
   - component: {fileID: 1309988165}
   - component: {fileID: 1309988164}
   - component: {fileID: 1309988163}
+  - component: {fileID: 1309988167}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -446,6 +435,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1309988167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309988162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a972ed6bdf5104498ba07ce27a380d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1409269113
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,22 +687,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858646039}
     m_Modifications:
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildScaleWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildControlWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildControlHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildForceExpandHeight
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8028523842636787592, guid: d17a50e5121674fd39046373053f94cb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
