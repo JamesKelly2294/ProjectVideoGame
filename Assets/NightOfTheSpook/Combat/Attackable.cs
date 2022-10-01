@@ -8,8 +8,8 @@ public class Attackable : MonoBehaviour
     /// <summary>
     /// The number of points of health the attackable entity can have. The range is somewhat arbitrary.
     /// </summary>
-    [Range(1, 10)]
-    public int TotalHealth = 3;
+    [Range(1f, 10f)]
+    public float TotalHealth = 3f;
 
     /// <summary>
     /// Check to see if the attackable entity is still alive.
@@ -25,8 +25,9 @@ public class Attackable : MonoBehaviour
     /// <summary>
     /// The attackable entity's health. If this hits zero, the entity is dead.
     /// </summary>
-    [HideInInspector]
-    public int Health = 3;
+    public float Health = 3f;
+
+    public bool IsPlayer = false;
 
     void Start()
     {
@@ -37,8 +38,13 @@ public class Attackable : MonoBehaviour
     /// Inflict damage upon the attackable entity.
     /// </summary>
     /// <param name="amount">The amount of damage to inflict.</param>
-    public void InflictDamage(int amount)
+    public void InflictDamage(float amount)
     {
         Health = Math.Max(0, Health - amount);
+
+        // TODO: Make an event / pub-sub system for death
+        if ( Health <= 0 ) {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }

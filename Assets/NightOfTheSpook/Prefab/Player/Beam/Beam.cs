@@ -16,7 +16,10 @@ public class Beam : MonoBehaviour
     private SpookyGameManager spookyGameManager;
 
     public GameObject beam;
+    public ColidingBeam colidingBeam;
     public Light spotLight;
+
+    public float damagePerSecond;
 
 
     // Start is called before the first frame update
@@ -36,6 +39,16 @@ public class Beam : MonoBehaviour
             beamFireTime += Time.deltaTime * beamFireSpeed;
             strength = beamFireStength.Evaluate(beamFireTime / beamFireTotalTime);
             spotColor = new Color(0f, 0.5f, 1f);
+
+            for (int i =  colidingBeam.attackables.Count - 1; i >= 0 ; i--)
+            {
+                Attackable item = colidingBeam.attackables[i];
+                if (item != null) {
+                    item.InflictDamage(damagePerSecond * Time.deltaTime);
+                } else {
+                    colidingBeam.attackables.RemoveAt(i);
+                }
+            }
 
             if (beamFireTime > (beamFireTotalTime * beamFireSpeed)) {
                 isFiring = false;

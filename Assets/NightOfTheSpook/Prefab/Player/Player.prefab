@@ -255,10 +255,12 @@ MonoBehaviour:
   preFireMat: {fileID: 2100000, guid: f1a4dabf2c5484ddf909bfdbd2ad6daf, type: 2}
   beamFireMat: {fileID: 2100000, guid: 123dc63bdd62847148288b5c5808ba13, type: 2}
   beamFireTime: 0
-  beamFireTotalTime: 2
+  beamFireTotalTime: 1
   beamFireSpeed: 5
   beam: {fileID: 6321582112355887087}
+  colidingBeam: {fileID: 6715753760850718303}
   spotLight: {fileID: 5444810607709679246}
+  damagePerSecond: 3
 --- !u!114 &7143462387225376914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +396,7 @@ GameObject:
   - component: {fileID: 4015410895872398120}
   - component: {fileID: 585783530524821423}
   - component: {fileID: 1126257404020665259}
+  - component: {fileID: 6715753760850718303}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
@@ -474,11 +477,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6321582112355887087}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6715753760850718303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321582112355887087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0b3fdaccd3049648386d0f86d6067d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackables: []
 --- !u!1 &7733621537679148744
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalHealth: 100
   Health: 0
+  IsPlayer: 0
 --- !u!1 &8839680691945272828
 GameObject:
   m_ObjectHideFlags: 0

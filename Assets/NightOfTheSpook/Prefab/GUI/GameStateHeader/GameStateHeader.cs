@@ -17,7 +17,7 @@ public class GameStateHeader : MonoBehaviour
     void Start()
     {
         spookyGameManager = GameObject.FindObjectOfType<SpookyGameManager>();
-        playerAttackable = GameObject.FindObjectOfType<Attackable>();
+        playerAttackable = GameObject.FindObjectOfType<Player>().GetComponent<Attackable>();
     }
 
     // Update is called once per frame
