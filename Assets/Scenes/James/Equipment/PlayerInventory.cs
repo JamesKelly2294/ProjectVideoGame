@@ -9,9 +9,11 @@ public class InventorySlot
     public int currentCharges = 0;
 }
 
+[RequireComponent(typeof(PubSubSender))]
 public class PlayerInventory : MonoBehaviour
 {
     public List<InventorySlot> slots;
+    private PubSubSender _pubSub;
 
     public int InventoryCapacity
     {
@@ -24,6 +26,8 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _pubSub = GetComponent<PubSubSender>();
+
         slots = new List<InventorySlot>(InventoryCapacity);
         for(var i = 0; i < InventoryCapacity; i++)
         {
@@ -71,6 +75,8 @@ public class PlayerInventory : MonoBehaviour
 
         availableInventorySlot.configuration = configuration;
         availableInventorySlot.currentCharges += 1;
+
+        _pubSub.Publish("InventoryChanged");
 
         Destroy(pickup);
     }
