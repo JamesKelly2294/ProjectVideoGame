@@ -28,6 +28,6 @@ public class SpookyGameManager : MonoBehaviour
 
     void Fire()
     {
-
+        this.GetComponent<PubSubSender>().Publish("timer.didFire");
     }
 }

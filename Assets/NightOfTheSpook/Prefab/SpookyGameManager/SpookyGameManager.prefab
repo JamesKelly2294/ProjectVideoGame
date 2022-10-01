@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8199742932489216775}
   - component: {fileID: 8199742932489216772}
+  - component: {fileID: 255144325103144861}
   m_Layer: 0
   m_Name: SpookyGameManager
   m_TagString: Untagged
@@ -42,5 +43,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98172860756cb4762a4737480da0606f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerTime: 0
+  timerTotalTime: 10
+  money: 231
+--- !u!114 &255144325103144861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199742932489216773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f292d19e8ac687f4796ed88f9f22cd01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
