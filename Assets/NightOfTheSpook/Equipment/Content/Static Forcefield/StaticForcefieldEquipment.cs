@@ -32,7 +32,7 @@ public class StaticForcefieldEquipment : Equipment
             ForcefieldParticles.Play();
             _elapsedTimeSinceLastTrigger = 0;
             Vector3 explosionPos = transform.position + Vector3.up * 1;
-            Collider[] colliders = Physics.OverlapSphere(explosionPos, ForcefieldRadius);
+            Collider[] colliders = Physics.OverlapSphere(explosionPos, ForcefieldRadius, 1 << LayerConstants.Enemy);
             foreach (Collider hit in colliders)
             {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
