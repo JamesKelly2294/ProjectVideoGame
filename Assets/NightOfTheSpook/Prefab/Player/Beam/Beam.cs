@@ -37,6 +37,8 @@ public class Beam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0) { return; }
+        
         float strength;
         Material mat;
         Color spotColor;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public int experienceValue = 10;
+    public float experienceValue = 10;
 
     // Start is called before the first frame update
     void Start()

@@ -8,7 +8,7 @@ public class GameStateHeader : MonoBehaviour
 
     public ProgressBar healthBar;
     public ProgressBar chargeBar;
-    public TextMeshProUGUI moneyTextField;
+    public ProgressBar xpBar;
 
     private SpookyGameManager spookyGameManager;
     private Attackable playerAttackable;
@@ -25,6 +25,6 @@ public class GameStateHeader : MonoBehaviour
     {
         chargeBar.SetProgress(spookyGameManager.timerTime / spookyGameManager.timerTotalTime);
         healthBar.SetProgress(playerAttackable.Health / playerAttackable.TotalHealth);
-        moneyTextField.text = "" + spookyGameManager.money;
+        xpBar.SetProgress(spookyGameManager.xp / spookyGameManager.xpGoal);
     }
 }
