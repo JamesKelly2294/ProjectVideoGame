@@ -12,19 +12,28 @@ public class Attacker : MonoBehaviour
     public Attackable PrimaryTarget;
 
     /// <summary>
-    /// How much time (in seconds) should pass between each attack.
-    /// </summary>
-    [Range(0.1f, 10.0f)]
-    public float SecondsBetweenAttacks;
-
-    /// <summary>
     /// How quickly the attacker moves toward the target, in units per second.
     /// </summary>
     [Range(0.1f, 10.0f)]
-    public float movementSpeedInUnitsPerSecond;
+    public float MovementSpeedInUnitsPerSecond;
+
+    /// <summary>
+    /// How many seconds it takes for the attacker to be ready to attack again.
+    /// </summary>
+    [Range(0.1f, 10.0f)]
+    public float AttackCoolDownInSeconds;
+
+    /// <summary>
+    /// How much damage is done in a single attack.
+    /// </summary>
+    [Range(1, 100)]
+    public int DamagePerAttack = 1;
 
     private AttackerTasks _currentTask;
     private bool _collidingWithTarget;
+
+    // The next viable attack time, which is the last time this entity attacked + a cooldown.
+    private float _nextAttackTime = 0.0f;
 
     private enum AttackerTasks
     {
@@ -145,13 +154,21 @@ public class Attacker : MonoBehaviour
             case AttackerTasks.MovingToTarget:
                 // TODO: Collisions with props
 
-                float magnitude = movementSpeedInUnitsPerSecond * Time.deltaTime;
+                // TODO: switch to rigid body velocity based movement so we can do physicsy things
+                float magnitude = MovementSpeedInUnitsPerSecond * Time.deltaTime;
                 var heading = target.transform.position - transform.position;
                 heading.y = 0.0f;
                 var movementVector = magnitude * heading.normalized;
                 transform.Translate(movementVector);
                 break;
             case AttackerTasks.Attacking:
+                // Perform an attack if we're in range.
+                if(_nextAttackTime < Time.time)
+                {
+                    target.InflictDamage(DamagePerAttack);
+                    _nextAttackTime = Time.time + AttackCoolDownInSeconds;
+                    Debug.Log($"{name} inflicting {DamagePerAttack}; next attack at {_nextAttackTime}");
+                }
                 break;
             default:
                 break;
