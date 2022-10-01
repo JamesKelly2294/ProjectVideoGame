@@ -24,7 +24,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _pubSub = GetComponent<PubSubSender>();
 
@@ -48,13 +48,13 @@ public class PlayerInventory : MonoBehaviour
         {
             if (slot.configuration == configuration)
             {
-                if (slot.configuration.baseMaxCharges >= slot.currentCharges)
+                if (slot.currentCharges < slot.configuration.baseMaxCharges)
                 {
-                    return null;
+                    return slot;
                 }
                 else
                 {
-                    return slot;
+                    return null;
                 }
             }
             if (firstAvailableEmptySlot == null && slot.configuration == null)
@@ -67,6 +67,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void PickUpEquipment(EquipmentPickup pickup)
     {
+        Debug.Log("Pick up equipment");
         var configuration = pickup.configuration;
         if (configuration == null) { return; }
 
@@ -78,7 +79,7 @@ public class PlayerInventory : MonoBehaviour
 
         _pubSub.Publish("InventoryChanged");
 
-        Destroy(pickup);
+        Destroy(pickup.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -11,7 +11,7 @@ public class EquipmentConfiguration : ScriptableObject
     public GameObject pickupPrefab;
     public GameObject deployedPrefab;
 
-    public Image inventoryIcon;
+    public Sprite inventoryIcon;
 
     // Higher value == more likely to spawn
     public int baseSpawnWeight = 1;

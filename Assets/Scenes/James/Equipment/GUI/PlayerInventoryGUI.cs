@@ -15,12 +15,40 @@ public class PlayerInventoryGUI : MonoBehaviour
     {
         _playerInventory = FindObjectOfType<PlayerInventory>();
 
+        InventoryChanged();
+
+    }
+
+    public void InventoryChanged()
+    {
+        for (var i = 0; i < slots.transform.childCount; i++)
+        {
+            Destroy(slots.transform.GetChild(i).gameObject);
+        }
+
         for (var i = 0; i < _playerInventory.InventoryCapacity; i++)
         {
+            var inventorySlot = _playerInventory.slots[i];
+
             var go = Instantiate(inventorySlotPrefab);
             go.transform.SetParent(slots.transform);
             go.transform.name = "Slot " + i;
             go.SetActive(true);
+
+            var slotGUI = go.GetComponent<PlayerInventorySlotGUI>();
+
+            if(inventorySlot.configuration == null)
+            {
+                slotGUI.equipmentIcon.enabled = false;
+                slotGUI.equipmentIcon = null;
+                slotGUI.equipmentCountText.text = "";
+            }
+            else
+            {
+                slotGUI.equipmentIcon.enabled = true;
+                slotGUI.equipmentIcon.sprite = inventorySlot.configuration.inventoryIcon;
+                slotGUI.equipmentCountText.text = inventorySlot.currentCharges + "/" + inventorySlot.configuration.baseMaxCharges;
+            }
         }
     }
 

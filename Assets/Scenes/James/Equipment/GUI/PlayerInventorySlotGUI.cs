@@ -5,5 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerInventorySlotGUI : MonoBehaviour
 {
+    public TMPro.TextMeshProUGUI equipmentCountText;
     public Image equipmentIcon;
 }
