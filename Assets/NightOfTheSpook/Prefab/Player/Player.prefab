@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalHealth: 100
   Health: 0
-  IsPlayer: 0
+  IsPlayer: 1
 --- !u!1 &8839680691945272828
 GameObject:
   m_ObjectHideFlags: 0
