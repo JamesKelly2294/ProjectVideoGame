@@ -332,7 +332,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -416,30 +416,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1479695700, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 1479695702, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: field of view
-      value: 16.071423
-      objectReference: {fileID: 0}
-    - target: {fileID: 1479695702, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_FocalLength
-      value: 85
-      objectReference: {fileID: 0}
-    - target: {fileID: 1479695703, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1479695703, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 1479695703, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -30
-      objectReference: {fileID: 0}
     - target: {fileID: 7733621537679148744, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
       propertyPath: m_Name
       value: Player

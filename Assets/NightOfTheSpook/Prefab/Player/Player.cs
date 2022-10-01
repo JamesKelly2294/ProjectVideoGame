@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     public GameObject inner;
     Plane plane = new Plane(Vector3.up, 0);
 
+    public AnimationCurve walkVertical;
+    public AnimationCurve walkWobble;
+    public float walkVerticalTime, walkVerticalTotalTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+
         Vector3 movement = Vector3.zero;
         if (Input.GetKey("w"))
         {
@@ -39,8 +44,27 @@ public class Player : MonoBehaviour
             movement += Vector3.right;
         }
 
-        movement = movement.normalized;
+        movement = Quaternion.Euler(0, -45, 0) * movement.normalized;
         transform.position += movement * Time.deltaTime * speed;
+
+        // Animate walk
+        if (movement != Vector3.zero) {
+            walkVerticalTime += Time.deltaTime;
+            if (walkVerticalTime > walkVerticalTotalTime) {
+                walkVerticalTime -= walkVerticalTotalTime;
+            }
+        } else {
+            // If we are beyond half way, just continue
+            if (walkVerticalTime > walkVerticalTotalTime / 2 && walkVerticalTime < walkVerticalTotalTime) {
+                walkVerticalTime += Time.deltaTime;
+                walkVerticalTime = Mathf.Min(walkVerticalTotalTime, walkVerticalTime);
+            } else if (walkVerticalTime < walkVerticalTotalTime / 2 && walkVerticalTime > 0) {
+                walkVerticalTime -= Time.deltaTime;
+                walkVerticalTime = Mathf.Max(0, walkVerticalTime);
+            }
+        }
+        float innerVerticalOffet = walkVertical.Evaluate(walkVerticalTime / walkVerticalTotalTime);
+        inner.transform.position = new Vector3(inner.transform.position.x, innerVerticalOffet, inner.transform.position.z);
 
         float distance;
         Vector3 cursorLoc = Vector3.zero;
@@ -51,5 +75,7 @@ public class Player : MonoBehaviour
         }
 
         inner.transform.LookAt(cursorLoc);
+        Vector3 eulerRotation = inner.transform.rotation.eulerAngles;
+        inner.transform.rotation = Quaternion.Euler(new Vector3(eulerRotation.x, eulerRotation.y, walkWobble.Evaluate(walkVerticalTime / walkVerticalTotalTime) * 90));
     }
 }
