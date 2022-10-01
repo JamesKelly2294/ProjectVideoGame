@@ -14,7 +14,8 @@ public class DeathAnimation : MonoBehaviour
     {
         transparencyCurve = new AnimationCurve(
             new Keyframe(0, 1),
-            new Keyframe(0.7f, 1),
+            new Keyframe(0.5f, 1),
+            new Keyframe(0.9f, 0.05f),
             new Keyframe(1, 0)
         );
 
@@ -54,7 +55,7 @@ public class DeathAnimation : MonoBehaviour
         time += Time.deltaTime;
 
         if (time > totalTime) {
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject, 0.1f);
         }
 
         material.color = new Color (color.r, color.g, color.b, transparencyCurve.Evaluate(time / totalTime));
