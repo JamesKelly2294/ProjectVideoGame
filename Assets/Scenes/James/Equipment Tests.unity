@@ -123,23 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &112907240 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7733621537679148744, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-  m_PrefabInstance: {fileID: 595355108}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &112907246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112907240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f292d19e8ac687f4796ed88f9f22cd01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &203294270
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,18 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3924711561227873625, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068133568121338763, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_Height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068133568121338763, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
-      propertyPath: m_Center.y
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 7733621537679148744, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -716,26 +687,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858646039}
     m_Modifications:
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildScaleWidth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildControlWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildControlHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildForceExpandWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6657354835248824845, guid: d17a50e5121674fd39046373053f94cb, type: 3}
-      propertyPath: m_ChildForceExpandHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8028523842636787592, guid: d17a50e5121674fd39046373053f94cb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
