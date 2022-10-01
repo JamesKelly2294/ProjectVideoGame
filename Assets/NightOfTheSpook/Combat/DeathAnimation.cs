@@ -34,6 +34,16 @@ public class DeathAnimation : MonoBehaviour
         material.DisableKeyword("_ALPHABLEND_ON");
         material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = 3000;
+
+        Attackable attackable = GetComponent<Attackable>();
+        if (attackable != null) {
+            attackable.enabled = false;
+        }
+        
+        Attacker attacker = GetComponent<Attacker>();
+        if (attacker != null) {
+            attacker.enabled = false;
+        }
     }
 
     // Update is called once per frame
