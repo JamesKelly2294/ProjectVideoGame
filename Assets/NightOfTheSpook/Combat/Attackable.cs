@@ -8,8 +8,8 @@ public class Attackable : MonoBehaviour
     /// <summary>
     /// The number of points of health the attackable entity can have. The range is somewhat arbitrary.
     /// </summary>
-    [Range(1, 10000)]
-    public int TotalHealth = 100;
+    [Range(1, 10)]
+    public int TotalHealth = 3;
 
     /// <summary>
     /// Check to see if the attackable entity is still alive.
@@ -25,7 +25,8 @@ public class Attackable : MonoBehaviour
     /// <summary>
     /// The attackable entity's health. If this hits zero, the entity is dead.
     /// </summary>
-    public int Health;
+    [HideInInspector]
+    public int Health = 3;
 
     void Start()
     {

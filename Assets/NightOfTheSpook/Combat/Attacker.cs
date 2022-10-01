@@ -11,15 +11,20 @@ public class Attacker : MonoBehaviour
     /// </summary>
     public Attackable PrimaryTarget;
 
-    /**
-     * How much time (in seconds) should pass between each attack to register.
-     */
-    [Range(0.1f, float.MaxValue)]
-    public double SecondsBetweenAttacks;
+    /// <summary>
+    /// How much time (in seconds) should pass between each attack.
+    /// </summary>
+    [Range(0.1f, 10.0f)]
+    public float SecondsBetweenAttacks;
+
+    /// <summary>
+    /// How quickly the attacker moves toward the target, in units per second.
+    /// </summary>
+    [Range(0.1f, 10.0f)]
+    public float movementSpeedInUnitsPerSecond;
 
     private AttackerTasks _currentTask;
     private bool _collidingWithTarget;
-
 
     private enum AttackerTasks
     {
@@ -38,15 +43,16 @@ public class Attacker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateMode();
-        HandleMode();
+        UpdateAttackStateMachine();
+        HandleAttack();
     }
 
     void OnCollisionEnter(Collision collision)
     {
         var target = GetAttackTarget().gameObject;
         var other = collision.gameObject;
-        if(ReferenceEquals(other, target))
+        Debug.Log($"{name} entered collision with ({other.gameObject.name})");
+        if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = true;
         }
@@ -56,7 +62,7 @@ public class Attacker : MonoBehaviour
     {
         var target = GetAttackTarget().gameObject;
         var other = collision.gameObject;
-        Debug.Log($"Exited collision with ({other.gameObject.name})");
+        Debug.Log($"{name} exited collision with ({other.gameObject.name})");
         if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = false;
@@ -83,7 +89,7 @@ public class Attacker : MonoBehaviour
         }
     }
 
-    private void UpdateMode()
+    private void UpdateAttackStateMachine()
     {
         var target = GetAttackTarget();
         if (target == null && _currentTask != AttackerTasks.Idle)
@@ -105,6 +111,10 @@ public class Attacker : MonoBehaviour
                 {
                     SwitchToTask(AttackerTasks.MovingToTarget, "target is alive");
                 }
+
+                // Pick a random point to move to. This should occur the first time we go idle,
+                // or when we reach a certain distance of the existing target point.
+                // TODO: the above
                 break;
             case AttackerTasks.MovingToTarget:
                 if (_collidingWithTarget)
@@ -119,14 +129,33 @@ public class Attacker : MonoBehaviour
                 }
                 break;
             default:
-                Debug.LogWarning("Attack mode is undefined! Try setting it to something (e.g. 'Idle')");
+                Debug.LogWarning(@"{name} state is undefined! Try setting it to something (e.g. 'Idle')");
                 break;
         }
     }
 
-    private void HandleMode()
+    private void HandleAttack()
     {
+        var target = GetAttackTarget();
+        switch (_currentTask)
+        {
+            case AttackerTasks.Idle:
+                // TODO: move to the random location we previously picked in UpdateMode
+                break;
+            case AttackerTasks.MovingToTarget:
+                // TODO: Collisions with props
 
+                float magnitude = movementSpeedInUnitsPerSecond * Time.deltaTime;
+                var heading = target.transform.position - transform.position;
+                heading.y = 0.0f;
+                var movementVector = magnitude * heading.normalized;
+                transform.Translate(movementVector);
+                break;
+            case AttackerTasks.Attacking:
+                break;
+            default:
+                break;
+        };
     }
 
     private void SwitchToTask(AttackerTasks newTask, String reason = "")
@@ -136,11 +165,11 @@ public class Attacker : MonoBehaviour
         var next = TaskToTaskName(newTask);
         if(reason != "")
         {
-            Debug.Log($"Changing from task {current} to {next} because {reason}");
+            Debug.Log($"{name} changing from task {current} to {next} because {reason}");
         }
         else
         {
-            Debug.Log($"Changing from task {current} to {next}");
+            Debug.Log($"{name} changing from task {current} to {next}");
         }
 #endif
         _currentTask = newTask;
