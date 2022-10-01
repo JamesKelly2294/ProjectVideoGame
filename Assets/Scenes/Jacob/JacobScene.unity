@@ -220,7 +220,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -416,6 +416,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1479695700, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479695702, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
+      propertyPath: field of view
+      value: 16.071423
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479695702, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
+      propertyPath: m_FocalLength
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479695703, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479695703, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479695703, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30
+      objectReference: {fileID: 0}
     - target: {fileID: 7733621537679148744, guid: 0c6b0062bc9b8485ab2e7f7c8169e3f3, type: 3}
       propertyPath: m_Name
       value: Player
