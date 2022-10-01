@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6404160709062362057}
   - component: {fileID: 7881687491104595004}
   - component: {fileID: 7881687491104594979}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ghost Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5d22142c390764ad9b41b88603b1d63e, type: 3}
       propertyPath: m_Name
       value: ghost_head.vox
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d22142c390764ad9b41b88603b1d63e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5d22142c390764ad9b41b88603b1d63e, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d22142c390764ad9b41b88603b1d63e, type: 3}

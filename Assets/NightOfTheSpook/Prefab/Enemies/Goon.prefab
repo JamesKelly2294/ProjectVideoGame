@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1298528449839150682}
   - component: {fileID: 4037137563005793341}
   - component: {fileID: 4037137563005793329}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Goon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 59fcb7e4256f145f3bb7477ddbeb94e8, type: 3}
       propertyPath: m_Name
       value: chr_sword.vox
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59fcb7e4256f145f3bb7477ddbeb94e8, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 59fcb7e4256f145f3bb7477ddbeb94e8, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59fcb7e4256f145f3bb7477ddbeb94e8, type: 3}
