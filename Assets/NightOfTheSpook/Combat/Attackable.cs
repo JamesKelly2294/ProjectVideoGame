@@ -22,6 +22,9 @@ public class Attackable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The attackable entity's health. If this hits zero, the entity is dead.
+    /// </summary>
     public int Health;
 
     void Start()
@@ -35,6 +38,6 @@ public class Attackable : MonoBehaviour
     /// <param name="amount">The amount of damage to inflict.</param>
     public void InflictDamage(int amount)
     {
-        Health = Math.Max(0, amount);
+        Health = Math.Max(0, Health - amount);
     }
 }
