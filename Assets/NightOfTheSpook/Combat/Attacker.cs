@@ -26,7 +26,7 @@ public class Attacker : MonoBehaviour
     /// <summary>
     /// How much damage is done in a single attack.
     /// </summary>
-    [Range(0.001f, float.MaxValue)]
+    [Range(0.001f, 100)]
     public float DamagePerAttack = 1.0f;
 
     private AttackerTasks _currentTask;
@@ -164,7 +164,7 @@ public class Attacker : MonoBehaviour
                 var heading = target.transform.position - transform.position;
                 heading.y = 0.0f;
                 var movementVector = magnitude * heading.normalized;
-                transform.Translate(movementVector);
+                transform.position += (movementVector);
                 break;
             case AttackerTasks.Attacking:
                 // Perform an attack if we're in range.

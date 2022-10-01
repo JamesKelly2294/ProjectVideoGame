@@ -45,8 +45,6 @@ public class EquipmentSpawner : MonoBehaviour
             return;
         }
 
-        Debug.Log("Spawning...");
-
         var totalWeights = 0;
         foreach(var spawnRate in equipmentSpawnTable.spawnRates)
         {
