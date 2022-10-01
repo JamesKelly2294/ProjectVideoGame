@@ -583,6 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1050809174}
   - component: {fileID: 1050809175}
+  - component: {fileID: 1050809176}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -622,6 +623,19 @@ MonoBehaviour:
   MovementSpeedInUnitsPerSecond: 5
   AttackCoolDownInSeconds: 2
   DamagePerAttack: 10
+--- !u!65 &1050809176
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050809173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1122932429
 PrefabInstance:
   m_ObjectHideFlags: 0
