@@ -430,6 +430,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1904333311}
     m_Modifications:
+    - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
+      propertyPath: world
+      value: 
+      objectReference: {fileID: 1602074424}
+    - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
+      propertyPath: resourceName
+      value: platinum
+      objectReference: {fileID: 0}
     - target: {fileID: 3012148286311130280, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
       propertyPath: m_Color.b
       value: 0.99215686
@@ -895,6 +903,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1904333311}
     m_Modifications:
+    - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
+      propertyPath: world
+      value: 
+      objectReference: {fileID: 1602074424}
+    - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
+      propertyPath: resourceName
+      value: iron
+      objectReference: {fileID: 0}
     - target: {fileID: 3012148286311130280, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
       propertyPath: m_Color.b
       value: 0.5019608
@@ -1088,6 +1104,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1904333311}
     m_Modifications:
+    - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
+      propertyPath: world
+      value: 
+      objectReference: {fileID: 1602074424}
+    - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
+      propertyPath: resourceName
+      value: silica
+      objectReference: {fileID: 0}
     - target: {fileID: 681998610, guid: 42de2429e7995f547a1e3da6f37ab78c, type: 3}
       propertyPath: clickedScaleFactor
       value: 1.1
