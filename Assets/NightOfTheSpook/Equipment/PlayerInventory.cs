@@ -6,6 +6,13 @@ public class InventorySlot
 {
     public EquipmentConfiguration configuration = null;
 
+    public int ChargeCapacity
+    {
+        get
+        {
+            return configuration.baseMaxCharges;
+        }
+    }
     public int currentCharges = 0;
 }
 

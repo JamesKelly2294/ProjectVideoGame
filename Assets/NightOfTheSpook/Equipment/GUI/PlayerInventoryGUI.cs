@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventoryGUI : MonoBehaviour
 {
@@ -10,13 +11,20 @@ public class PlayerInventoryGUI : MonoBehaviour
 
     private PlayerInventory _playerInventory;
 
+    private Color _deselectedSlotColor;
+    public Color selectedSlotColor;
+
+    private Color _filledChargeColor;
+    public Color emptyChargeColor;
+
     // Start is called before the first frame update
     void Start()
     {
         _playerInventory = FindObjectOfType<PlayerInventory>();
+        _deselectedSlotColor = inventorySlotPrefab.GetComponent<PlayerInventorySlotGUI>().equipmentSelection.color;
+        _filledChargeColor = inventorySlotPrefab.GetComponent<PlayerInventorySlotGUI>().chargeSlotPrefab.GetComponent<Image>().color;
 
         InventoryChanged();
-
     }
 
     public void InventoryChanged()
@@ -37,20 +45,36 @@ public class PlayerInventoryGUI : MonoBehaviour
 
             var slotGUI = go.GetComponent<PlayerInventorySlotGUI>();
 
-            if(inventorySlot.configuration == null)
+            for (var j = 0; j < slotGUI.charges.transform.childCount; j++)
+            {
+                // very efficient omegalul
+                Destroy(slotGUI.charges.transform.GetChild(j).gameObject);
+            }
+
+            if (inventorySlot.configuration == null)
             {
                 slotGUI.equipmentIcon.enabled = false;
                 slotGUI.equipmentIcon = null;
-                slotGUI.equipmentCountText.text = "";
-                slotGUI.equipmentSelection.enabled = _playerInventory.SelectedSlot == inventorySlot;
+                slotGUI.equipmentSelection.color = _deselectedSlotColor;
             }
             else
             {
                 slotGUI.equipmentIcon.enabled = true;
                 slotGUI.equipmentIcon.sprite = inventorySlot.configuration.inventoryIcon;
-                slotGUI.equipmentCountText.text = inventorySlot.currentCharges + "/" + inventorySlot.configuration.baseMaxCharges;
-                slotGUI.equipmentSelection.enabled = _playerInventory.SelectedSlot == inventorySlot;
+                slotGUI.equipmentSelection.color = _playerInventory.SelectedSlot == inventorySlot ? selectedSlotColor : _deselectedSlotColor;
+
+                for (var j = 0; j < inventorySlot.ChargeCapacity; j++)
+                {
+                    var chargeSlot = Instantiate(slotGUI.chargeSlotPrefab);
+                    chargeSlot.transform.parent = slotGUI.charges.transform;
+                    if (j >= inventorySlot.currentCharges)
+                    {
+                        chargeSlot.GetComponent<Image>().color = emptyChargeColor;
+                    }
+                }
             }
+
+            go.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
     }
 
