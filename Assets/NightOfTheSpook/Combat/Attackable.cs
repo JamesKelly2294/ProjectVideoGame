@@ -44,7 +44,9 @@ public class Attackable : MonoBehaviour
 
         // TODO: Make an event / pub-sub system for death
         if ( Health <= 0.0f ) {
-            GameObject.Destroy(this.gameObject);
+            if (GetComponent<DeathAnimation>() == null) {
+                gameObject.AddComponent<DeathAnimation>();
+            }
         }
     }
 }

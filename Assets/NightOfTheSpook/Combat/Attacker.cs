@@ -60,7 +60,7 @@ public class Attacker : MonoBehaviour
     {
         var target = GetAttackTarget().gameObject;
         var other = collision.gameObject;
-        Debug.Log($"{name} entered collision with ({other.name})");
+        // Debug.Log($"{name} entered collision with ({other.name})");
         if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = true;
@@ -71,7 +71,7 @@ public class Attacker : MonoBehaviour
     {
         var target = GetAttackTarget().gameObject;
         var other = collision.gameObject;
-        Debug.Log($"{name} exited collision with ({other.name})");
+        // Debug.Log($"{name} exited collision with ({other.name})");
         if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = false;
