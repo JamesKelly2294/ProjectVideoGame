@@ -31,7 +31,7 @@ public class StaticForcefieldEquipment : Equipment
         {
             ForcefieldParticles.Play();
             _elapsedTimeSinceLastTrigger = 0;
-            Vector3 explosionPos = transform.position;
+            Vector3 explosionPos = transform.position + Vector3.up * 1;
             Collider[] colliders = Physics.OverlapSphere(explosionPos, ForcefieldRadius);
             foreach (Collider hit in colliders)
             {
@@ -39,6 +39,7 @@ public class StaticForcefieldEquipment : Equipment
 
                 if (rb != null)
                 {
+                    if (rb.gameObject.layer != LayerConstants.Enemy) { continue; }
                     rb.AddExplosionForce(ForcefieldPower, explosionPos, ForcefieldRadius, ForcefieldUpwardsModifier);
                 }
             }

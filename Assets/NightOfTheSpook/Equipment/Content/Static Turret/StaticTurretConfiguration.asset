@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: StaticTurretConfiguration
   m_EditorClassIdentifier: 
   displayName: Static Turret
-  pickupPrefab: {fileID: 6224716738282402136, guid: 1862689ba5f2945f99280f37d0a4ce9d, type: 3}
-  deployedPrefab: {fileID: 0}
-  inventoryIcon: {fileID: 21300000, guid: def24b733e08740b787f394c1b9ee5d7, type: 3}
-  baseSpawnWeight: 1
-  baseMaxCharges: 3
+  pickupPrefab: {fileID: 3158609300030686922, guid: 5779059a3a07642c399d6c804456b38d, type: 3}
+  deployedPrefab: {fileID: 6457969297087112050, guid: ca8a0c3359a884fe5a6c6daf3887717d, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: 19b65a0e38c4b470eac5ce73370fbafd, type: 3}
+  baseMaxCharges: 1

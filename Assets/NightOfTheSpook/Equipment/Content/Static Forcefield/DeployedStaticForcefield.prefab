@@ -5027,10 +5027,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForcefieldRadius: 7
-  ForcefieldPower: 600
+  ForcefieldPower: 300
   ForcefieldUpwardsModifier: 0
   ForcefieldLifetime: 24
-  ForcefieldCooldown: 5
+  ForcefieldCooldown: 1.25
   ForcefieldParticles: {fileID: 946819134}
 --- !u!1 &7142904387173907499
 GameObject:

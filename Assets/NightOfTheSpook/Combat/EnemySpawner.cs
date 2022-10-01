@@ -13,13 +13,16 @@ public class EnemySpawner : MonoBehaviour
 
     // HACK: true on start to prevent onscreen spawners from doing things
     // on start before the visibility check has occured.
-    private bool _isVisible = true; 
+    private bool _isVisible = true;
+
+    private Attackable _primaryTarget;
 
     // Start is called before the first frame update
     void Start()
     {
         // TODO: look for the player camera if it isn't set.
         // TODO: do something/bail if the Prefab game object isn't set.
+        _primaryTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Attackable>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
             var newEnemy = Instantiate(Prefab, transform.position, Quaternion.identity);
             newEnemy.SetActive(true);
             _nextSpawnTime = Time.time + CoolDownTime;
+
+            newEnemy.GetComponent<Attacker>().PrimaryTarget = _primaryTarget;
         }
     }
 

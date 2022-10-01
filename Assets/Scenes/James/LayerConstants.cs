@@ -12,4 +12,5 @@ public static class LayerConstants
     public const int PostProcessing = 6;
     public const int Pickup = 8;
     public const int Player = 9;
+    public const int Enemy = 11;
 }
