@@ -10,26 +10,14 @@ public class EnemySpawnManager : MonoBehaviour
     /// <summary>
     /// Locations in the current scene where enemies can spawn
     /// </summary>
-    public Transform[] ViableSpawnLocations;
-
-    /// <summary>
-    /// The camera to use for scene visability purposes.
-    /// </summary>
-    public Camera PlayerCamera;
+    public Transform[] SpawnLocations;
 
     /// <summary>
     /// The attackable entity the spawn manager will preferentially hit?
     /// </summary>
     public Attackable EnemyTarget;
 
-    //public IEnumerable OffscreenSpawnLocations
-    //{
-    //    get
-    //    {
-    //        // todo
-    //        return null;
-    //    }
-    //}
+    public 
 
     // Start is called before the first frame update
     void Start()
