@@ -40,10 +40,10 @@ public class Attackable : MonoBehaviour
     /// <param name="amount">The amount of damage to inflict.</param>
     public void InflictDamage(float amount)
     {
-        Health = Math.Max(0, Health - amount);
+        Health = Math.Max(0.0f, Health - amount);
 
         // TODO: Make an event / pub-sub system for death
-        if ( Health <= 0 ) {
+        if ( Health <= 0.0f ) {
             GameObject.Destroy(this.gameObject);
         }
     }

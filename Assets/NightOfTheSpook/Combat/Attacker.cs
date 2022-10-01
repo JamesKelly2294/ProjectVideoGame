@@ -26,8 +26,8 @@ public class Attacker : MonoBehaviour
     /// <summary>
     /// How much damage is done in a single attack.
     /// </summary>
-    [Range(1, 100)]
-    public int DamagePerAttack = 1;
+    [Range(0.001f, float.MaxValue)]
+    public float DamagePerAttack = 1.0f;
 
     private AttackerTasks _currentTask;
     private bool _collidingWithTarget;
@@ -60,7 +60,7 @@ public class Attacker : MonoBehaviour
     {
         var target = GetAttackTarget().gameObject;
         var other = collision.gameObject;
-        Debug.Log($"{name} entered collision with ({other.gameObject.name})");
+        Debug.Log($"{name} entered collision with ({other.name})");
         if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = true;
@@ -71,7 +71,7 @@ public class Attacker : MonoBehaviour
     {
         var target = GetAttackTarget().gameObject;
         var other = collision.gameObject;
-        Debug.Log($"{name} exited collision with ({other.gameObject.name})");
+        Debug.Log($"{name} exited collision with ({other.name})");
         if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = false;
@@ -80,7 +80,7 @@ public class Attacker : MonoBehaviour
 
     private Attackable GetAttackTarget()
     {
-        return PrimaryTarget.GetComponent<Attackable>();
+        return PrimaryTarget != null ? PrimaryTarget.GetComponent<Attackable>() : null;
     }
 
     private string TaskToTaskName(AttackerTasks task)
@@ -104,6 +104,11 @@ public class Attacker : MonoBehaviour
         if (target == null && _currentTask != AttackerTasks.Idle)
         {
             SwitchToTask(AttackerTasks.Idle, "no target");
+            return;
+        }
+        else if (target == null)
+        {
+            // Handle case where we're already ideal here to avoid log spew.
             return;
         }
 
