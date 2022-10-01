@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Base Class
 public class Equipment : MonoBehaviour
 {
     // Start is called before the first frame update

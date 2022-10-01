@@ -66,6 +66,40 @@ public class PlayerInventory : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha7)) { SetSelectedSlotIndex(6); }
         else if(Input.GetKeyDown(KeyCode.Alpha8)) { SetSelectedSlotIndex(7); }
         else if(Input.GetKeyDown(KeyCode.Alpha9)) { SetSelectedSlotIndex(8); }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DeployEquipment();
+        }
+    }
+
+    private void DeployEquipment()
+    {
+        InventorySlot selectedSlot = SelectedSlot;
+        if (selectedSlot == null)
+        {
+            return;
+        }
+
+        EquipmentConfiguration equipmentConfig = selectedSlot.configuration;
+        if (equipmentConfig == null)
+        {
+            return;
+        }
+
+        var deployedEquipment = Instantiate(equipmentConfig.deployedPrefab);
+
+        // lol tightly coupled
+        var headingGO = transform.Find("Inner");
+
+        deployedEquipment.transform.position = transform.position + (headingGO.forward * 1);
+        selectedSlot.currentCharges -= 1;
+        if (selectedSlot.currentCharges == 0)
+        {
+            selectedSlot.configuration = null;
+        }
+
+        _pubSub.Publish("InventoryChanged");
     }
 
     private InventorySlot SlotForEquipment(EquipmentConfiguration configuration)

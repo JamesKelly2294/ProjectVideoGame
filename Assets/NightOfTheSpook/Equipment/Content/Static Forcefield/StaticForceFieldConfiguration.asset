@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StaticForceFieldConfiguration
   m_EditorClassIdentifier: 
   displayName: Static Forcefield
-  pickupPrefab: {fileID: 3111653262886478088, guid: 86fe095b431894c128601ac27d40eff4, type: 3}
-  deployedPrefab: {fileID: 0}
-  inventoryIcon: {fileID: 21300000, guid: eb8f382c7de144ffabacadcaad734f76, type: 3}
+  pickupPrefab: {fileID: 8742746091072468152, guid: 7a1d971a9e47148768f2c57383ee664f, type: 3}
+  deployedPrefab: {fileID: 2210557486056277234, guid: ac480bffd134c42048ed6b0aff62ae65, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: ba70aba94c83b4142ad36f3e57c179d1, type: 3}
   baseSpawnWeight: 1
   baseMaxCharges: 2

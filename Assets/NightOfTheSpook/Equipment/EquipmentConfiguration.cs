@@ -13,8 +13,5 @@ public class EquipmentConfiguration : ScriptableObject
 
     public Sprite inventoryIcon;
 
-    // Higher value == more likely to spawn
-    public int baseSpawnWeight = 1;
-
     public int baseMaxCharges = 3;
 }

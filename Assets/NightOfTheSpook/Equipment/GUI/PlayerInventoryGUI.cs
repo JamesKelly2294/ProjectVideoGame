@@ -42,6 +42,7 @@ public class PlayerInventoryGUI : MonoBehaviour
                 slotGUI.equipmentIcon.enabled = false;
                 slotGUI.equipmentIcon = null;
                 slotGUI.equipmentCountText.text = "";
+                slotGUI.equipmentSelection.enabled = _playerInventory.SelectedSlot == inventorySlot;
             }
             else
             {
