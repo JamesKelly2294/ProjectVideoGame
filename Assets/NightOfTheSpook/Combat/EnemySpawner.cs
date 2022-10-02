@@ -32,6 +32,16 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public float CoolDownTime;
 
+    /// <summary>
+    /// Waits this many seconds before spawning anything.
+    /// </summary>
+    public float DelaySpawningUntilAfterSeconds = 0.0f;
+
+    /// <summary>
+    /// Stops spawning enemies after this many seconds.
+    /// </summary>
+    public float StopSpawningAfterSeconds = 0.0f;
+
     // Determines when the spawner can be invoked again. The Manager can forcibly invoke the spawner if needed.
     private float _nextSpawnTime = 0.0f;
 
@@ -97,8 +107,10 @@ public class EnemySpawner : MonoBehaviour
     {
         get
         {
-            bool isCoolingDown = _nextSpawnTime < Time.time;
-            return !_isVisible && isCoolingDown;
+            bool isNotCoolingDown = _nextSpawnTime < Time.time;
+            bool pastDelay = DelaySpawningUntilAfterSeconds < Time.time;
+            bool beforeShutoffTime = StopSpawningAfterSeconds > Time.time;
+            return !_isVisible && pastDelay && beforeShutoffTime && isNotCoolingDown;
         }
     }
 
