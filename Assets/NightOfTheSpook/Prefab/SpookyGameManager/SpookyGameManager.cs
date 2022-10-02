@@ -9,7 +9,7 @@ public class SpookyGameManager : MonoBehaviour
     public float timerTotalTime = 10f;
 
     public float xp = 0;
-    public float xpGoal = 100;
+    public float xpGoal = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,12 @@ public class SpookyGameManager : MonoBehaviour
         this.GetComponent<PubSubSender>().Publish("upgradeTime.shouldBegin");
     }
 
+    public void ApplyUpgrade(PubSubListenerEvent e) {
+        EndUpgrade();
+    }
+
     public void EndUpgrade() {
+        xp -= xpGoal;
         Time.timeScale = 1;
         this.GetComponent<PubSubSender>().Publish("upgradeTime.hasEnded");
     }

@@ -20,7 +20,7 @@ public class PubSubSender : MonoBehaviour
     }
 
     public void Publish(string key) {
-        pubSubMan.Publish(key, gameObject, null);
+        pubSubMan.Publish(key, gameObject, this);
     }
 
     public void Publish(string key, object value) {
