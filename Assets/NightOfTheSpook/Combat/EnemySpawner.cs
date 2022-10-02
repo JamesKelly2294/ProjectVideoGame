@@ -4,50 +4,115 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject Prefab;
+    /// <summary>
+    /// If populated, enemies will be spawned within a random spot in the collider volume.
+    /// </summary>
+    [Header("Required")]
+    public Collider ColliderForBounds;
 
-    [Range(0.001f, 100.0f)]
+    /// <summary>
+    /// Overrides whatever enemy prefab is set by the manager.
+    /// Don't assume this is set to anything! Check before using.
+    /// </summary>
+    [Header("Overrides - only touch if you know what's going on.")]
+    public GameObject EnemyPrefab;
+
+    /// <summary>
+    /// The attackable that the spawner will target. Please set this programmatically.
+    /// </summary>
+    public Attackable AttackerTarget;
+
+    /// <summary>
+    /// The maximum number of enemies that can spawn from here. Can be overriden by the manager is present.
+    /// </summary>
+    public int MaxEnemiesPerSpawn;
+
+    /// <summary>
+    /// How long it takes for the spawner to recharge after triggering. Can be overriden by the manager is present.
+    /// </summary>
     public float CoolDownTime;
 
+    // Determines when the spawner can be invoked again. The Manager can forcibly invoke the spawner if needed.
     private float _nextSpawnTime = 0.0f;
 
     // HACK: true on start to prevent onscreen spawners from doing things
     // on start before the visibility check has occured.
     private bool _isVisible = true;
 
-    private Attackable _primaryTarget;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        // TODO: look for the player camera if it isn't set.
-        // TODO: do something/bail if the Prefab game object isn't set.
-        _primaryTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Attackable>();
+        if (AttackerTarget == null)
+        {
+            AttackerTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Attackable>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Spawn a wave of enemies.
+    /// </summary>
+    /// <param name="count">How many to spawn</param>
+    /// <returns>A GameObject containing all of the spawned enemies.</returns>
+    public GameObject TriggerGroupSpawn(int count)
     {
-        if (!_isVisible && _nextSpawnTime < Time.time)
+        if (ColliderForBounds == null)
         {
-            Debug.Log($"{name} Spawning");
-            var newEnemy = Instantiate(Prefab, transform.position, Quaternion.identity);
-            newEnemy.SetActive(true);
-            _nextSpawnTime = Time.time + CoolDownTime;
+            Debug.Log("{name} no spawn area specified; see Bounds");
+            return null;
+        }
 
-            newEnemy.GetComponent<Attacker>().PrimaryTarget = _primaryTarget;
+        var bounds = ColliderForBounds.bounds;
+        for (int i = 0; i < count; ++i)
+        {
+            var rx = Random.Range(bounds.min.x, bounds.max.x);
+            var ry = 0.0f; // the ground
+            var rz = Random.Range(bounds.min.y, bounds.max.y);
+            var position = new Vector3(rx, ry, rz);
+            _ = TriggerSpawn(position); // probably do something to specify a parent here.
+        }
+
+        // TODO: Hack for now, need to add plumbing to specify a parent above
+        return gameObject;
+    }
+
+    /// <summary>
+    /// Spawn a single instance of an enemy at the given location.
+    /// </summary>
+    /// <param name="where">The place where the enemy should be spawned.</param>
+    /// <returns></returns>
+    public GameObject TriggerSpawn(Vector3 where)
+    {
+        Debug.Log($"{name} spawned");
+        var newEnemy = Instantiate(EnemyPrefab.gameObject, where, Quaternion.identity, gameObject.transform);
+        newEnemy.GetComponent<Attacker>().PrimaryTarget = AttackerTarget;
+        newEnemy.SetActive(true);
+        
+        _nextSpawnTime = Time.time + CoolDownTime;
+        return newEnemy;
+    }
+
+    /// <summary>
+    /// Checks if the spawner is ready to swim upstream and do its duty.
+    /// </summary>
+    public bool IsReadyToSpawn
+    {
+        get
+        {
+            bool isCoolingDown = _nextSpawnTime < Time.time;
+            Debug.Log($"{name} is visible: {_isVisible}");
+            Debug.Log($"{name} in cooldown: {isCoolingDown}");
+            return !_isVisible && isCoolingDown;
         }
     }
 
     void OnBecameVisible()
     {
-        Debug.Log($"{name} Howdy");
+        Debug.Log($"{name} is visible");
         _isVisible = true;
     }
 
     void OnBecameInvisible()
     {
-        Debug.Log($"{name} Goodbye :<");
+        Debug.Log($"{name} is not visible");
         _isVisible = false;
     }
 }
