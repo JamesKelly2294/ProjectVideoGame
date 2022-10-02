@@ -19,7 +19,7 @@ public class InventorySlot
 [RequireComponent(typeof(PubSubSender))]
 public class PlayerInventory : MonoBehaviour
 {
-    private int _selectedSlotIndex = -1;
+    private int _selectedSlotIndex = 0;
     public InventorySlot SelectedSlot
     {
         get
@@ -30,7 +30,13 @@ public class PlayerInventory : MonoBehaviour
     public List<InventorySlot> slots;
 
     private PubSubSender _pubSub;
-    private GameObject _deploymentBlueprint;
+
+    [Range(0, 10.0f)]
+    public float PlacementRange = 5.0f;
+    public Material BlueprintValidPlacementMat;
+    public Material BlueprintInvalidPlacementMat;
+
+    private EquipmentBlueprint _deploymentBlueprint;
 
     public int InventoryCapacity
     {
@@ -50,6 +56,11 @@ public class PlayerInventory : MonoBehaviour
         {
             slots.Add(new InventorySlot());
         }
+    }
+
+    private void Start()
+    {
+
     }
 
     private void SetSelectedSlotIndex(int index)
@@ -74,9 +85,39 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
+        UpdateBlueprint();
+
         _pubSub.Publish("InventoryChanged");
     }
 
+    private void UpdateBlueprint()
+    {
+        if (_deploymentBlueprint != null)
+        {
+            Destroy(_deploymentBlueprint.gameObject);
+        }
+
+        if (SelectedSlot != null &&
+    SelectedSlot.configuration != null &&
+    SelectedSlot.configuration.type == EquipmentConfiguration.EquipmentType.Deployable)
+        {
+            var go = Instantiate(SelectedSlot.configuration.blueprintPrefab);
+            _deploymentBlueprint = go.AddComponent<EquipmentBlueprint>();
+            _deploymentBlueprint.BlueprintValidPlacementMat = BlueprintValidPlacementMat;
+            _deploymentBlueprint.BlueprintInvalidPlacementMat = BlueprintInvalidPlacementMat;
+            _deploymentBlueprint.PlacementAnchor = gameObject;
+            _deploymentBlueprint.PlacementRange = PlacementRange;
+        }
+    }
+
+    private bool CanPollUserInput
+    {
+        get
+        {
+            return Time.timeScale > 0.01;
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -90,7 +131,23 @@ public class PlayerInventory : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha8)) { SetSelectedSlotIndex(7); }
         else if(Input.GetKeyDown(KeyCode.Alpha9)) { SetSelectedSlotIndex(8); }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                var newIndex = _selectedSlotIndex + 1;
+                if (newIndex >= InventoryCapacity) { newIndex = 0; }
+                SetSelectedSlotIndex(newIndex);
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                var newIndex = _selectedSlotIndex - 1;
+                if (newIndex < 0) { newIndex = InventoryCapacity - 1; }
+                SetSelectedSlotIndex(newIndex);
+            }
+        }
+
+        if (CanPollUserInput && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
             DeployEquipment();
         }
@@ -103,16 +160,13 @@ public class PlayerInventory : MonoBehaviour
 
     private void UpdateBlueprintTracking()
     {
-        // this creates a horizontal plane passing through this object's center
-        var plane = new Plane(transform.position, Vector3.up);
-        // create a ray from the mousePosition
+        var plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f));
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // plane.Raycast returns the distance from the ray start to the hit point
-        float distance = 0;
-        if (plane.Raycast(ray, out distance)){
-            // some point of the plane was hit - get its coordinates
+        if (plane.Raycast(ray, out float distance))
+        {
             var hitPoint = ray.GetPoint(distance);
-            // use the hitPoint to aim your cannon
+
+            _deploymentBlueprint.transform.position = hitPoint;
         }
     }
 
@@ -130,17 +184,32 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
-        var deployedEquipment = Instantiate(equipmentConfig.deployedPrefab);
-
         // lol tightly coupled
         var headingGO = transform.Find("Inner");
+        var placementLocation = transform.position + (headingGO.forward * 1);
+        if (equipmentConfig.type == EquipmentConfiguration.EquipmentType.Deployable)
+        {
+            if (_deploymentBlueprint == null || _deploymentBlueprint.IsValidPlacement == false)
+            {
+                return;
+            }
+            else
+            {
+                placementLocation = _deploymentBlueprint.transform.position;
+                Destroy(_deploymentBlueprint.gameObject);
+            }
+        }
 
-        deployedEquipment.transform.position = transform.position + (headingGO.forward * 1);
+        var deployedEquipment = Instantiate(equipmentConfig.deployedPrefab);
+
+        deployedEquipment.transform.position = placementLocation;
         selectedSlot.currentCharges -= 1;
         if (selectedSlot.currentCharges == 0)
         {
             selectedSlot.configuration = null;
         }
+
+        UpdateBlueprint();
 
         _pubSub.Publish("InventoryChanged");
         AudioManager.Instance.Play("SFX/EquipmentPlace");
@@ -184,6 +253,8 @@ public class PlayerInventory : MonoBehaviour
         _pubSub.Publish("InventoryChanged");
 
         AudioManager.Instance.Play("SFX/EquipmentPickup");
+
+        UpdateBlueprint();
 
         Destroy(pickup.gameObject);
     }

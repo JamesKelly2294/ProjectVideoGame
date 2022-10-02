@@ -56,7 +56,7 @@ public class PlayerInventoryGUI : MonoBehaviour
             {
                 slotGUI.equipmentIcon.enabled = false;
                 slotGUI.equipmentIcon = null;
-                slotGUI.equipmentSelection.enabled = false;
+                slotGUI.equipmentSelection.enabled = _playerInventory.SelectedSlot == inventorySlot ? true : false;
                 //slotGUI.equipmentSelection.color = _deselectedSlotColor;
             }
             else

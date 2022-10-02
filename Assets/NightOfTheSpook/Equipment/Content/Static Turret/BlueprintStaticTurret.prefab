@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 16388321020887498}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 258453921841392065}
   - component: {fileID: 6256492036375977346}
   - component: {fileID: 8349109626500131816}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: projectile launch position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8340895127081853525}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TurretShootyBit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8340895127885359678}
   - component: {fileID: 6347099651320556785}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BlueprintStaticTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8340895127885359677}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.13, y: 2.23, z: 1.24}
@@ -280,6 +280,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3a68524c6ded2464983660c72f57f4f3, type: 3}
       propertyPath: m_Name
       value: turret.vox-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3a68524c6ded2464983660c72f57f4f3, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 3a68524c6ded2464983660c72f57f4f3, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a68524c6ded2464983660c72f57f4f3, type: 3}
@@ -359,6 +367,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret.vox-2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 84435637cb82f48f1b711b1c7bdf7634, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 84435637cb82f48f1b711b1c7bdf7634, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84435637cb82f48f1b711b1c7bdf7634, type: 3}
 --- !u!4 &8379640418772897058 stripped
@@ -436,6 +452,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8199da363cbab4dda9a8d96ebe5d7536, type: 3}
       propertyPath: m_Name
       value: turret.vox-0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8199da363cbab4dda9a8d96ebe5d7536, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 8199da363cbab4dda9a8d96ebe5d7536, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8199da363cbab4dda9a8d96ebe5d7536, type: 3}

@@ -14,4 +14,6 @@ public static class LayerConstants
     public const int Player = 9;
     public const int Enemy = 11;
     public const int Dead = 12;
+    public const int World = 13;
+    public const int Blueprint = 14;
 }
