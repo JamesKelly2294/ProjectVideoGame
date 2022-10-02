@@ -29,8 +29,6 @@ public class Attacker : MonoBehaviour
     [Range(0.001f, 100)]
     public float DamagePerAttack = 1.0f;
 
-    private Vector3 _movement = Vector3.zero;
-
     private AttackerTasks _currentTask;
     private bool _collidingWithTarget;
 
@@ -69,9 +67,34 @@ public class Attacker : MonoBehaviour
         HandleAttack();
     }
 
+    void FixedUpdate()
+    {
+        var target = PrimaryTarget.GetComponent<Attackable>();
+        if (_currentTask == AttackerTasks.MovingToTarget && target != null && target.IsAlive)
+        {
+            // TODO: Attack props?
+            // TODO: switch to rigid body velocity based movement so we can do physicsy things
+
+            //float magnitude = MovementSpeedInUnitsPerSecond * Time.fixedDeltaTime;
+            //var heading = target.transform.position - transform.position;
+            //heading.y = 0.0f;
+            //var movementVector = magnitude * heading.normalized;
+            //transform.position += (movementVector);
+
+            var rb = GetComponent<Rigidbody>();
+            if (rb.velocity.magnitude < MovementSpeedInUnitsPerSecond)
+            {
+                var heading = target.transform.position - transform.position;
+                heading.y = 0.0f;
+                var velocity = MovementSpeedInUnitsPerSecond * heading.normalized;
+                rb.AddForce(velocity, ForceMode.VelocityChange);
+            }
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        var target = GetAttackTarget().gameObject;
+        var target = PrimaryTarget.GetComponent<Attackable>().gameObject;
         var other = collision.gameObject;
         // Debug.Log($"{name} entered collision with ({other.name})");
         if (ReferenceEquals(other, target))
@@ -82,18 +105,13 @@ public class Attacker : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        var target = GetAttackTarget().gameObject;
+        var target = PrimaryTarget.GetComponent<Attackable>().gameObject;
         var other = collision.gameObject;
         // Debug.Log($"{name} exited collision with ({other.name})");
         if (ReferenceEquals(other, target))
         {
             _collidingWithTarget = false;
         }
-    }
-
-    private Attackable GetAttackTarget()
-    {
-        return PrimaryTarget != null ? PrimaryTarget.GetComponent<Attackable>() : null;
     }
 
     private string TaskToTaskName(AttackerTasks task)
@@ -113,7 +131,7 @@ public class Attacker : MonoBehaviour
 
     private void UpdateAttackStateMachine()
     {
-        var target = GetAttackTarget();
+        var target = PrimaryTarget.GetComponent<Attackable>();
         if (target == null && _currentTask != AttackerTasks.Idle)
         {
             SwitchToTask(AttackerTasks.Idle, "no target");
@@ -121,7 +139,7 @@ public class Attacker : MonoBehaviour
         }
         else if (target == null)
         {
-            // Handle case where we're already ideal here to avoid log spew.
+            // Handle case where we're already idle to avoid log spew.
             return;
         }
 
@@ -163,22 +181,14 @@ public class Attacker : MonoBehaviour
 
     private void HandleAttack()
     {
-        var target = GetAttackTarget();
+        var target = PrimaryTarget.GetComponent<Attackable>();
         switch (_currentTask)
         {
             case AttackerTasks.Idle:
                 // TODO: move to the random location we previously picked in UpdateMode
-                _movement = Vector3.zero;
                 break;
             case AttackerTasks.MovingToTarget:
-                // TODO: Collisions with props
-
-                // TODO: switch to rigid body velocity based movement so we can do physicsy things
-                float magnitude = MovementSpeedInUnitsPerSecond * Time.deltaTime;
-                var heading = target.transform.position - transform.position;
-                heading.y = 0.0f;
-                _movement = magnitude * heading.normalized;
-                transform.position += (_movement);
+                // Anything to do here?
                 break;
             case AttackerTasks.Attacking:
                 // Perform an attack if we're in range.
