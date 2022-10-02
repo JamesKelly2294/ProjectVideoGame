@@ -50,6 +50,6 @@ public class ProgressBar : MonoBehaviour
 
     public void SetProgress(float progress)
     {
-        this.progress = progress;
+        this.progress = Mathf.Clamp01(progress);
     }
 }
