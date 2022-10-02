@@ -180,8 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots: {fileID: 395795653}
   inventorySlotPrefab: {fileID: 7717458634980162798, guid: d8c7b38258a1d439e8b345a87c09118b, type: 3}
-  selectedSlotColor: {r: 0.93333334, g: 0.57254905, b: 0.22352941, a: 0.56078434}
-  emptyChargeColor: {r: 1, g: 0.56078434, b: 0.14901961, a: 0.40392157}
+  selectedSlotColor: {r: 1, g: 0, b: 0.92679024, a: 0.56078434}
+  emptyChargeColor: {r: 0.7830189, g: 0.4112875, b: 0.06278926, a: 0.33333334}
 --- !u!114 &208367751392073703
 MonoBehaviour:
   m_ObjectHideFlags: 0

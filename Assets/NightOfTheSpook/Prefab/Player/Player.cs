@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
             cursorLoc = ray.GetPoint(distance);
         }
 
+        cursorLoc = new Vector3(cursorLoc.x, inner.transform.position.y, cursorLoc.z);
         inner.transform.LookAt(cursorLoc);
         Vector3 eulerRotation = inner.transform.rotation.eulerAngles;
         inner.transform.rotation = Quaternion.Euler(new Vector3(eulerRotation.x, eulerRotation.y, walkWobble.Evaluate(walkVerticalTime / walkVerticalTotalTime) * 90));

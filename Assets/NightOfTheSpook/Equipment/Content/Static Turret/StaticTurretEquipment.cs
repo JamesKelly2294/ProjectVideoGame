@@ -66,7 +66,7 @@ public class StaticTurretEquipment : Equipment
     void LookTowardsTarget()
     {
         var damping = 2;
-        var lookPos = target != null ? target.transform.position - turretShootyBit.transform.position : turretShootyBit.transform.position + transform.forward;
+        var lookPos = target != null ? target.transform.position - turretShootyBit.transform.position : turretShootyBit.transform.position + transform.forward * 10.0f;
         var rotation = Quaternion.LookRotation(lookPos);
         turretShootyBit.transform.rotation = Quaternion.Slerp(turretShootyBit.transform.rotation, rotation, Time.deltaTime * damping);
     }

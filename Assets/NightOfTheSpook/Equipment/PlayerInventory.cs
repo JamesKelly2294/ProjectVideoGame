@@ -107,6 +107,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         _pubSub.Publish("InventoryChanged");
+        AudioManager.Instance.Play("SFX/EquipmentPlace");
     }
 
     private InventorySlot SlotForEquipment(EquipmentConfiguration configuration)
@@ -145,6 +146,8 @@ public class PlayerInventory : MonoBehaviour
         availableInventorySlot.currentCharges += 1;
 
         _pubSub.Publish("InventoryChanged");
+
+        AudioManager.Instance.Play("SFX/EquipmentPickup");
 
         Destroy(pickup.gameObject);
     }

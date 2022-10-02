@@ -9,9 +9,37 @@ public class DeathAnimation : MonoBehaviour
     private Material material;
     private AnimationCurve transparencyCurve;
 
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        var wiggleAnimation = GetComponent<WiggleAnimation>();
+        if (wiggleAnimation)
+        {
+            wiggleAnimation.enabled = false;
+            Destroy(wiggleAnimation);
+        }
+
+        SetLayerRecursively(gameObject, LayerConstants.Dead);
+
         transparencyCurve = new AnimationCurve(
             new Keyframe(0, 1),
             new Keyframe(0.5f, 1),

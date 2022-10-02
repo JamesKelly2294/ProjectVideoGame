@@ -66,7 +66,7 @@ public class PlayerInventoryGUI : MonoBehaviour
                 for (var j = 0; j < inventorySlot.ChargeCapacity; j++)
                 {
                     var chargeSlot = Instantiate(slotGUI.chargeSlotPrefab);
-                    chargeSlot.transform.parent = slotGUI.charges.transform;
+                    chargeSlot.transform.SetParent(slotGUI.charges.transform);
                     if (j >= inventorySlot.currentCharges)
                     {
                         chargeSlot.GetComponent<Image>().color = emptyChargeColor;

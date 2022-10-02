@@ -29,6 +29,8 @@ public class Attacker : MonoBehaviour
     [Range(0.001f, 100)]
     public float DamagePerAttack = 1.0f;
 
+    private Vector3 _movement = Vector3.zero;
+
     private AttackerTasks _currentTask;
     private bool _collidingWithTarget;
 
@@ -47,6 +49,16 @@ public class Attacker : MonoBehaviour
         // Default to idle until we have a target. Might be null, dead, etc.
         _currentTask = AttackerTasks.Idle;
         _collidingWithTarget = false;
+
+        if (PrimaryTarget == null)
+        {
+            // try to find the player as a backup
+            var go = GameObject.FindGameObjectWithTag("Player");
+            if (go)
+            {
+                PrimaryTarget = go.GetComponent<Attackable>();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -156,6 +168,7 @@ public class Attacker : MonoBehaviour
         {
             case AttackerTasks.Idle:
                 // TODO: move to the random location we previously picked in UpdateMode
+                _movement = Vector3.zero;
                 break;
             case AttackerTasks.MovingToTarget:
                 // TODO: Collisions with props
@@ -164,8 +177,8 @@ public class Attacker : MonoBehaviour
                 float magnitude = MovementSpeedInUnitsPerSecond * Time.deltaTime;
                 var heading = target.transform.position - transform.position;
                 heading.y = 0.0f;
-                var movementVector = magnitude * heading.normalized;
-                transform.position += (movementVector);
+                _movement = magnitude * heading.normalized;
+                transform.position += (_movement);
                 break;
             case AttackerTasks.Attacking:
                 // Perform an attack if we're in range.

@@ -68,7 +68,7 @@ public class AudioManager : MonoBehaviour
         sounds[soundInfo.id] = soundInfo;
     }
     
-    public void Play(string id, bool loop = false, float pitchMin = 1.0f, float pitchMax = 1.0f, float volumeMin = 1.0f, float volumeMax = 1.0f, bool isMusic = false)
+    public void Play(string id, bool loop = false, float pitchMin = 1.0f, float pitchMax = 1.0f, float volumeMin = 1.0f, float volumeMax = 1.0f, bool isMusic = false, Vector3? position = null, float minDistance = 1, float maxDistance = 1000)
     {
         //Debug.Log("Play " + id);
         AudioSource audioSource = null;
@@ -109,9 +109,23 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = soundInfo.audioClips[Random.Range(0, soundInfo.audioClips.Length)];
         audioSource.outputAudioMixerGroup = soundInfo.audioMixerGroup;
         audioSource.loop = loop;
+
+        if(position != null)
+        {
+            audioSource.transform.position = position.Value;
+            audioSource.spatialBlend = 1.0f;
+            audioSource.minDistance = minDistance;
+            audioSource.maxDistance = maxDistance;
+        }
+        else
+        {
+            audioSource.transform.localPosition = Vector3.zero;
+            audioSource.spatialBlend = 0.0f;
+        }
+
         audioSource.Play();
 
-        if(isMusic)
+        if (isMusic)
         {
             _musicSource = audioSource;
         }
