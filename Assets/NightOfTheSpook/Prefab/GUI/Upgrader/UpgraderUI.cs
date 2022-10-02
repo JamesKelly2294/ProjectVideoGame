@@ -12,7 +12,11 @@ public class UpgraderUI : MonoBehaviour
     void Start()
     {
         upgradeManager = GameObject.FindObjectOfType<UpgradeManager>();
-        gameObject.SetActive(false);
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

@@ -49,11 +49,20 @@ public class StaticTurretEquipment : Equipment
             return;
         }
 
+        var attackable = target.GetComponent<Attackable>();
+        if (attackable != null && attackable.Health <= 0)
+        {
+            target = null;
+            _deltaTime = 0;
+            return;
+        }
+
         float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
         if (distanceToTarget > maxAttackRange || distanceToTarget < minAttackRange)
         {
             target = null;
             _deltaTime = 0;
+            return;
         }
     }
 
@@ -104,17 +113,22 @@ public class StaticTurretEquipment : Equipment
                 float distance = Vector3.Distance(transform.position, hit.transform.position);
                 if (distance < smallestDistance && distance > minAttackRange)
                 {
-                    smallestDistance = distance;
-                    target = hit.gameObject;
+                    var attackable = hit.GetComponent<Attackable>();
+                    if (attackable == null) { continue; }
+                    if (attackable.Health > 0)
+                    {
+                        smallestDistance = distance;
+                        target = hit.gameObject;
+                    } 
                 }
             }
         }
-    }
+    }       
 
     void LookTowardsTarget()
     {
-        var damping = 2;
-        var lookPos = target != null ? (target.transform.position + Vector3.up) - turretShootyBit.transform.position : turretShootyBit.transform.position + transform.forward * 10.0f;
+        var damping = 5;
+        var lookPos = target != null ? (target.transform.position) - turretShootyBit.transform.position : turretShootyBit.transform.position + transform.forward * 10.0f;
         var rotation = Quaternion.LookRotation(lookPos);
         turretShootyBit.transform.rotation = Quaternion.Slerp(turretShootyBit.transform.rotation, rotation, Time.deltaTime * damping);
     }
