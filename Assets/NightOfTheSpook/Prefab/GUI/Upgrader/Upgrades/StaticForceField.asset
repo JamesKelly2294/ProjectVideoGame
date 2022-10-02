@@ -16,7 +16,7 @@ MonoBehaviour:
   equipmentConfiguration: {fileID: 11400000, guid: 125044fe05a484703b332ae515d7582b, type: 2}
   allowances:
   - type: 0
-    displayName: ' Stronger Force Fields'
+    displayName: Stronger Force Fields
     max: 2
     weight: 1
   - type: 1
