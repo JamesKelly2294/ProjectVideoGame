@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GooGrenadeConfiguration
   m_EditorClassIdentifier: 
   displayName: Goo Grenade
-  pickupPrefab: {fileID: 8742746091072468152, guid: 7a1d971a9e47148768f2c57383ee664f, type: 3}
+  pickupPrefab: {fileID: 4915490360038851502, guid: 75b27c3c8e61c4f6abb88c509ecf5c33, type: 3}
   deployedPrefab: {fileID: 2210557486056277234, guid: ac480bffd134c42048ed6b0aff62ae65, type: 3}
-  inventoryIcon: {fileID: 21300000, guid: ba70aba94c83b4142ad36f3e57c179d1, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: 59b8fef4d349f48efab46babe68876a0, type: 3}
   baseMaxCharges: 2
