@@ -5,7 +5,7 @@
 [Bb]uilds/
 [Ll]ogs/
 Assets/AssetStoreTools*
-UserSettings/EditorUserSettings.asset
+[Uu]serSettings/
 
 # Visual Studio cache directory
 .vs/
