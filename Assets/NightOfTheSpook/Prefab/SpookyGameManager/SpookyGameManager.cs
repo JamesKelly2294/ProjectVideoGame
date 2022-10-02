@@ -71,6 +71,7 @@ public class SpookyGameManager : MonoBehaviour
 
     public void HandlePlayerDeath() {
         alive = false;
+        timerTime = 0;
     }
 }
 
