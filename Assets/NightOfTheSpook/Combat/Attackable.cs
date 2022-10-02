@@ -29,9 +29,30 @@ public class Attackable : MonoBehaviour
 
     public bool IsPlayer = false;
 
-    void Start()
-    {
+    private float wasDamagedCooldown = 0f;
+    private AnimationCurve wasDamagedAnimationCurve;
+    private Color damagedColor = new Color(1f,0,0,1f);
+    private Renderer innerRenderer;
+
+    void Start() {
         Health = TotalHealth;
+        innerRenderer = gameObject.GetComponentInChildren<Renderer>();
+        wasDamagedAnimationCurve = new AnimationCurve(
+            new Keyframe(0,     0),
+            new Keyframe(.2f, 10)
+        );
+    }
+
+    void Update() {
+        if (wasDamagedCooldown > 0) {
+            wasDamagedCooldown -= Time.deltaTime;
+            if (wasDamagedCooldown <= 0) {
+                innerRenderer.material.DisableKeyword("_EMISSION");
+            } else {
+                innerRenderer.material.SetColor ("_EmissionColor", new Color(1f,0,0,1f) * wasDamagedAnimationCurve.Evaluate(wasDamagedCooldown));
+            }
+        }
+        
     }
 
     /// <summary>
@@ -44,6 +65,8 @@ public class Attackable : MonoBehaviour
         Health = Math.Max(0.0f, Health - amount);
 
         if ( Health <= 0.0f ) {
+            innerRenderer.material.DisableKeyword("_EMISSION");
+
             if (GetComponent<DeathAnimation>() == null) {
                 gameObject.AddComponent<DeathAnimation>();
 
@@ -51,6 +74,9 @@ public class Attackable : MonoBehaviour
                     GetComponent<Player>().Died();
                 }
             }
+        } else if (wasDamagedCooldown <= 0) {
+            innerRenderer.material.EnableKeyword("_EMISSION");
+            wasDamagedCooldown = 0.2f;
         }
     }
 }
