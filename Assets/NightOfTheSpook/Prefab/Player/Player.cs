@@ -80,4 +80,12 @@ public class Player : MonoBehaviour
         Vector3 eulerRotation = inner.transform.rotation.eulerAngles;
         inner.transform.rotation = Quaternion.Euler(new Vector3(eulerRotation.x, eulerRotation.y, walkWobble.Evaluate(walkVerticalTime / walkVerticalTotalTime) * 90));
     }
+
+    public void Died() {
+        Camera camera = GetComponentInChildren<Camera>();
+        if (camera != null) {
+            camera.gameObject.transform.SetParent(null);
+            camera.gameObject.AddComponent<CameraDeathAnimation>();
+        }
+    }
 }

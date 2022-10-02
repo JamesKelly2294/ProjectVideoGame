@@ -47,6 +47,10 @@ public class Attackable : MonoBehaviour
         if ( Health <= 0.0f ) {
             if (GetComponent<DeathAnimation>() == null) {
                 gameObject.AddComponent<DeathAnimation>();
+
+                if (IsPlayer) {
+                    GetComponent<Player>().Died();
+                }
             }
         }
     }
