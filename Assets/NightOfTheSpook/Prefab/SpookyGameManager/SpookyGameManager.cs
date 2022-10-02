@@ -11,6 +11,9 @@ public class SpookyGameManager : MonoBehaviour
     public float xp = 0;
     public float xpGoal = 50;
 
+    // Used to tell the end screens what happened.
+    public SpookyGameSummaryState state = new SpookyGameSummaryState();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class SpookyGameManager : MonoBehaviour
 
     void Fire()
     {
+        state.timesShot += 1;
         this.GetComponent<PubSubSender>().Publish("timer.didFire");
     }
 
@@ -37,6 +41,7 @@ public class SpookyGameManager : MonoBehaviour
         Enemy enemy = (e.value as GameObject).GetComponent<Enemy>();
         if (enemy != null) {
             xp += enemy.experienceValue;
+            state.totalXPGained += enemy.experienceValue;
             if (xp >= xpGoal) {
                 BeginUpgrade();
             }
@@ -60,4 +65,9 @@ public class SpookyGameManager : MonoBehaviour
         Time.timeScale = 1;
         this.GetComponent<PubSubSender>().Publish("upgradeTime.hasEnded");
     }
+}
+
+public class SpookyGameSummaryState {
+    public int timesShot = 0;
+    public float totalXPGained = 0;
 }

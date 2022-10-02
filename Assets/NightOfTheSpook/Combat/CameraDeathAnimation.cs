@@ -19,7 +19,7 @@ public class CameraDeathAnimation : MonoBehaviour
             gameObject.transform.localPosition += new Vector3(0, speed * Time.deltaTime, -speed * Time.deltaTime);
         } else {
             // End the game...
-            GameObject.FindObjectOfType<GameManager>().ShowLoseScreen();
+            GameObject.FindObjectOfType<GameManager>().ShowLoseScreen(GameObject.FindObjectOfType<SpookyGameManager>().state);
         }
     }
 }
