@@ -51,17 +51,20 @@ public class PlayerInventoryGUI : MonoBehaviour
                 Destroy(slotGUI.charges.transform.GetChild(j).gameObject);
             }
 
+            slotGUI.keyLabel.text = "" + (i+1);
             if (inventorySlot.configuration == null)
             {
                 slotGUI.equipmentIcon.enabled = false;
                 slotGUI.equipmentIcon = null;
-                slotGUI.equipmentSelection.color = _deselectedSlotColor;
+                slotGUI.equipmentSelection.enabled = false;
+                //slotGUI.equipmentSelection.color = _deselectedSlotColor;
             }
             else
             {
                 slotGUI.equipmentIcon.enabled = true;
                 slotGUI.equipmentIcon.sprite = inventorySlot.configuration.inventoryIcon;
-                slotGUI.equipmentSelection.color = _playerInventory.SelectedSlot == inventorySlot ? selectedSlotColor : _deselectedSlotColor;
+                slotGUI.equipmentSelection.enabled = _playerInventory.SelectedSlot == inventorySlot ? true : false;
+                //slotGUI.equipmentSelection.color = _playerInventory.SelectedSlot == inventorySlot ? selectedSlotColor : _deselectedSlotColor;
 
                 for (var j = 0; j < inventorySlot.ChargeCapacity; j++)
                 {

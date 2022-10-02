@@ -19,16 +19,18 @@ public class InventorySlot
 [RequireComponent(typeof(PubSubSender))]
 public class PlayerInventory : MonoBehaviour
 {
-    private int _selectedSlotIndex = 0;
+    private int _selectedSlotIndex = -1;
     public InventorySlot SelectedSlot
     {
         get
         {
-            return slots[_selectedSlotIndex];
+            return _selectedSlotIndex >= 0 ? slots[_selectedSlotIndex] : null;
         }
     }
     public List<InventorySlot> slots;
+
     private PubSubSender _pubSub;
+    private GameObject _deploymentBlueprint;
 
     public int InventoryCapacity
     {
@@ -54,10 +56,24 @@ public class PlayerInventory : MonoBehaviour
     {
         if (index < 0 || index >= InventoryCapacity)
         {
-            return;
+            _selectedSlotIndex = -1;
+        }
+        else
+        {
+            if (index == _selectedSlotIndex)
+            {
+                _selectedSlotIndex = -1;
+            }
+            else
+            {
+                _selectedSlotIndex = index;
+                if (SelectedSlot == null)
+                {
+                    _selectedSlotIndex = -1;
+                }
+            }
         }
 
-        _selectedSlotIndex = index;
         _pubSub.Publish("InventoryChanged");
     }
 
@@ -77,6 +93,26 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DeployEquipment();
+        }
+
+        if (_deploymentBlueprint != null)
+        {
+            UpdateBlueprintTracking();
+        }
+    }
+
+    private void UpdateBlueprintTracking()
+    {
+        // this creates a horizontal plane passing through this object's center
+        var plane = new Plane(transform.position, Vector3.up);
+        // create a ray from the mousePosition
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // plane.Raycast returns the distance from the ray start to the hit point
+        float distance = 0;
+        if (plane.Raycast(ray, distance)){
+            // some point of the plane was hit - get its coordinates
+            var hitPoint = ray.GetPoint(distance);
+            // use the hitPoint to aim your cannon
         }
     }
 

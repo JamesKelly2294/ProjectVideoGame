@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: StaticTurretConfiguration
   m_EditorClassIdentifier: 
   displayName: Static Turret
+  type: 0
   pickupPrefab: {fileID: 3158609300030686922, guid: 5779059a3a07642c399d6c804456b38d, type: 3}
   deployedPrefab: {fileID: 6457969297087112050, guid: ca8a0c3359a884fe5a6c6daf3887717d, type: 3}
+  blueprintPrefab: {fileID: 8340895127885359677, guid: 70cef06d5caf744908f4c1a9a7bca7c2, type: 3}
   inventoryIcon: {fileID: 21300000, guid: 19b65a0e38c4b470eac5ce73370fbafd, type: 3}
   baseMaxCharges: 1
