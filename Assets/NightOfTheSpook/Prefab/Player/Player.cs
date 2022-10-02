@@ -12,12 +12,22 @@ public class Player : MonoBehaviour
     public AnimationCurve walkVertical;
     public AnimationCurve walkWobble;
     public float walkVerticalTime, walkVerticalTotalTime;
+    public float footstepTime;
     public bool alive = true;
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    void PlayFootstepAudio()
+    {
+        AudioManager.Instance.Play("SFX/PlayerWalk",
+            pitchMin: 0.9f, pitchMax: 1.1f,
+            volumeMin: 0.5f, volumeMax: 0.5f,
+            position: transform.position,
+            minDistance: 10, maxDistance: 20);
     }
 
     // Update is called once per frame
@@ -56,11 +66,19 @@ public class Player : MonoBehaviour
             if (walkVerticalTime > walkVerticalTotalTime) {
                 walkVerticalTime -= walkVerticalTotalTime;
             }
+
+            footstepTime += Time.deltaTime;
+            if (footstepTime > (walkVerticalTotalTime / 2.0f) - (walkVerticalTotalTime / 4.0f))
+            {
+                PlayFootstepAudio();
+                footstepTime = -walkVerticalTotalTime / 4.0f;
+            }
         } else {
             // If we are beyond half way, just continue
             if (walkVerticalTime > walkVerticalTotalTime / 2 && walkVerticalTime < walkVerticalTotalTime) {
                 walkVerticalTime += Time.deltaTime;
                 walkVerticalTime = Mathf.Min(walkVerticalTotalTime, walkVerticalTime);
+                
             } else if (walkVerticalTime < walkVerticalTotalTime / 2 && walkVerticalTime > 0) {
                 walkVerticalTime -= Time.deltaTime;
                 walkVerticalTime = Mathf.Max(0, walkVerticalTime);
