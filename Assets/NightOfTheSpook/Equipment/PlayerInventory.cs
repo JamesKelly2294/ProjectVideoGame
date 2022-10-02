@@ -109,7 +109,7 @@ public class PlayerInventory : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         // plane.Raycast returns the distance from the ray start to the hit point
         float distance = 0;
-        if (plane.Raycast(ray, distance)){
+        if (plane.Raycast(ray, out distance)){
             // some point of the plane was hit - get its coordinates
             var hitPoint = ray.GetPoint(distance);
             // use the hitPoint to aim your cannon
