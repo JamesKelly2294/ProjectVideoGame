@@ -91,6 +91,14 @@ public class EnemySpawnManager : MonoBehaviour
             var enemyCount = spawner.MaxEnemiesPerSpawn;
             TriggerSpawner(spawner, enemyCount);
         }
+        foreach (var kv in _specialSpawnerRuleLookup)
+        {
+            if(kv.Value())
+            {
+                var spawner = kv.Key;
+                TriggerSpawner(spawner, spawner.MaxEnemiesPerSpawn);
+            }
+        }
     }
 
     void Awake()

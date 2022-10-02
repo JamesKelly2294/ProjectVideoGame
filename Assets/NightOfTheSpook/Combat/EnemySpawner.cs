@@ -69,6 +69,7 @@ public class EnemySpawner : MonoBehaviour
             var position = new Vector3(rx, ry, rz);
             _ = TriggerSpawn(position); // probably do something to specify a parent here.
         }
+        Debug.Log($"{name} spawned {count} enemies of type {EnemyPrefab.name}");
 
         // TODO: Hack for now, need to add plumbing to specify a parent above
         return gameObject;
@@ -81,7 +82,6 @@ public class EnemySpawner : MonoBehaviour
     /// <returns></returns>
     public GameObject TriggerSpawn(Vector3 where)
     {
-        Debug.Log($"{name} spawned");
         var newEnemy = Instantiate(EnemyPrefab.gameObject, where, Quaternion.identity, gameObject.transform);
         newEnemy.GetComponent<Attacker>().PrimaryTarget = AttackerTarget;
         newEnemy.SetActive(true);
@@ -98,8 +98,6 @@ public class EnemySpawner : MonoBehaviour
         get
         {
             bool isCoolingDown = _nextSpawnTime < Time.time;
-            Debug.Log($"{name} is visible: {_isVisible}");
-            Debug.Log($"{name} in cooldown: {isCoolingDown}");
             return !_isVisible && isCoolingDown;
         }
     }
