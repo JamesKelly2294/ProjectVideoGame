@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AudioManager
   - RootCanvas
+  - Enemies
   layers:
   - Default
   - TransparentFX

@@ -49,8 +49,12 @@ public class EnemySpawner : MonoBehaviour
     // on start before the visibility check has occured.
     private bool _isVisible = true;
 
+    private GameObject _enemiesContainer;
+
     private void Start()
     {
+        _enemiesContainer = GameObject.FindGameObjectWithTag("Enemies");
+
         if (AttackerTarget == null)
         {
             AttackerTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Attackable>();
@@ -92,7 +96,7 @@ public class EnemySpawner : MonoBehaviour
     /// <returns></returns>
     public GameObject TriggerSpawn(Vector3 where)
     {
-        var newEnemy = Instantiate(EnemyPrefab.gameObject, where, Quaternion.identity, gameObject.transform);
+        var newEnemy = Instantiate(EnemyPrefab, where, Quaternion.identity, _enemiesContainer != null ? _enemiesContainer.transform : gameObject.transform);
         newEnemy.GetComponent<Attacker>().PrimaryTarget = AttackerTarget;
         newEnemy.SetActive(true);
         
