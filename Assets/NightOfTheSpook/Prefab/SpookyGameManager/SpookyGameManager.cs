@@ -56,6 +56,7 @@ public class SpookyGameManager : MonoBehaviour
 
     public void EndUpgrade() {
         xp -= xpGoal;
+        xpGoal *= 2;
         Time.timeScale = 1;
         this.GetComponent<PubSubSender>().Publish("upgradeTime.hasEnded");
     }
