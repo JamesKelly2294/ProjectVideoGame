@@ -19,13 +19,26 @@ public class Beam : MonoBehaviour
     public ColidingBeam colidingBeam;
     public Light spotLight;
 
-    public float damagePerSecond;
+
+
+
+
+    // TUNE HERE 
+    private float baseDamagePerSecond = 2f, baseSize = 0.25f, baseDuration = 1f;
+    private float dpsLevelExponent = 2f, sizeLevelExponent = 2f, durationLevelExponent = 2f;
+
+
+
+
+
 
     public AudioSource fireSound, cooldownSound;
     public float fireSoundNormalVolume = 1f;
     public float cooldownSoundNormalVolume = 0.25f;
     public float fireSoundCooldownTime = 0f;
     public float fireSoundCooldownTotalTime = 0.25f;
+
+    public EquipmentConfiguration equipmentConfiguration;
 
 
     // Start is called before the first frame update
@@ -38,7 +51,13 @@ public class Beam : MonoBehaviour
     void Update()
     {
         if (Time.timeScale == 0) { return; }
-        
+
+        // Update weapon
+        Upgrade u = spookyGameManager.GetComponent<UpgradeManager>().UpgradeOrZero(equipmentConfiguration);
+        float damagePerSecond = baseDamagePerSecond * (Mathf.Pow(dpsLevelExponent, u.power));
+        beamFireTotalTime = baseDuration * (Mathf.Pow(durationLevelExponent, u.speed));
+        float size = baseSize * (Mathf.Pow(sizeLevelExponent, u.special));
+
         float strength;
         Material mat;
         Color spotColor;
@@ -46,6 +65,7 @@ public class Beam : MonoBehaviour
             mat = beamFireMat;
             beamFireTime += Time.deltaTime * beamFireSpeed;
             strength = beamFireStength.Evaluate(beamFireTime / beamFireTotalTime);
+            strength *= size;
             spotColor = new Color(0f, 0.5f, 1f);
 
             for (int i =  colidingBeam.attackables.Count - 1; i >= 0 ; i--)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8199742932489216772}
   - component: {fileID: 255144325103144861}
   - component: {fileID: 4776054439890026186}
+  - component: {fileID: 8013721313627934566}
   m_Layer: 0
   m_Name: SpookyGameManager
   m_TagString: Untagged
@@ -107,3 +108,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8013721313627934566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199742932489216773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb92f7fa5ebdd41c384faaac590213d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeConfigurations:
+  - {fileID: 11400000, guid: 61feea02c2fdf48e78c507a1b142e46a, type: 2}
+  - {fileID: 11400000, guid: 8598e36ca5cae4831bbe3923f4117f50, type: 2}
+  - {fileID: 11400000, guid: cc647a16bbc5e4e0cb84ac13025b9a7e, type: 2}

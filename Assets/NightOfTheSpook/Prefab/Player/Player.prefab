@@ -263,13 +263,19 @@ MonoBehaviour:
   beam: {fileID: 6321582112355887087}
   colidingBeam: {fileID: 6715753760850718303}
   spotLight: {fileID: 5444810607709679246}
-  damagePerSecond: 3
+  baseDamagePerSecond: 1
+  baseSize: 0.05
+  baseDuration: 1
+  dpsLevelExponent: 2
+  sizeLevelExponent: 2
+  durationLevelExponent: 1.5
   fireSound: {fileID: 6947675245757811451}
   cooldownSound: {fileID: 2369130545612495721}
   fireSoundNormalVolume: 1
   cooldownSoundNormalVolume: 0.2
   fireSoundCooldownTime: 0
   fireSoundCooldownTotalTime: 0.5
+  equipmentConfiguration: {fileID: 11400000, guid: 54047b33cb05d46aca6ea36dedfd12ab, type: 2}
 --- !u!114 &7143462387225376914
 MonoBehaviour:
   m_ObjectHideFlags: 0

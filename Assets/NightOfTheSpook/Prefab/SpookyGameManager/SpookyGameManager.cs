@@ -49,6 +49,8 @@ public class SpookyGameManager : MonoBehaviour
     }
 
     public void ApplyUpgrade(PubSubListenerEvent e) {
+        UpgradeOption option = (e.value as PubSubSender).gameObject.GetComponent<UpgradeButton>().upgradeOption;
+        GetComponent<UpgradeManager>().PurchaseUpgrade(option);
         EndUpgrade();
     }
 
