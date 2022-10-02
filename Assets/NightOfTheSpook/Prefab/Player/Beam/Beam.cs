@@ -5,7 +5,7 @@ using UnityEngine;
 public class Beam : MonoBehaviour
 {
 
-    public bool isFiring;
+    public bool isFiring, alive = true;
     public AnimationCurve preFireBeamStrength;
     public AnimationCurve beamFireStength;
 
@@ -108,11 +108,22 @@ public class Beam : MonoBehaviour
     }
 
     public void Fire() {
+        if (!alive) { return; }
         isFiring = true;
         beamFireTime = 0;
         fireSound.Play();
         fireSound.volume = fireSoundNormalVolume;
         cooldownSound.volume = 0;
         fireSoundCooldownTime = 0;
+    }
+
+    public void HandlePlayerDeath() {
+        alive = false;
+        if(isFiring) {
+            isFiring = false;
+            beamFireTime = 0;
+            cooldownSound.Play();
+        }
+        
     }
 }

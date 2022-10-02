@@ -77,6 +77,10 @@ public class DeathAnimation : MonoBehaviour
         PubSubSender sender = GetComponent<PubSubSender>();
         if (sender == null) { sender = gameObject.AddComponent<PubSubSender>(); }
         sender.Publish("i.died", gameObject);
+
+        if (attackable != null && attackable.IsPlayer) {
+            sender.Publish("gameOver");
+        }
     }
 
     // Update is called once per frame

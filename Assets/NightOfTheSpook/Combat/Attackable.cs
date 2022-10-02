@@ -43,7 +43,6 @@ public class Attackable : MonoBehaviour
         if (Time.timeScale == 0) { return; }
         Health = Math.Max(0.0f, Health - amount);
 
-        // TODO: Make an event / pub-sub system for death
         if ( Health <= 0.0f ) {
             if (GetComponent<DeathAnimation>() == null) {
                 gameObject.AddComponent<DeathAnimation>();

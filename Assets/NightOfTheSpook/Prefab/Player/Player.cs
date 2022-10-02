@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public AnimationCurve walkVertical;
     public AnimationCurve walkWobble;
     public float walkVerticalTime, walkVerticalTotalTime;
+    public bool alive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        if (!alive) { return; }
         if (Time.timeScale == 0) { return; }
 
         Vector3 movement = Vector3.zero;
@@ -82,6 +84,7 @@ public class Player : MonoBehaviour
     }
 
     public void Died() {
+        alive = false;
         Camera camera = GetComponentInChildren<Camera>();
         if (camera != null) {
             camera.gameObject.transform.SetParent(null);

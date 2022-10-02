@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFiring: 0
+  alive: 1
   preFireBeamStrength:
     serializedVersion: 2
     m_Curve:
@@ -290,6 +291,22 @@ MonoBehaviour:
         - m_Target: {fileID: 2148205076494097447}
           m_TargetAssemblyTypeName: Beam, Assembly-CSharp
           m_MethodName: Fire
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Key: gameOver
+    Delegate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2148205076494097447}
+          m_TargetAssemblyTypeName: Beam, Assembly-CSharp
+          m_MethodName: HandlePlayerDeath
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1201,6 +1218,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   walkVerticalTime: 0
   walkVerticalTotalTime: 0.3
+  alive: 1
 --- !u!114 &6221681206638172224
 MonoBehaviour:
   m_ObjectHideFlags: 0

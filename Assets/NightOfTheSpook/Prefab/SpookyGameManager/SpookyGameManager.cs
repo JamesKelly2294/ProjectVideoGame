@@ -7,6 +7,7 @@ public class SpookyGameManager : MonoBehaviour
 
     public float timerTime = 0f;
     public float timerTotalTime = 10f;
+    public bool alive = true;
 
     public float xp = 0;
     public float xpGoal = 50;
@@ -23,6 +24,7 @@ public class SpookyGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!alive) { return; }
         timerTime += Time.deltaTime;
         if (timerTime > timerTotalTime) {
             timerTime -= timerTotalTime;
@@ -37,7 +39,7 @@ public class SpookyGameManager : MonoBehaviour
     }
 
     public void IDiedHandler(PubSubListenerEvent e) {
-
+        if (!alive) { return; }
         Enemy enemy = (e.value as GameObject).GetComponent<Enemy>();
         if (enemy != null) {
             xp += enemy.experienceValue;
@@ -49,6 +51,7 @@ public class SpookyGameManager : MonoBehaviour
     }
 
     public void BeginUpgrade() {
+        if (!alive) { return; }
         Time.timeScale = 0;
         this.GetComponent<PubSubSender>().Publish("upgradeTime.shouldBegin");
     }
@@ -64,6 +67,10 @@ public class SpookyGameManager : MonoBehaviour
         xpGoal *= 2;
         Time.timeScale = 1;
         this.GetComponent<PubSubSender>().Publish("upgradeTime.hasEnded");
+    }
+
+    public void HandlePlayerDeath() {
+        alive = false;
     }
 }
 
