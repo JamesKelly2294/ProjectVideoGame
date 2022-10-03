@@ -8,7 +8,6 @@ public class Attackable : MonoBehaviour
     /// <summary>
     /// The number of points of health the attackable entity can have. The range is somewhat arbitrary.
     /// </summary>
-    [Range(1f, 10f)]
     public float TotalHealth = 3f;
 
     /// <summary>
