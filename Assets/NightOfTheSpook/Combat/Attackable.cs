@@ -10,6 +10,13 @@ public class Attackable : MonoBehaviour
     /// </summary>
     public float TotalHealth = 3f;
 
+
+    public AudioClip deathSound;
+    public float deathSoundChance, deathSoundVolume;
+    public AudioClip hurtSound;
+    public float hurtSoundChance, hurtSoundVolume;
+    public AudioSource audioSource;
+
     /// <summary>
     /// Check to see if the attackable entity is still alive.
     /// </summary>
@@ -80,6 +87,15 @@ public class Attackable : MonoBehaviour
         //     particles.transform.position = gameObject.transform.position + Vector3.up;
         //     particles.transform.LookAt(beam.gameObject.transform.position * -1);
         // }
+
+        float ran = Random.Range(0, 1);
+        if (wasDamagedCooldown <= 0 && audioSource != null) {
+            if (Health <= 0.0f && ran <= deathSoundChance && deathSound != null) {
+                audioSource.PlayOneShot(deathSound, deathSoundVolume);
+            } else if (Health > 0.0f && ran <= hurtSoundChance && hurtSound != null) {
+                audioSource.PlayOneShot(hurtSound, hurtSoundChance);
+            }
+        }
 
         if ( Health <= 0.0f ) {
             innerRenderer.material.DisableKeyword("_EMISSION");
