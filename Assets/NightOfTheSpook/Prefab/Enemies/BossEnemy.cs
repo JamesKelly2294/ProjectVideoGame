@@ -162,10 +162,6 @@ public class BossEnemy : MonoBehaviour
     private bool ShouldTeleport()
     {
 
-
-        // Sorry :(
-        return false;
-
         // This will result in a check every second, so there will be a slight delay before the boss jumps.
         if ((_previousDPSCheckTime + 1.0f) > Time.time)
         {
@@ -185,12 +181,25 @@ public class BossEnemy : MonoBehaviour
 
     private void HandleTeleportAnimationFinished()
     {
+
+        if ( TeleportLocations == null || TeleportLocations.Count == 0) {
+            TeleportLocations = new List<Transform>();
+            EquipmentSpawner[] spawns = (EquipmentSpawner[])GameObject.FindObjectsOfTypeAll(typeof(EquipmentSpawner));
+            foreach (var item in spawns) {
+                TeleportLocations.Add(item.gameObject.transform);
+            }
+        }
+
         var nextLocationIndex = Random.Range(0, TeleportLocations.Count);
         var nextLocation = TeleportLocations[nextLocationIndex];
         gameObject.transform.position = nextLocation.position;
 
         // Reset the face back to normal.
         SetFace(FaceState.Idle);
+        CapsuleCollider col = GetComponent<CapsuleCollider>();
+        col.center = Vector3.down * 2;
+        col.radius = 2f;
+        col.height = 6.6f;
 
         // The previous animation will destroy itself so we need a new one.
         ConfigureTeleportAnimation();
