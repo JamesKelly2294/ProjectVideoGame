@@ -1,0 +1,276 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6275743915203568806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4072669369135173618}
+  m_Layer: 0
+  m_Name: Hay Bale Pile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4072669369135173618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275743915203568806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 210977909797014146}
+  - {fileID: 1250638709334223429}
+  - {fileID: 7621658742397896173}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &389335108728565097
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4072669369135173618}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_Name
+      value: HayBale.vox (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+--- !u!4 &210977909797014146 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+  m_PrefabInstance: {fileID: 389335108728565097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &695344236183654456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+  m_PrefabInstance: {fileID: 389335108728565097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8271852663679725248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695344236183654456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.31019974, y: 0.5061115, z: 0.5097008}
+  m_Center: {x: 0.04856682, y: 0.24694425, z: 0.049240112}
+--- !u!1001 &1644253921281396142
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4072669369135173618}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.632
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1745
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_Name
+      value: HayBale.vox (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+--- !u!4 &1250638709334223429 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+  m_PrefabInstance: {fileID: 1644253921281396142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1878275833241039103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+  m_PrefabInstance: {fileID: 1644253921281396142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8418276494748958121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878275833241039103}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.31019974, y: 0.5061115, z: 0.5097008}
+  m_Center: {x: 0.04856682, y: 0.24694425, z: 0.049240112}
+--- !u!1001 &7948619437540499974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4072669369135173618}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3183
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4151
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1083
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+      propertyPath: m_Name
+      value: HayBale.vox (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+--- !u!1 &7101686857935675223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+  m_PrefabInstance: {fileID: 7948619437540499974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1503091824855362552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7101686857935675223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.31019974, y: 0.5061115, z: 0.5097008}
+  m_Center: {x: 0.04856682, y: 0.24694425, z: 0.049240112}
+--- !u!4 &7621658742397896173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac69ddc35354b4d59a22143f021d4a30, type: 3}
+  m_PrefabInstance: {fileID: 7948619437540499974}
+  m_PrefabAsset: {fileID: 0}
