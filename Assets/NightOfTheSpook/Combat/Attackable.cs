@@ -33,6 +33,8 @@ public class Attackable : MonoBehaviour
     private Color damagedColor = new Color(1f,0,0,1f);
     private Renderer innerRenderer;
 
+    private Color _cachedEmissiveColor;
+
     void Start() {
         Health = TotalHealth;
         innerRenderer = gameObject.GetComponentInChildren<Renderer>();
@@ -42,16 +44,25 @@ public class Attackable : MonoBehaviour
         );
     }
 
+    bool _cachedEmission;
+    bool _animatingDamage;
     void Update() {
         if (wasDamagedCooldown > 0) {
             wasDamagedCooldown -= Time.deltaTime;
             if (wasDamagedCooldown <= 0) {
-                innerRenderer.material.DisableKeyword("_EMISSION");
+                if (!_cachedEmission)
+                {
+                    innerRenderer.material.DisableKeyword("_EMISSION");
+                }
+                else
+                {
+                    innerRenderer.material.SetColor("_EmissionColor", _cachedEmissiveColor);
+                    _animatingDamage = false;
+                }
             } else {
                 innerRenderer.material.SetColor ("_EmissionColor", new Color(1f,0,0,1f) * wasDamagedAnimationCurve.Evaluate(wasDamagedCooldown));
             }
         }
-        
     }
 
     /// <summary>
@@ -81,7 +92,20 @@ public class Attackable : MonoBehaviour
                 }
             }
         } else if (wasDamagedCooldown <= 0) {
-            innerRenderer.material.EnableKeyword("_EMISSION");
+            if (!innerRenderer.material.IsKeywordEnabled("_EMISSION"))
+            {
+                innerRenderer.material.EnableKeyword("_EMISSION");
+            }
+            else
+            {
+                if (!_animatingDamage)
+                {
+                    _cachedEmissiveColor = innerRenderer.material.GetColor("_EmissionColor");
+                    _cachedEmission = true;
+                }
+            }
+
+            _animatingDamage = true;
             wasDamagedCooldown = 0.2f;
         }
     }
