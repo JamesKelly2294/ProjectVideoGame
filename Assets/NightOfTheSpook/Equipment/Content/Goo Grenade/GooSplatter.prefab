@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5977736093496702577}
   - component: {fileID: 8800596700868955963}
   - component: {fileID: 5406494607773526959}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9055945273413149009}
   - component: {fileID: 5038640109339841426}
   - component: {fileID: 2712849562238276350}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GooSplatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

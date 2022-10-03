@@ -1346,7 +1346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacementRangeIndicator: {fileID: 1494940777773349462}
-  PlacementRange: 5
+  PlacementRange: 7.5
   BlueprintValidPlacementMat: {fileID: 2100000, guid: 4893ca88c745c42978cd44ecb2d02ab6, type: 2}
   BlueprintInvalidPlacementMat: {fileID: 2100000, guid: a222930ace1334d1faac719678d3c952, type: 2}
   ThrowRange: 10

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 960660197990066352}
   - component: {fileID: 960660197990066355}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5357106188921022094}
   - component: {fileID: 7102014908145672132}
   - component: {fileID: 6028867237265161040}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 960660197995741088}
   - component: {fileID: 1196103353}
   - component: {fileID: 5726859824312842163}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: DeployedGooGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

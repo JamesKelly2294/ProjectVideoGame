@@ -182,7 +182,7 @@ public class StaticTurretEquipment : Equipment
                 }
             }
         }
-    }       
+    }
 
     void LookTowardsTarget()
     {
