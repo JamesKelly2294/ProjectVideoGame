@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PubSubListener))]
 public class StaticTurretEquipment : Equipment
 {
     public GameObject target;
@@ -24,9 +25,17 @@ public class StaticTurretEquipment : Equipment
     [Range(0, 60.0f)]
     public float lifetime = 30.0f;
 
+    public EquipmentConfiguration Configuration;
+
+    private UpgradeManager _upgradeManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        var spookyGameManager = FindObjectOfType<SpookyGameManager>();
+        _upgradeManager = spookyGameManager.GetComponent<UpgradeManager>();
+
+        RecalculateUpgrades();
     }
 
     private float _deltaTime;
@@ -45,9 +54,44 @@ public class StaticTurretEquipment : Equipment
         EvaluateLifetime();
     }
 
+    private float _trueCooldown = 1.0f;
+    private float _trueDamage = 1.0f;
+    private float _trueLifetime = 1.0f;
+    public void RecalculateUpgrades()
+    {
+        RecalculateTrueLifetime();
+        RecalculateTruePower();
+        RecalculateTrueCooldown();
+    }
+
+    private void RecalculateTrueLifetime()
+    {
+        var upgrade = _upgradeManager.UpgradeOrZero(Configuration);
+        var multiplier = Mathf.Pow(1.5f, upgrade.lifetime);
+
+        _trueLifetime = lifetime * multiplier;
+    }
+
+    private void RecalculateTruePower()
+    {
+        var upgrade = _upgradeManager.UpgradeOrZero(Configuration);
+        var multiplier = Mathf.Pow(2, upgrade.power);
+
+        _trueDamage = attackDamage * multiplier;
+    }
+
+    private void RecalculateTrueCooldown()
+    {
+        var upgrade = _upgradeManager.UpgradeOrZero(Configuration);
+        var multiplier = Mathf.Pow(0.5f, upgrade.speed);
+
+        _trueCooldown = attackCooldown * multiplier;
+    }
+
+
     void EvaluateLifetime()
     {
-        if (_elapsedTime > lifetime)
+        if (_elapsedTime > _trueLifetime)
         {
             var animation = gameObject.AddComponent<EquipmentDestructionAnimation>();
             animation.scaleCurve = AnimationCurve.EaseInOut(0.0f, 1.0f, 1.0f, 0.0f);
@@ -88,7 +132,7 @@ public class StaticTurretEquipment : Equipment
             return;
         }
 
-        if (_deltaTime < attackCooldown)
+        if (_deltaTime < _trueCooldown)
         {
             return;
         }
@@ -101,7 +145,7 @@ public class StaticTurretEquipment : Equipment
         projectileGO.transform.rotation = turretShootyBit.transform.rotation;
 
         var projectile = projectileGO.GetComponent<Projectile>();
-        projectile.damage = attackDamage;
+        projectile.damage = _trueDamage;
 
         AudioManager.Instance.Play("SFX/TurretFire",
                 pitchMin: 0.9f, pitchMax: 1.1f,
