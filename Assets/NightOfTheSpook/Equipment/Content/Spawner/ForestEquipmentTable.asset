@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ForestEquipmentTable
   m_EditorClassIdentifier: 
   spawnRates:
-  - configuration: {fileID: 11400000, guid: 58181a8e24aa945e694382e2cd6c8a0e, type: 2}
+  - configuration: {fileID: 11400000, guid: 282da901fe44142f8ae359791e0c986f, type: 2}
     spawnWeight: 11
