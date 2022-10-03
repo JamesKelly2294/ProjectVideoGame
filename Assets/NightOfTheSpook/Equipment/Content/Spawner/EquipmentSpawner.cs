@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EquipmentSpawner : MonoBehaviour
 {
+    [Header("Spawning")]
     public GameObject equipmentPickupPrefab;
     public EquipmentSpawnTable equipmentSpawnTable;
     public GameObject spawnPoint;
@@ -15,9 +16,7 @@ public class EquipmentSpawner : MonoBehaviour
     [Range(-120, 120)]
     public float spawnCooldownJitter = 30;
 
-    public float targetElapsedTime;
-    public float elapsedTime;
-
+    [Header("Bounce Animation")]
     [Range(0.0f, 5.0f)]
     public float verticalMovementTime = 1.0f;
     [Range(0.0f, 1.0f)]
@@ -25,6 +24,10 @@ public class EquipmentSpawner : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float verticalOffset = 0.2f;
     public AnimationCurve verticalMovement;
+
+    [Header("Bookkeeping")]
+    public float targetElapsedTime;
+    public float elapsedTime;
 
     private GameObject _spawnedPickup;
     private bool _spawnedPickupLastFrame;
