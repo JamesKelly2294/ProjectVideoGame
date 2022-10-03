@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalHealth: 500
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: cf81482b55f175d4bb815e18a0d84e3d, type: 3}
   deathSoundChance: 0
   deathSoundVolume: 0
   hurtSound: {fileID: 0}
@@ -434,6 +434,14 @@ MonoBehaviour:
   - {fileID: 5497878203589427394}
   - {fileID: 8066850791409253932}
   - {fileID: 7156507099729824880}
+  SpawnSound: {fileID: 8300000, guid: 632f8e6a6377bb14cb62673bbbaf08bd, type: 3}
+  PainSounds:
+  - {fileID: 8300000, guid: d6ece98c3e12c694b96736afe9025cf9, type: 3}
+  - {fileID: 8300000, guid: e1d6bc8aa9123ca4181d441150368145, type: 3}
+  - {fileID: 8300000, guid: ef743071373dff646a4178c1eaac08b9, type: 3}
+  - {fileID: 8300000, guid: 6781600e1f9654c45802f7a0192d67b7, type: 3}
+  - {fileID: 8300000, guid: 0c5ee035f948ddf409404b9d72c930c3, type: 3}
+  - {fileID: 8300000, guid: 786db3dcdaf04124bbf03cba2f62b00f, type: 3}
 --- !u!82 &230030106281035495
 AudioSource:
   m_ObjectHideFlags: 0
