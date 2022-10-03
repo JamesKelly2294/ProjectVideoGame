@@ -25,6 +25,6 @@ public class GameStateHeader : MonoBehaviour
     {
         chargeBar.SetProgress(spookyGameManager.timerTime / spookyGameManager.timerTotalTime);
         healthBar.SetProgress(playerAttackable.Health / playerAttackable.TotalHealth);
-        xpBar.SetProgress(spookyGameManager.xp / spookyGameManager.xpGoal);
+        xpBar.SetProgress(spookyGameManager.xp / spookyGameManager.XPGoal);
     }
 }

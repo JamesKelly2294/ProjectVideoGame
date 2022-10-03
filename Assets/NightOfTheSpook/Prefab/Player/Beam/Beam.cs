@@ -24,7 +24,7 @@ public class Beam : MonoBehaviour
 
 
     // TUNE HERE 
-    private float baseDamagePerSecond = 2f, baseSize = 0.25f, baseDuration = 1f;
+    private float baseDamagePerSecond = 2.5f, baseSize = 0.25f, baseDuration = 1f;
     private float dpsLevelExponent = 2f, sizeLevelExponent = 2f, durationLevelExponent = 2f;
 
 

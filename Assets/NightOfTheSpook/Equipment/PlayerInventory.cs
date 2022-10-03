@@ -153,6 +153,11 @@ public class PlayerInventory : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha8)) { SetSelectedSlotIndex(7); }
         else if(Input.GetKeyDown(KeyCode.Alpha9)) { SetSelectedSlotIndex(8); }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            SetSelectedSlotIndex(-1);
+        }
+
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0)

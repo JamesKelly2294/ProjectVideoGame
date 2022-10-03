@@ -19,14 +19,14 @@ MonoBehaviour:
     displayName: Increase Spookbuster Power
     displayDescription: 
     max: 2
-    weight: 1
+    weight: 2
   - type: 1
     displayName: Increase Spookbuster Duration
     displayDescription: 
     max: 2
-    weight: 1
+    weight: 2
   - type: 2
     displayName: Larger Spookbuster Beam
     displayDescription: 
     max: 2
-    weight: 1
+    weight: 2
