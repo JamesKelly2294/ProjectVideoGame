@@ -106,3 +106,5 @@ MonoBehaviour:
   CoolDownTime: 0
   DelaySpawningUntilAfterSeconds: 0
   StopSpawningAfterSeconds: 0
+  SpawnWhenVisible: 1
+  IsVisible: 1
