@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 37208f3af3036e94ebeeb7ec1b3895c4
+=======
+guid: 126f5e348467343cea727fe30b7ee1d6
+>>>>>>> e2008f9 (Minor jump scare)
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
