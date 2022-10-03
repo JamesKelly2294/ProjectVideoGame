@@ -111,7 +111,7 @@ public class Attacker : MonoBehaviour
     {
         if (_movementModifiers.ContainsKey(modifier.type))
         {
-            _movementModifiers[modifier.type].Remove(modifier);
+            _movementModifiers[modifier.type].RemoveAll(m => m.source == modifier.source);
         }
         else
         {
@@ -155,7 +155,7 @@ public class Attacker : MonoBehaviour
                 foreach(var staleModifier in staleModifiers)
                 {
                     //Debug.Log("Removing stale modifier with " + staleModifier);
-                    entry.Value.Remove(staleModifier);
+                    entry.Value.RemoveAll(m => m.source == staleModifier.source);
                 }
 
                 movementModifierVal *= currentBest;

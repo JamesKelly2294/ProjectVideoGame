@@ -86,7 +86,6 @@ public class GooSplatter : MonoBehaviour
         }
 
         CalculateMovementModifier();
-        Debug.Log("Applied movement modifier with source " + _movementModifier.source);
         attacker.ApplyMovementModifier(_movementModifier);
     }
 
