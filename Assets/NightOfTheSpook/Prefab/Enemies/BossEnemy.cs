@@ -27,7 +27,7 @@ public class BossEnemy : MonoBehaviour
     /// <summary>
     /// Animation curve to use when playing the teleport animation arbl garbl warble.
     /// </summary>
-    public AnimationCurve TeleportAnimationCurve = AnimationCurve.EaseInOut(1.0f, 0.0f, 0.0f, 1.0f);
+    public AnimationCurve TeleportAnimationCurve; // = AnimationCurve.EaseInOut(1.0f, 0.0f, 0.0f, 1.0f);
 
     public enum FaceState
     {
@@ -50,6 +50,17 @@ public class BossEnemy : MonoBehaviour
     public AudioClip SpawnSound;
     public List<AudioClip> PainSounds;
 
+    /// <summary>
+    /// List of sounds to pull from for idle sounds while them monster is roaming around.
+    /// </summary>
+    public List<AudioClip> IdleSounds;
+
+    /// <summary>
+    /// How often to play the idle sound.
+    /// </summary>
+    public float IdleSoundFrequency = 10.0f;
+    private float _idleSoundLastPlayedTime = 0.0f;
+
     private BossTeleportAnimation _teleportAnimation;
     private float _previousDPSCheckTime = 0.0f;
     private float _previousHealthValue = 0.0f;
@@ -67,6 +78,7 @@ public class BossEnemy : MonoBehaviour
     void Update()
     {
         UpdateBodyState();
+        UpdateIdleSound();
         UpdateTeleport();
         UpdateWinState();
     }
@@ -98,6 +110,14 @@ public class BossEnemy : MonoBehaviour
         else
         {
             SetBody(BodyState.WellDone);
+        }
+    }
+
+    private void UpdateIdleSound()
+    {
+        if (ShouldPlayIdleSound)
+        {
+            PlayIdleSound();
         }
     }
 
@@ -227,10 +247,9 @@ public class BossEnemy : MonoBehaviour
         _currentBodyState = body;
     }
 
-    private void PlayPainSound()
+    private void PlayRandomSoundFromList(List<AudioClip> sounds)
     {
-        // Play a spoooky sound.
-        var soundIndex = Random.Range(0, PainSounds.Count);
+        var soundIndex = Random.Range(0, sounds.Count);
         var clip = PainSounds[soundIndex];
         Attackable.audioSource.PlayOneShot(clip, 1.0f);
     }
@@ -238,5 +257,23 @@ public class BossEnemy : MonoBehaviour
     private void PlaySpawnSound()
     {
         Attackable.audioSource.PlayOneShot(SpawnSound, 1.0f);
+    }
+
+    private void PlayIdleSound()
+    {
+        PlayRandomSoundFromList(IdleSounds);
+        _idleSoundLastPlayedTime = Time.time;
+    }
+
+    private void PlayPainSound()
+    {
+        PlayRandomSoundFromList(PainSounds);
+    }
+
+    private bool ShouldPlayIdleSound
+    {
+        get {
+            return !IsDead && !IsTeleporting && ((_idleSoundLastPlayedTime + IdleSoundFrequency) < Time.time);
+        }
     }
 }
