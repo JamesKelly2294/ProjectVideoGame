@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: -8813556041379662668}
   - component: {fileID: 4531274980180969661}
   - component: {fileID: 230030106281035495}
+  - component: {fileID: 1738975966294969846}
   m_Layer: 11
   m_Name: DaBoss
   m_TagString: Untagged
@@ -569,6 +570,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1738975966294969846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881687491104595000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f292d19e8ac687f4796ed88f9f22cd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9127816388446678136
 GameObject:
   m_ObjectHideFlags: 0

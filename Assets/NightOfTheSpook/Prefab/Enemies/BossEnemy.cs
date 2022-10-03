@@ -65,6 +65,8 @@ public class BossEnemy : MonoBehaviour
     private float _previousDPSCheckTime = 0.0f;
     private float _previousHealthValue = 0.0f;
 
+    private bool _isKill = false;
+
     void Start()
     {
         _previousHealthValue = Attackable.Health;
@@ -85,6 +87,8 @@ public class BossEnemy : MonoBehaviour
 
     private void UpdateBodyState()
     {
+        if (Attackable == null) { return; }
+
         var healthPercentage = Attackable.Health / Attackable.TotalHealth;
         if(healthPercentage >= 0.75)
         {
@@ -139,21 +143,19 @@ public class BossEnemy : MonoBehaviour
 
     private void UpdateWinState()
     {
-        if (IsDead)
+        if (IsDead && !_isKill)
         {
             // Cancel the teleportation animation so we don't try to yeet the boss
             // somewhere that won't exist momentarily.
             _teleportAnimation.enabled = false;
 
+            // Prevent the win state from being updated repetitively.
+            _isKill = true;
+
             // TODO: play a "boss is kill" animation here?
 
             // Show the end screen.
-            var gm = GameManager.instance;
-            if(gm != null)
-            {
-                var sgm = FindObjectOfType<SpookyGameManager>();
-                gm.ShowWinScreen(sgm.state);
-            }
+            GetComponent<PubSubSender>().Publish("youWin");
         }
     }
 

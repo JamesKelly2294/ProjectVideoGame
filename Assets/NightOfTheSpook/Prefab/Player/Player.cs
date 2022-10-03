@@ -109,4 +109,14 @@ public class Player : MonoBehaviour
             camera.gameObject.AddComponent<CameraDeathAnimation>();
         }
     }
+
+    public void Win()
+    {
+        foreach(var enemy in GameObject.FindObjectsOfTypeAll(typeof(Enemy)))
+        {
+            // lol
+            ((Enemy)enemy).GetComponent<Attackable>().InflictDamage(100000, null);
+        }
+        Died();
+    }
 }

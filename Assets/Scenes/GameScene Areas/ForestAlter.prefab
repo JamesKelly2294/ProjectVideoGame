@@ -724,7 +724,7 @@ MonoBehaviour:
   AttackerTarget: {fileID: 0}
   MaxEnemiesPerSpawn: 1
   CoolDownTime: 10000
-  DelaySpawningUntilAfterSeconds: 420
+  DelaySpawningUntilAfterSeconds: 0
   StopSpawningAfterSeconds: 421
   SpawnWhenVisible: 1
   IsVisible: 1
