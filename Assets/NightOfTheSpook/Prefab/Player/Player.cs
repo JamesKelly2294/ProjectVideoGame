@@ -114,9 +114,12 @@ public class Player : MonoBehaviour
     {
         foreach(var enemy in GameObject.FindObjectsOfTypeAll(typeof(Enemy)))
         {
-            // lol
-            ((Enemy)enemy).GetComponent<Attackable>().InflictDamage(100000, null);
+            Attackable attackable = ((Enemy)enemy).GetComponent<Attackable>();
+            if (attackable != null && attackable.innerRenderer != null && attackable.IsAlive) {
+                attackable.InflictDamage(attackable.Health + 1, null);
+            }
         }
+
         Died();
     }
 }

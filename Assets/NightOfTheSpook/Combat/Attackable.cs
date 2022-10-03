@@ -38,7 +38,7 @@ public class Attackable : MonoBehaviour
     private float wasDamagedCooldown = 0f;
     private AnimationCurve wasDamagedAnimationCurve;
     private Color damagedColor = new Color(1f,0,0,1f);
-    private Renderer innerRenderer;
+    public Renderer innerRenderer;
 
     private Color _cachedEmissiveColor;
 

@@ -14,6 +14,7 @@ public class CameraDeathAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Time.timeScale = 1;
         time += Time.deltaTime;
         if (time <= totalTime) {
             gameObject.transform.localPosition += new Vector3(0, speed * Time.deltaTime, -speed * Time.deltaTime);
