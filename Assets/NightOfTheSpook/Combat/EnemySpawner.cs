@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
         {
             var rx = Random.Range(bounds.min.x, bounds.max.x);
             var ry = 0.0f; // the ground
-            var rz = Random.Range(bounds.min.y, bounds.max.y);
+            var rz = Random.Range(bounds.min.z, bounds.max.z);
             var position = new Vector3(rx, ry, rz);
             _ = TriggerSpawn(position); // probably do something to specify a parent here.
         }

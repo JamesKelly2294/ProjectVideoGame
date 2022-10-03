@@ -36,7 +36,12 @@ public class PlayerInventory : MonoBehaviour
     public Material BlueprintValidPlacementMat;
     public Material BlueprintInvalidPlacementMat;
 
+    [Range(0, 20.0f)]
+    public float ThrowRange = 10.0f;
+    public GameObject TargetingReticlePrefab;
+
     private EquipmentBlueprint _deploymentBlueprint;
+    private GameObject _targetingReticle;
 
     public int InventoryCapacity
     {
@@ -85,21 +90,26 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        UpdateBlueprint();
+        ResetTracking();
 
         _pubSub.Publish("InventoryChanged");
     }
 
-    private void UpdateBlueprint()
+    private void ResetTracking()
     {
         if (_deploymentBlueprint != null)
         {
             Destroy(_deploymentBlueprint.gameObject);
         }
 
+        if (_targetingReticle != null)
+        {
+            Destroy(_targetingReticle);
+        }
+
         if (SelectedSlot != null &&
-    SelectedSlot.configuration != null &&
-    SelectedSlot.configuration.type == EquipmentConfiguration.EquipmentType.Deployable)
+            SelectedSlot.configuration != null &&
+            SelectedSlot.configuration.type == EquipmentConfiguration.EquipmentType.Deployable)
         {
             var go = Instantiate(SelectedSlot.configuration.blueprintPrefab);
             _deploymentBlueprint = go.AddComponent<EquipmentBlueprint>();
@@ -107,6 +117,13 @@ public class PlayerInventory : MonoBehaviour
             _deploymentBlueprint.BlueprintInvalidPlacementMat = BlueprintInvalidPlacementMat;
             _deploymentBlueprint.PlacementAnchor = gameObject;
             _deploymentBlueprint.PlacementRange = PlacementRange;
+        }
+
+        if (SelectedSlot != null &&
+            SelectedSlot.configuration != null &&
+            SelectedSlot.configuration.type == EquipmentConfiguration.EquipmentType.Throwable)
+        {
+            _targetingReticle = Instantiate(TargetingReticlePrefab);
         }
     }
 
@@ -152,21 +169,33 @@ public class PlayerInventory : MonoBehaviour
             DeployEquipment();
         }
 
-        if (_deploymentBlueprint != null)
-        {
-            UpdateBlueprintTracking();
-        }
+        UpdateTracking();
     }
 
-    private void UpdateBlueprintTracking()
+    private void UpdateTracking()
     {
-        var plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f));
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (plane.Raycast(ray, out float distance))
-        {
-            var hitPoint = ray.GetPoint(distance);
+        GameObject trackingCursor = null;
 
-            _deploymentBlueprint.transform.position = hitPoint;
+        if (_deploymentBlueprint != null) { trackingCursor = _deploymentBlueprint.gameObject; }
+        if (_targetingReticle != null) { trackingCursor = _targetingReticle; }
+
+        if (trackingCursor != null)
+        {
+            var plane = new Plane(Vector3.up, new Vector3(0.0f, 0.0f, 0.0f));
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (plane.Raycast(ray, out float distance))
+            {
+                var hitPoint = ray.GetPoint(distance);
+
+                trackingCursor.transform.position = hitPoint;
+
+                if (_targetingReticle != null && Vector3.Distance(trackingCursor.transform.position, transform.position) > ThrowRange)
+                {
+                    var direction = (trackingCursor.transform.position - transform.position).normalized;
+                    var offset = direction * ThrowRange;
+                    trackingCursor.transform.position = transform.position + offset;
+                }
+            }
         }
     }
 
@@ -196,11 +225,32 @@ public class PlayerInventory : MonoBehaviour
             else
             {
                 placementLocation = _deploymentBlueprint.transform.position;
-                Destroy(_deploymentBlueprint.gameObject);
             }
         }
 
         var deployedEquipment = Instantiate(equipmentConfig.deployedPrefab);
+
+        if (equipmentConfig.type == EquipmentConfiguration.EquipmentType.Throwable)
+        {
+            var throwableTarget = deployedEquipment.GetComponent<ThrowableTarget>();
+
+            if (throwableTarget != null)
+            {
+                float maxParabolaDuration = 0.60f;
+                float minParabolaDuration = 0.25f;
+                float durationRange = maxParabolaDuration - minParabolaDuration;
+
+                float maxParabolaHeight = 3.0f;
+                float minParabolaHeight = 1.0f;
+                float heightRange = maxParabolaHeight - minParabolaHeight;
+
+                var distance = Vector3.Distance(transform.position, _targetingReticle.transform.position);
+
+                throwableTarget.target = _targetingReticle;
+                throwableTarget.ParabolaDuration = (minParabolaDuration + (distance / ThrowRange) * durationRange);
+                throwableTarget.ParabolaHeight = (minParabolaHeight + (distance / ThrowRange) * heightRange);
+            }
+        }
 
         deployedEquipment.transform.position = placementLocation;
         selectedSlot.currentCharges -= 1;
@@ -209,7 +259,7 @@ public class PlayerInventory : MonoBehaviour
             selectedSlot.configuration = null;
         }
 
-        UpdateBlueprint();
+        ResetTracking();
 
         _pubSub.Publish("InventoryChanged");
         AudioManager.Instance.Play("SFX/EquipmentPlace");
@@ -254,7 +304,7 @@ public class PlayerInventory : MonoBehaviour
 
         AudioManager.Instance.Play("SFX/EquipmentPickup");
 
-        UpdateBlueprint();
+        ResetTracking();
 
         Destroy(pickup.gameObject);
     }
