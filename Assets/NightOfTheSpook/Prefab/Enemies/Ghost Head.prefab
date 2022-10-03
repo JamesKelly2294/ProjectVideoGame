@@ -216,7 +216,7 @@ MonoBehaviour:
       outWeight: 0.43192384
     - serializedVersion: 3
       time: 0.24891785
-      value: 0.10038775
+      value: 0.06278247
       inSlope: -0.014270142
       outSlope: -0.014270142
       tangentMode: 0
@@ -224,8 +224,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.07221429
     - serializedVersion: 3
-      time: 0.69545144
-      value: -0.09891799
+      time: 0.6996171
+      value: -0.059428245
       inSlope: -0.005822043
       outSlope: -0.005822043
       tangentMode: 0
@@ -244,8 +244,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  walkVerticalTime: 0
-  walkVerticalTotalTime: 0.3
+  walkVerticalTime: 0.84
+  walkVerticalTotalTime: 2.06
 --- !u!1 &9127816388446678136
 GameObject:
   m_ObjectHideFlags: 0

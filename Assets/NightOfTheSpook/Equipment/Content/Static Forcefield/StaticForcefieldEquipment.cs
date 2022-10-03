@@ -53,7 +53,10 @@ public class StaticForcefieldEquipment : Equipment
 
         if (_elapsedTime > ForcefieldLifetime)
         {
-            Destroy(this.gameObject);
+            var animation = gameObject.AddComponent<EquipmentDestructionAnimation>();
+            animation.scaleCurve = AnimationCurve.EaseInOut(0.0f, 1.0f, 1.0f, 0.0f);
+            animation.duration = 0.5f;
+            Destroy(this);
             return;
         }
     }

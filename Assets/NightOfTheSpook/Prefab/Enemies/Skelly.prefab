@@ -245,7 +245,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   walkVerticalTime: 0
-  walkVerticalTotalTime: 0.3
+  walkVerticalTotalTime: 0.5
 --- !u!1 &5118858602557069207
 GameObject:
   m_ObjectHideFlags: 0

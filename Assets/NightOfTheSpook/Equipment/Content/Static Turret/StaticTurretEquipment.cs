@@ -30,16 +30,31 @@ public class StaticTurretEquipment : Equipment
     }
 
     private float _deltaTime;
+    private float _elapsedTime;
 
     // Update is called once per frame
     void Update()
     {
         _deltaTime += Time.deltaTime;
+        _elapsedTime += Time.deltaTime;
 
         ValidateTarget();
         AcquireTarget();
         LookTowardsTarget();
         FireWeapon();
+        EvaluateLifetime();
+    }
+
+    void EvaluateLifetime()
+    {
+        if (_elapsedTime > lifetime)
+        {
+            var animation = gameObject.AddComponent<EquipmentDestructionAnimation>();
+            animation.scaleCurve = AnimationCurve.EaseInOut(0.0f, 1.0f, 1.0f, 0.0f);
+            animation.duration = 0.5f;
+            Destroy(this);
+            return;
+        }
     }
 
     void ValidateTarget()
