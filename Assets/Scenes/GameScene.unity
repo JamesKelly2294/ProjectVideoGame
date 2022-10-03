@@ -1660,6 +1660,10 @@ MonoBehaviour:
     <PeriodInSeconds>k__BackingField: 30
     <EnemyPrefab>k__BackingField: {fileID: 7881687491104595000, guid: 216cb3d19187f4fe4968779350884178, type: 3}
     <MaxEnemiesPerSpawn>k__BackingField: 1
+  - <Spawner>k__BackingField: {fileID: 5844476269119016819}
+    <PeriodInSeconds>k__BackingField: 1000000
+    <EnemyPrefab>k__BackingField: {fileID: 7881687491104595000, guid: 216cb3d19187f4fe4968779350884178, type: 3}
+    <MaxEnemiesPerSpawn>k__BackingField: 1
 --- !u!1001 &1114768665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4237,3 +4241,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 283931b869c394700bf4c1352a1605fd, type: 3}
+--- !u!114 &5844476269119016819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4386248084680251163, guid: 283931b869c394700bf4c1352a1605fd, type: 3}
+  m_PrefabInstance: {fileID: 5844476269119016818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e789eaed2d3d5b4b837a1de28a25e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
