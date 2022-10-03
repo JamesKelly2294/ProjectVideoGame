@@ -526,6 +526,7 @@ MonoBehaviour:
   CoolDownTime: 5
   DelaySpawningUntilAfterSeconds: 10
   StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
   IsVisible: 1
 --- !u!1001 &168566534
 PrefabInstance:
@@ -1480,6 +1481,7 @@ MonoBehaviour:
   CoolDownTime: 25
   DelaySpawningUntilAfterSeconds: 1
   StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
   IsVisible: 1
 --- !u!1 &1049382287
 GameObject:
@@ -1736,6 +1738,7 @@ MonoBehaviour:
   CoolDownTime: 5
   DelaySpawningUntilAfterSeconds: 10
   StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
   IsVisible: 1
 --- !u!1 &1226587051
 GameObject:
@@ -2125,6 +2128,7 @@ MonoBehaviour:
   CoolDownTime: 5
   DelaySpawningUntilAfterSeconds: 10
   StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
   IsVisible: 1
 --- !u!108 &1389534843 stripped
 Light:
@@ -2665,6 +2669,18 @@ PrefabInstance:
     - target: {fileID: 2005896313752034111, guid: b7e0098297ed947cf88eb0905dc19e44, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008315726656685049, guid: b7e0098297ed947cf88eb0905dc19e44, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008315726656685049, guid: b7e0098297ed947cf88eb0905dc19e44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486180294501461756, guid: b7e0098297ed947cf88eb0905dc19e44, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 3345569257824119927, guid: b7e0098297ed947cf88eb0905dc19e44, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3250,6 +3266,7 @@ MonoBehaviour:
   CoolDownTime: 5
   DelaySpawningUntilAfterSeconds: 10
   StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
   IsVisible: 1
 --- !u!65 &1754415407
 BoxCollider:
@@ -3852,6 +3869,7 @@ MonoBehaviour:
   CoolDownTime: 5
   DelaySpawningUntilAfterSeconds: 10
   StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
   IsVisible: 1
 --- !u!1001 &3698662419043478231
 PrefabInstance:

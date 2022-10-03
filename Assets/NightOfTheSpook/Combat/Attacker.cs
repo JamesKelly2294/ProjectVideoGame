@@ -4,6 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public class MovementModifier
+{
+    public enum Type
+    {
+        Goo = 1
+    }
+
+    public MonoBehaviour source;
+    public Type type;
+    public float multiplier;
+
+    public bool Equals(MovementModifier other)
+    {
+        return other.source == source;
+    }
+
+    public override int GetHashCode()
+    {
+        return source.GetHashCode();
+    }
+}
+
 public class Attacker : MonoBehaviour
 {
     /// <summary>
@@ -37,6 +59,8 @@ public class Attacker : MonoBehaviour
     // The next viable attack time, which is the last time this entity attacked + a cooldown.
     private float _nextAttackTime = 0.0f;
 
+    private Dictionary<MovementModifier.Type, List<MovementModifier>> _movementModifiers = new Dictionary<MovementModifier.Type, List<MovementModifier>>();
+
     private enum AttackerTasks
     {
         Idle,
@@ -67,6 +91,78 @@ public class Attacker : MonoBehaviour
         if (Time.timeScale == 0) { return; }
         UpdateAttackStateMachine();
         HandleAttack();
+    }
+
+    public List<MovementModifier> MovementModifiersForType(MovementModifier.Type type)
+    {
+        return _movementModifiers[type];
+    }
+
+    public void ApplyMovementModifier(MovementModifier modifier)
+    {
+        if (!_movementModifiers.ContainsKey(modifier.type))
+        {
+            _movementModifiers[modifier.type] = new List<MovementModifier>();
+        }
+        _movementModifiers[modifier.type].Add(modifier);
+    }
+
+    public void RemoveMovementModifier(MovementModifier modifier)
+    {
+        if (_movementModifiers.ContainsKey(modifier.type))
+        {
+            _movementModifiers[modifier.type].Remove(modifier);
+        }
+        else
+        {
+            Debug.LogError("Trying to remove movement modifier... but the modifier isn't applied!");
+        }
+    }
+
+    public float MovementModifier
+    {
+        get
+        {
+            float movementModifierVal = 1.0f;
+            foreach (var entry in _movementModifiers)
+            {
+                if (entry.Value.Count == 0) { continue; }
+
+                // currently, we just take the most powerful modifier for each type
+                float currentBest = 0.0f;
+                List<MovementModifier> staleModifiers = new List<MovementModifier>();
+                foreach (var modifier in entry.Value)
+                {
+                    if(modifier.source == null)
+                    {
+                        // The source has been Destroy(...)'d. ignore it, and purge it.
+                        staleModifiers.Add(modifier);
+                        continue;
+                    }
+
+                    if (modifier.multiplier > 0 && modifier.multiplier > currentBest)
+                    {
+                        // bigger is better for positive multipliers
+                        currentBest = modifier.multiplier;
+                    }
+                    else if (modifier.multiplier < 0 && modifier.multiplier < currentBest)
+                    {
+                        // smaller is better for negative multipliers
+                        currentBest = modifier.multiplier;
+                    }
+                }
+
+                foreach(var staleModifier in staleModifiers)
+                {
+                    //Debug.Log("Removing stale modifier with " + staleModifier);
+                    entry.Value.Remove(staleModifier);
+                }
+
+                movementModifierVal *= currentBest;
+            }
+
+            return movementModifierVal;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -172,9 +268,7 @@ public class Attacker : MonoBehaviour
                 break;
             case AttackerTasks.MovingToTarget:
                 // TODO: Collisions with props
-
-                // TODO: switch to rigid body velocity based movement so we can do physicsy things
-                float magnitude = MovementSpeedInUnitsPerSecond * Time.deltaTime;
+                float magnitude = MovementSpeedInUnitsPerSecond * MovementModifier * Time.deltaTime;
                 var heading = target.transform.position - transform.position;
                 heading.y = 0.0f;
                 _movement = magnitude * heading.normalized;
@@ -186,7 +280,7 @@ public class Attacker : MonoBehaviour
                 {
                     target.InflictDamage(DamagePerAttack, null);
                     _nextAttackTime = Time.time + AttackCoolDownInSeconds;
-                    Debug.Log($"{name} inflicting {DamagePerAttack}; next attack at {_nextAttackTime}");
+                    //Debug.Log($"{name} inflicting {DamagePerAttack}; next attack at {_nextAttackTime}");
                 }
                 break;
             default:
@@ -197,16 +291,16 @@ public class Attacker : MonoBehaviour
     private void SwitchToTask(AttackerTasks newTask, String reason = "")
     {
 #if DEBUG
-        var current = TaskToTaskName(_currentTask);
-        var next = TaskToTaskName(newTask);
-        if(reason != "")
-        {
-            Debug.Log($"{name} changing from task {current} to {next} because {reason}");
-        }
-        else
-        {
-            Debug.Log($"{name} changing from task {current} to {next}");
-        }
+        //var current = TaskToTaskName(_currentTask);
+        //var next = TaskToTaskName(newTask);
+        //if(reason != "")
+        //{
+        //    Debug.Log($"{name} changing from task {current} to {next} because {reason}");
+        //}
+        //else
+        //{
+        //    Debug.Log($"{name} changing from task {current} to {next}");
+        //}
 #endif
         _currentTask = newTask;
     }
