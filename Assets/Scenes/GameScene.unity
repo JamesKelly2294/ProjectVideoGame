@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.6603774, g: 0, b: 0.5215129, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.015
+  m_FogDensity: 0.025
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.43173727, g: 0.44269687, b: 0.6226415, a: 1}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 130303131}
   - component: {fileID: 130303130}
   m_Layer: 0
-  m_Name: Skeleton Spawner (3)
+  m_Name: Slime Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1642,7 +1642,7 @@ MonoBehaviour:
     <MaxEnemiesPerSpawn>k__BackingField: 5
   - <Spawner>k__BackingField: {fileID: 1192230120}
     <PeriodInSeconds>k__BackingField: 15
-    <EnemyPrefab>k__BackingField: {fileID: 895822701002909439, guid: 52f75b10d83614d99b7603fa903a466c, type: 3}
+    <EnemyPrefab>k__BackingField: {fileID: 1619444487842900356, guid: 9b592c353a3134b6bb50297e9621d98d, type: 3}
     <MaxEnemiesPerSpawn>k__BackingField: 5
   - <Spawner>k__BackingField: {fileID: 2146377119}
     <PeriodInSeconds>k__BackingField: 45
@@ -1650,7 +1650,7 @@ MonoBehaviour:
     <MaxEnemiesPerSpawn>k__BackingField: 10
   - <Spawner>k__BackingField: {fileID: 130303133}
     <PeriodInSeconds>k__BackingField: 15
-    <EnemyPrefab>k__BackingField: {fileID: 895822701002909439, guid: 52f75b10d83614d99b7603fa903a466c, type: 3}
+    <EnemyPrefab>k__BackingField: {fileID: 6448082661701948562, guid: da0791097130240d7b1bf80a5888f2ff, type: 3}
     <MaxEnemiesPerSpawn>k__BackingField: 5
   - <Spawner>k__BackingField: {fileID: 1366111911}
     <PeriodInSeconds>k__BackingField: 7
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 1192230118}
   - component: {fileID: 1192230117}
   m_Layer: 0
-  m_Name: Skeleton Spawner (1)
+  m_Name: Rat Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1750,7 +1750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192230115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.18, y: 0, z: -59.86}
+  m_LocalPosition: {x: 38.16, y: 0, z: -23.97}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
