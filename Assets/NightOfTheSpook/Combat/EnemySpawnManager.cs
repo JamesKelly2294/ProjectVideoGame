@@ -46,13 +46,13 @@ public class EnemySpawnManager : MonoBehaviour
     private Dictionary<EnemySpawner, Func<bool>> _specialSpawnerRuleLookup = new();
 
     /// <summary>
-    /// Requests that the spawner trigger. This might be skipped if the spawner is still cooling down.
+    /// Requests that the spawner trigger. This might be skipped if the spawner is still cooling down, is visible, etc.
     /// </summary>
     /// <param name="spawner">The spawner to trigger.</param>
     /// <param name="count">The number of enemies that should be spawned.</param>
     public void TriggerSpawner(EnemySpawner spawner, int count)
     {
-        if (spawner != null && spawner.isActiveAndEnabled && spawner.IsReadyToSpawn)
+        if (spawner != null && spawner.isActiveAndEnabled && (spawner.SpawnWhenVisible ? spawner.IsEligibleForSpawn : spawner.IsReadyToSpawn))
         {
             spawner.TriggerGroupSpawn(count);
         }

@@ -42,6 +42,11 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public float StopSpawningAfterSeconds = 0.0f;
 
+    /// <summary>
+    /// The spawner will create enemies even when the player can see it.
+    /// </summary>
+    public bool SpawnWhenVisible = false;
+
     // Determines when the spawner can be invoked again. The Manager can forcibly invoke the spawner if needed.
     private float _nextSpawnTime = 0.0f;
 

@@ -543,8 +543,10 @@ MonoBehaviour:
   AttackerTarget: {fileID: 0}
   MaxEnemiesPerSpawn: 0
   CoolDownTime: 5
-  DelaySpawningUntilAfterSeconds: 15
-  StopSpawningAfterSeconds: 45
+  DelaySpawningUntilAfterSeconds: 0
+  StopSpawningAfterSeconds: 10000
+  SpawnWhenVisible: 0
+  IsVisible: 1
 --- !u!23 &1805996728
 MeshRenderer:
   m_ObjectHideFlags: 0
