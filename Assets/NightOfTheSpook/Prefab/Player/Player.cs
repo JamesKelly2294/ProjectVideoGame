@@ -36,6 +36,10 @@ public class Player : MonoBehaviour
         if (!alive) { return; }
         if (Time.timeScale == 0) { return; }
 
+        Attackable a = gameObject.GetComponent<Attackable>();
+        a.Health += Time.deltaTime * 1.0f;
+        a.Health = Mathf.Min(100, a.Health);
+
         Vector3 movement = Vector3.zero;
         if (Input.GetKey("w"))
         {
