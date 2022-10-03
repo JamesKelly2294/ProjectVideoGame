@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4d4d805cd3734293b89e9b328b3ab14, type: 3}
-  m_Name: EquipmentSpawnTable
+  m_Name: Graveyards
   m_EditorClassIdentifier: 
   spawnRates:
+  - configuration: {fileID: 11400000, guid: 58181a8e24aa945e694382e2cd6c8a0e, type: 2}
+    spawnWeight: 5
   - configuration: {fileID: 11400000, guid: 125044fe05a484703b332ae515d7582b, type: 2}
-    spawnWeight: 2
+    spawnWeight: 1
   - configuration: {fileID: 11400000, guid: 282da901fe44142f8ae359791e0c986f, type: 2}
     spawnWeight: 1
-  - configuration: {fileID: 11400000, guid: 58181a8e24aa945e694382e2cd6c8a0e, type: 2}
-    spawnWeight: 2

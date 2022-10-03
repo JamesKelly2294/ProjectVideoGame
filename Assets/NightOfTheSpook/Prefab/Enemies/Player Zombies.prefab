@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd9438e1ce8a4c5a8a097b2ee47750e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experienceValue: 10
+  experienceValue: 120
 --- !u!114 &895822701002909436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291b09cc05f134c98b354142c6282370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalHealth: 1
-  Health: 1
+  TotalHealth: 10
+  Health: 10
   IsPlayer: 0
 --- !u!114 &895822701002909424
 MonoBehaviour:
@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrimaryTarget: {fileID: 0}
-  MovementSpeedInUnitsPerSecond: 2
-  AttackCoolDownInSeconds: 1
-  DamagePerAttack: 10
+  MovementSpeedInUnitsPerSecond: 4
+  AttackCoolDownInSeconds: 1.25
+  DamagePerAttack: 15
 --- !u!114 &1534782688
 MonoBehaviour:
   m_ObjectHideFlags: 0
