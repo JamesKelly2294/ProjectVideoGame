@@ -47,6 +47,9 @@ public class BossEnemy : MonoBehaviour
     public List<GameObject> BodyStates;
     private BodyState _currentBodyState = BodyState.Raw;
 
+    public AudioClip SpawnSound;
+    public List<AudioClip> PainSounds;
+
     private BossTeleportAnimation _teleportAnimation;
     private float _previousDPSCheckTime = 0.0f;
     private float _previousHealthValue = 0.0f;
@@ -55,6 +58,7 @@ public class BossEnemy : MonoBehaviour
     {
         _previousHealthValue = Attackable.Health;
         _previousDPSCheckTime = Time.time;
+        PlaySpawnSound();
         SetFace(FaceState.Idle);
         SetBody(BodyState.Raw);
         ConfigureTeleportAnimation();
@@ -107,6 +111,7 @@ public class BossEnemy : MonoBehaviour
 
         if (ShouldTeleport())
         {
+            PlayPainSound();
             SetFace(FaceState.Pain);
             _teleportAnimation.enabled = true;
         }
@@ -201,24 +206,37 @@ public class BossEnemy : MonoBehaviour
 
         foreach (var state in BodyStates)
         {
-            state.SetActiveRecursively(false); //(false);
+            state.SetActive(false); //(false);
         }
         switch (body)
         {
             case BodyState.WellDone:
-                BodyStates[3].SetActiveRecursively(true);
+                BodyStates[3].SetActive(true);
                 break;
             case BodyState.Medium:
-                BodyStates[2].SetActiveRecursively(true);
+                BodyStates[2].SetActive(true);
                 break;
             case BodyState.Rare:
-                BodyStates[1].SetActiveRecursively(true);
+                BodyStates[1].SetActive(true);
                 break;
             case BodyState.Raw:
             default:
-                BodyStates[0].SetActiveRecursively(true);
+                BodyStates[0].SetActive(true);
                 break;
         }
         _currentBodyState = body;
+    }
+
+    private void PlayPainSound()
+    {
+        // Play a spoooky sound.
+        var soundIndex = Random.Range(0, PainSounds.Count);
+        var clip = PainSounds[soundIndex];
+        Attackable.audioSource.PlayOneShot(clip, 1.0f);
+    }
+
+    private void PlaySpawnSound()
+    {
+        Attackable.audioSource.PlayOneShot(SpawnSound, 1.0f);
     }
 }
