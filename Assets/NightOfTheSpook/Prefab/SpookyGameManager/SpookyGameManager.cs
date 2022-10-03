@@ -18,7 +18,9 @@ public class SpookyGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioManager.Instance.StopMusic();
+
+        AudioManager.Instance.Play("Music/Background", true, volumeMin: 0.5f, volumeMax: 0.5f, isMusic: true);
     }
 
     // Update is called once per frame

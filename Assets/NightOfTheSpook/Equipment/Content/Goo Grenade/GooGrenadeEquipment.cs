@@ -7,6 +7,7 @@ using UnityEngine;
 public class GooGrenadeEquipment : Equipment
 {
     public ThrowableTarget target;
+    public GameObject gooSplatterPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,10 @@ public class GooGrenadeEquipment : Equipment
     private void Update()
     {
         if (target.ThrowLanded) {
+            var go = Instantiate(gooSplatterPrefab);
+            go.transform.position = transform.position;
+            go.transform.parent = transform.parent;
+            go.transform.LookAt(gameObject.transform.position + target.DirectionOfTravel);
             Destroy(gameObject);
         }
     }

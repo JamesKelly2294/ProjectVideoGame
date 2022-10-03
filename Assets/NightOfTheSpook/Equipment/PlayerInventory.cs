@@ -31,6 +31,7 @@ public class PlayerInventory : MonoBehaviour
 
     private PubSubSender _pubSub;
 
+    public GameObject PlacementRangeIndicator;
     [Range(0, 10.0f)]
     public float PlacementRange = 5.0f;
     public Material BlueprintValidPlacementMat;
@@ -100,6 +101,7 @@ public class PlayerInventory : MonoBehaviour
         if (_deploymentBlueprint != null)
         {
             Destroy(_deploymentBlueprint.gameObject);
+            PlacementRangeIndicator.SetActive(false);
         }
 
         if (_targetingReticle != null)
@@ -111,6 +113,9 @@ public class PlayerInventory : MonoBehaviour
             SelectedSlot.configuration != null &&
             SelectedSlot.configuration.type == EquipmentConfiguration.EquipmentType.Deployable)
         {
+            PlacementRangeIndicator.SetActive(true);
+            PlacementRangeIndicator.transform.localScale = new Vector3(PlacementRange * 2, 0, PlacementRange * 2);
+
             var go = Instantiate(SelectedSlot.configuration.blueprintPrefab);
             _deploymentBlueprint = go.AddComponent<EquipmentBlueprint>();
             _deploymentBlueprint.BlueprintValidPlacementMat = BlueprintValidPlacementMat;

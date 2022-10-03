@@ -51,6 +51,15 @@ public class ThrowableTarget : MonoBehaviour
         transform.position = Parabola(_start, _end, ParabolaHeight, pct);
     }
 
+    public Vector3 DirectionOfTravel
+    {
+        get
+        {
+            var dir = (_end - _start).normalized;
+            return new Vector3(dir.x, 0.0f, dir.z);
+        }
+    }
+
     private void FixedUpdate()
     {
         var direction = (_prevPosition - transform.position).normalized;
