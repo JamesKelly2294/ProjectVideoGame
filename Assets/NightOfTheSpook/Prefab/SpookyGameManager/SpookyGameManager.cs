@@ -20,7 +20,7 @@ public class SpookyGameManager : MonoBehaviour
     {
         AudioManager.Instance.StopMusic();
 
-        AudioManager.Instance.Play("Music/Background", true, volumeMin: 0.5f, volumeMax: 0.5f, isMusic: true);
+        AudioManager.Instance.Play("Music/Background", true, volumeMin: 0.25f, volumeMax: 0.25f, isMusic: true);
     }
 
     // Update is called once per frame
