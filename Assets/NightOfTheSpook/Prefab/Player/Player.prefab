@@ -264,6 +264,7 @@ MonoBehaviour:
   beam: {fileID: 6321582112355887087}
   colidingBeam: {fileID: 6715753760850718303}
   spotLight: {fileID: 5444810607709679246}
+  beamParticleSystemPrefab: {fileID: 3089033488132174793, guid: c5f994a01136147c9b309f80f205fc75, type: 3}
   fireSound: {fileID: 6947675245757811451}
   cooldownSound: {fileID: 2369130545612495721}
   fireSoundNormalVolume: 1
@@ -1231,6 +1232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd981cc4e6064006b3cd3f46624d575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlacementRange: 5
+  BlueprintValidPlacementMat: {fileID: 0}
+  BlueprintInvalidPlacementMat: {fileID: 0}
 --- !u!136 &7068133568121338763
 CapsuleCollider:
   m_ObjectHideFlags: 0

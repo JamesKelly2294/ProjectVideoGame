@@ -184,7 +184,7 @@ public class Attacker : MonoBehaviour
                 // Perform an attack if we're in range.
                 if(_nextAttackTime < Time.time)
                 {
-                    target.InflictDamage(DamagePerAttack);
+                    target.InflictDamage(DamagePerAttack, null);
                     _nextAttackTime = Time.time + AttackCoolDownInSeconds;
                     Debug.Log($"{name} inflicting {DamagePerAttack}; next attack at {_nextAttackTime}");
                 }

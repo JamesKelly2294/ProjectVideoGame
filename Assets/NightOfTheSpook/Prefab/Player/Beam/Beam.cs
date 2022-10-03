@@ -18,7 +18,7 @@ public class Beam : MonoBehaviour
     public GameObject beam;
     public ColidingBeam colidingBeam;
     public Light spotLight;
-
+    public GameObject beamParticleSystemPrefab;
 
 
 
@@ -72,7 +72,7 @@ public class Beam : MonoBehaviour
             {
                 Attackable item = colidingBeam.attackables[i];
                 if (item != null) {
-                    item.InflictDamage(damagePerSecond * Time.deltaTime);
+                    item.InflictDamage(damagePerSecond * Time.deltaTime, this);
                 } else {
                     colidingBeam.attackables.RemoveAt(i);
                 }

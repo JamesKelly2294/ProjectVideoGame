@@ -59,10 +59,17 @@ public class Attackable : MonoBehaviour
     /// Inflict damage upon the attackable entity.
     /// </summary>
     /// <param name="amount">The amount of damage to inflict.</param>
-    public void InflictDamage(float amount)
+    public void InflictDamage(float amount, Beam beam)
     {
         if (Time.timeScale == 0) { return; }
         Health = Math.Max(0.0f, Health - amount);
+
+        // JAMES Enable the particle system here...
+        // if (wasDamagedCooldown <= 0 && beam != null) {
+        //     GameObject particles = GameObject.Instantiate(beam.beamParticleSystemPrefab);
+        //     particles.transform.position = gameObject.transform.position + Vector3.up;
+        //     particles.transform.LookAt(beam.gameObject.transform.position * -1);
+        // }
 
         if ( Health <= 0.0f ) {
             innerRenderer.material.DisableKeyword("_EMISSION");
