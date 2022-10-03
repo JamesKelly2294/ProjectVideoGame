@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5820836442491797919}
   - component: {fileID: 9055945273413149009}
   - component: {fileID: 5038640109339841426}
+  - component: {fileID: 2712849562238276350}
   m_Layer: 0
   m_Name: GooSplatter
   m_TagString: Untagged
@@ -182,3 +183,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lifetime: 20
   BaseSlowModifier: 0.5
+  Configuration: {fileID: 11400000, guid: 58181a8e24aa945e694382e2cd6c8a0e, type: 2}
+--- !u!114 &2712849562238276350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894873056787799443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56e1a9b13b922d428fcbf4039d56d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Subscriptions:
+  - Key: upgrade.apply
+    Delegate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5038640109339841426}
+          m_TargetAssemblyTypeName: GooSplatter, Assembly-CSharp
+          m_MethodName: RecalculateUpgrades
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

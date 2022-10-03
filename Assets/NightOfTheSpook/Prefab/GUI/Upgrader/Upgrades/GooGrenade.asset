@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 883dad30d4f0449c2acac0f46be42668, type: 3}
-  m_Name: StaticForceField
+  m_Name: GooGrenade
   m_EditorClassIdentifier: 
-  displayName: Static Force Field
-  equipmentConfiguration: {fileID: 11400000, guid: 125044fe05a484703b332ae515d7582b, type: 2}
+  displayName: Goo Grenade
+  equipmentConfiguration: {fileID: 11400000, guid: 58181a8e24aa945e694382e2cd6c8a0e, type: 2}
   allowances:
   - type: 0
-    displayName: Stronger Forcefields
-    displayDescription: 
-    max: 2
-    weight: 1
-  - type: 1
-    displayName: Faster Forcefields
+    displayName: Stickier Goo
     displayDescription: 
     max: 2
     weight: 1
   - type: 3
-    displayName: Longer Lasting Forcefields
+    displayName: Longer Lasting Goo
+    displayDescription: 
+    max: 2
+    weight: 1
+  - type: 2
+    displayName: Bigger Goo Grenade
     displayDescription: 
     max: 2
     weight: 1

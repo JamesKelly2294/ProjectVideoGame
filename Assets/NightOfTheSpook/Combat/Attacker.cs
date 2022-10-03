@@ -13,7 +13,9 @@ public class MovementModifier
 
     public MonoBehaviour source;
     public Type type;
-    public float multiplier;
+    public delegate float MultiplierDelegate();
+
+    public MultiplierDelegate multiplier;
 
     public bool Equals(MovementModifier other)
     {
@@ -140,15 +142,16 @@ public class Attacker : MonoBehaviour
                         continue;
                     }
 
-                    if (modifier.multiplier > 0 && modifier.multiplier > currentBest)
+                    var multiplier = modifier.multiplier();
+                    if (multiplier > 0 && multiplier > currentBest)
                     {
                         // bigger is better for positive multipliers
-                        currentBest = modifier.multiplier;
+                        currentBest = multiplier;
                     }
-                    else if (modifier.multiplier < 0 && modifier.multiplier < currentBest)
+                    else if (multiplier < 0 && multiplier < currentBest)
                     {
                         // smaller is better for negative multipliers
-                        currentBest = modifier.multiplier;
+                        currentBest = multiplier;
                     }
                 }
 

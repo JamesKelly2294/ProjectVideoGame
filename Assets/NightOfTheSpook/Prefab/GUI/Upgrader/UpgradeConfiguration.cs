@@ -17,11 +17,11 @@ public class UpgradeAllowance {
 
     public UpgradeType type;
     public string displayName;
+    public string displayDescription;
     public int max;
     public float weight;
-
 }
 
 public enum UpgradeType {
-    power, speed, special
+    power, speed, special, lifetime
 }

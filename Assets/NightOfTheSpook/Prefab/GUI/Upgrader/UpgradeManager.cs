@@ -26,11 +26,12 @@ public class UpgradeManager : MonoBehaviour
         List<UpgradeOption> options = new List<UpgradeOption>();
         foreach (var upgradeConfig in upgradeConfigurations) {
             Upgrade u = Upgrade(upgradeConfig.equipmentConfiguration);
-            int uPower = 0, uSpeed = 0, uSpecial = 0;
+            int uPower = 0, uSpeed = 0, uSpecial = 0, uLifetime = 0;
             if (u != null) {
                 uPower = u.power;
                 uSpeed = u.speed;
                 uSpecial = u.special;
+                uLifetime = u.lifetime;
             }
 
             UpgradeAllowance powerAllowance = upgradeConfig.allowances.Find(x => x.type == UpgradeType.power);
@@ -46,6 +47,11 @@ public class UpgradeManager : MonoBehaviour
             UpgradeAllowance specialAllowance = upgradeConfig.allowances.Find(x => x.type == UpgradeType.special);
             if (specialAllowance != null && (specialAllowance.max - uSpecial) > 0) {
                 for (int i = 0; i < specialAllowance.weight; i++) { options.Add(new UpgradeOption(upgradeConfig.equipmentConfiguration, UpgradeType.special)); }
+            }
+
+            UpgradeAllowance lifetimeAllowance = upgradeConfig.allowances.Find(x => x.type == UpgradeType.lifetime);
+            if (lifetimeAllowance != null && (lifetimeAllowance.max - uLifetime) > 0) {
+                for (int i = 0; i < lifetimeAllowance.weight; i++) { options.Add(new UpgradeOption(upgradeConfig.equipmentConfiguration, UpgradeType.lifetime)); }
             }
         }
 
@@ -78,9 +84,10 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.speed:     u.speed += 1;   break;
             case UpgradeType.power:     u.power += 1;   break;
             case UpgradeType.special:   u.special += 1; break;
+            case UpgradeType.lifetime:  u.lifetime += 1; break;
         }
 
-        Debug.Log("Purchasing... " + u.equipmentConfiguration.displayName + " now " + u.speed + ", " + u.power + ", " + u.special);
+        Debug.Log("Purchasing... " + u.equipmentConfiguration.displayName + " now " + u.speed + ", " + u.power + ", " + u.special + ", " + u.lifetime);
     }
 
     public Upgrade Upgrade(EquipmentConfiguration configuration) {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PubSubListener))]
 public class GooSplatter : MonoBehaviour
 {
     [Range(0, 60.0f)]
@@ -10,9 +11,15 @@ public class GooSplatter : MonoBehaviour
     [Range(0, 1.0f)]
     public float BaseSlowModifier = 0.75f;
 
+    public EquipmentConfiguration Configuration;
+
     private float _elapsedTime;
 
     private MovementModifier _movementModifier;
+
+    private UpgradeManager _upgradeManager;
+
+    private Vector3 _startingScale;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +45,13 @@ public class GooSplatter : MonoBehaviour
     {
         _initialized = true;
         _elapsedTime = 0.0f;
+
+        var spookyGameManager = FindObjectOfType<SpookyGameManager>();
+        _upgradeManager = spookyGameManager.GetComponent<UpgradeManager>();
+
+        _startingScale = transform.localScale;
+
+        RecalculateUpgrades();
     }
 
     // Update is called once per frame
@@ -46,7 +60,7 @@ public class GooSplatter : MonoBehaviour
         if (!_initialized) { return; }
         _elapsedTime += Time.deltaTime;
 
-        if (_elapsedTime > Lifetime)
+        if (_elapsedTime > _trueLifetime)
         {
             var animation = gameObject.AddComponent<EquipmentDestructionAnimation>();
             animation.scaleCurve = AnimationCurve.EaseInOut(0.0f, 1.0f, 1.0f, 0.0f);
@@ -56,19 +70,48 @@ public class GooSplatter : MonoBehaviour
         }
     }
 
-    private float SlowModifierValue
+    private Vector3 _trueScale = Vector3.one;
+    private float _truePower = 1.0f;
+    private float _trueLifetime = 1.0f;
+    public void RecalculateUpgrades()
     {
-        get
-        {
-            return BaseSlowModifier;
-        }
+        RecalculateTrueLifetime();
+        RecalculateTruePower();
+        RecalculateTrueScale();
+    }
+
+    private void RecalculateTrueLifetime()
+    {
+        var upgrade = _upgradeManager.UpgradeOrZero(Configuration);
+        var multiplier = Mathf.Pow(1.5f, upgrade.lifetime);
+
+        _trueLifetime = Lifetime * multiplier;
+    }
+
+    private void RecalculateTruePower()
+    {
+        var upgrade = _upgradeManager.UpgradeOrZero(Configuration);
+        var multiplier = Mathf.Pow(0.8f, upgrade.power);
+
+        _truePower = BaseSlowModifier * multiplier;
+    }
+
+    private void RecalculateTrueScale()
+    {
+        var upgrade = _upgradeManager.UpgradeOrZero(Configuration);
+        var multiplier = Mathf.Pow(1.5f, upgrade.special);
+
+        _trueScale = _startingScale * multiplier;
+        transform.localScale = _trueScale;
     }
 
     private void CalculateMovementModifier()
     {
         _movementModifier = new MovementModifier();
         _movementModifier.type = MovementModifier.Type.Goo;
-        _movementModifier.multiplier = SlowModifierValue;
+        _movementModifier.multiplier = () => {
+            return _truePower;
+        };
         _movementModifier.source = this;
     }
 

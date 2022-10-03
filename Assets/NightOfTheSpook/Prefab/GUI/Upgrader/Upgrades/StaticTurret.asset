@@ -17,9 +17,16 @@ MonoBehaviour:
   allowances:
   - type: 0
     displayName: Stronger Turrets
+    displayDescription: 
     max: 2
     weight: 1
   - type: 1
     displayName: Quicker Turrets
+    displayDescription: 
+    max: 2
+    weight: 1
+  - type: 3
+    displayName: Longer Lasting Turrets
+    displayDescription: 
     max: 2
     weight: 1
