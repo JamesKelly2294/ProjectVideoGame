@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     // HACK: true on start to prevent onscreen spawners from doing things
     // on start before the visibility check has occured.
-    private bool _isVisible = true;
+    public bool IsVisible = true;
 
     private GameObject _enemiesContainer;
 
@@ -111,22 +111,33 @@ public class EnemySpawner : MonoBehaviour
     {
         get
         {
-            bool isNotCoolingDown = _nextSpawnTime < Time.time;
-            bool pastDelay = DelaySpawningUntilAfterSeconds < Time.time;
-            bool beforeShutoffTime = StopSpawningAfterSeconds > Time.time;
-            return !_isVisible && pastDelay && beforeShutoffTime && isNotCoolingDown;
+            return !IsVisible && IsEligibleForSpawn;
         }
     }
 
-    void OnBecameVisible()
+    /// <summary>
+    /// Like IsReadyToSpawn, but without the visibility check
+    /// </summary>
+    public bool IsEligibleForSpawn
     {
-        Debug.Log($"{name} is visible");
-        _isVisible = true;
+        get
+        {
+            bool isNotCoolingDown = _nextSpawnTime < Time.time;
+            bool pastDelay = DelaySpawningUntilAfterSeconds < Time.time;
+            bool beforeShutoffTime = StopSpawningAfterSeconds > Time.time;
+            return pastDelay && beforeShutoffTime && isNotCoolingDown;
+        }
     }
 
-    void OnBecameInvisible()
-    {
-        Debug.Log($"{name} is not visible");
-        _isVisible = false;
-    }
+    //void OnBecameVisible()
+    //{
+    //    Debug.Log($"{name} is visible");
+    //    _isVisible = true;
+    //}
+
+    //void OnBecameInvisible()
+    //{
+    //    Debug.Log($"{name} is not visible");
+    //    _isVisible = false;
+    //}
 }

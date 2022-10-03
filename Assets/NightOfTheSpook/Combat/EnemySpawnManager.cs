@@ -85,7 +85,34 @@ public class EnemySpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(var spawner in _periodicSpawners)
+        // calculate visibility
+        var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        foreach (var spawner in _periodicSpawners)
+        {
+            if (!spawner.IsEligibleForSpawn)
+            {
+                continue;
+            }
+
+            var boxCollider = spawner.GetComponent<BoxCollider>();
+            if (boxCollider)
+            {
+                var isVisible = GeometryUtility.TestPlanesAABB(planes, boxCollider.bounds);
+
+                if (isVisible && spawner.IsVisible == false)
+                {
+                    Debug.Log(boxCollider + " became visible!");
+                }
+                else if (!isVisible && spawner.IsVisible == true)
+                {
+                    Debug.Log(boxCollider + " became invisible!");
+                }
+
+                spawner.IsVisible = isVisible;
+            }
+        }
+
+        foreach (var spawner in _periodicSpawners)
         {
             // TODO: Tweak the enemy count here to account for things like the player being low on health.
             var enemyCount = spawner.MaxEnemiesPerSpawn;
