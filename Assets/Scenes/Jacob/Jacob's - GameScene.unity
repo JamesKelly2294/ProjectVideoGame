@@ -1309,9 +1309,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 225689706, guid: 7c2209bae7ba640a3a5f95800281c896, type: 3}
+      propertyPath: EnemyPrefab
+      value: 
+      objectReference: {fileID: 895822701002909439, guid: 68aa2bac64491427a90f56d3a4c42d2e, type: 3}
+    - target: {fileID: 225689706, guid: 7c2209bae7ba640a3a5f95800281c896, type: 3}
+      propertyPath: CoolDownTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 225689706, guid: 7c2209bae7ba640a3a5f95800281c896, type: 3}
+      propertyPath: MaxEnemiesPerSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225689706, guid: 7c2209bae7ba640a3a5f95800281c896, type: 3}
+      propertyPath: StopSpawningAfterSeconds
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 1507514846934189464, guid: 7c2209bae7ba640a3a5f95800281c896, type: 3}
       propertyPath: m_Name
-      value: outhouse.vox Variant
+      value: '!! Outhouse'
       objectReference: {fileID: 0}
     - target: {fileID: 2278843851505639202, guid: 7c2209bae7ba640a3a5f95800281c896, type: 3}
       propertyPath: m_RootOrder
