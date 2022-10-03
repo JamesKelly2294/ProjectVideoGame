@@ -161,6 +161,11 @@ public class BossEnemy : MonoBehaviour
 
     private bool ShouldTeleport()
     {
+
+
+        // Sorry :(
+        return false;
+
         // This will result in a check every second, so there will be a slight delay before the boss jumps.
         if ((_previousDPSCheckTime + 1.0f) > Time.time)
         {

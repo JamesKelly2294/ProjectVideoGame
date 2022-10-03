@@ -199,10 +199,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 8
+  m_Radius: 1.7903825
+  m_Height: 6.6149673
   m_Direction: 0
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0.2281928, y: 1.5168027, z: 0}
 --- !u!114 &6404160709062362057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   audioSource: {fileID: 230030106281035495}
   Health: 500
   IsPlayer: 0
+  innerRenderer: {fileID: 0}
 --- !u!114 &7881687491104594979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f110b4cc192318545899930f26d61ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attackable: {fileID: 0}
+  Attackable: {fileID: 7881687491104595004}
   TeleportLocations: []
   DamagePerSecondBeforeTeleport: 10
   TeleportAnimationDuration: 1
