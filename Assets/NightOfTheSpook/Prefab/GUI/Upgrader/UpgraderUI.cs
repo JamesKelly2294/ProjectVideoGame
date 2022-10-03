@@ -7,6 +7,7 @@ public class UpgraderUI : MonoBehaviour
 
     public UpgradeButton first, second, third;
     private UpgradeManager upgradeManager;
+    public GameObject betaDaddy;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class UpgraderUI : MonoBehaviour
     }
 
     public void PickNewUpgrades() {
+        betaDaddy.SetActive(true);
         List<UpgradeOption> options = upgradeManager.GetRandomOptions(3);
         for (int i = 0; i < options.Count; i++) {
             if (i == 0) {           first.upgradeOption  = options[i]; 
