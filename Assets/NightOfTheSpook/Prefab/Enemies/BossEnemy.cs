@@ -27,7 +27,25 @@ public class BossEnemy : MonoBehaviour
     /// <summary>
     /// Animation curve to use when playing the teleport animation arbl garbl warble.
     /// </summary>
-    public AnimationCurve TeleportAnimationCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+    public AnimationCurve TeleportAnimationCurve = AnimationCurve.EaseInOut(1.0f, 0.0f, 0.0f, 1.0f);
+
+    public enum FaceState
+    {
+        Idle,
+        Pain
+    }
+    public GameObject FaceIdle;
+    public GameObject FacePain;
+
+    public enum BodyState
+    {
+        Raw,
+        Rare,
+        Medium,
+        WellDone
+    }
+    public List<GameObject> BodyStates;
+    private BodyState _currentBodyState = BodyState.Raw;
 
     private BossTeleportAnimation _teleportAnimation;
     private float _previousDPSCheckTime = 0.0f;
@@ -37,13 +55,46 @@ public class BossEnemy : MonoBehaviour
     {
         _previousHealthValue = Attackable.Health;
         _previousDPSCheckTime = Time.time;
+        SetFace(FaceState.Idle);
+        SetBody(BodyState.Raw);
         ConfigureTeleportAnimation();
     }
 
     void Update()
     {
+        UpdateBodyState();
         UpdateTeleport();
         UpdateWinState();
+    }
+
+    private void UpdateBodyState()
+    {
+        var healthPercentage = Attackable.Health / Attackable.TotalHealth;
+        if(healthPercentage >= 0.75)
+        {
+            if (_currentBodyState != BodyState.Raw)
+            {
+                SetBody(BodyState.Raw);
+            }
+        }
+        else if (healthPercentage >= 0.5)
+        {
+            if (_currentBodyState != BodyState.Rare)
+            {
+                SetBody(BodyState.Rare);
+            }
+        }
+        else if (healthPercentage >= 0.25)
+        {
+            if (_currentBodyState != BodyState.Medium)
+            {
+                SetBody(BodyState.Medium);
+            }
+        }
+        else
+        {
+            SetBody(BodyState.WellDone);
+        }
     }
 
     private void UpdateTeleport()
@@ -56,6 +107,7 @@ public class BossEnemy : MonoBehaviour
 
         if (ShouldTeleport())
         {
+            SetFace(FaceState.Pain);
             _teleportAnimation.enabled = true;
         }
     }
@@ -105,6 +157,9 @@ public class BossEnemy : MonoBehaviour
         var nextLocation = TeleportLocations[nextLocationIndex];
         gameObject.transform.position = nextLocation.position;
 
+        // Reset the face back to normal.
+        SetFace(FaceState.Idle);
+
         // The previous animation will destroy itself so we need a new one.
         ConfigureTeleportAnimation();
     }
@@ -121,5 +176,49 @@ public class BossEnemy : MonoBehaviour
     private bool IsDead
     {
         get { return Attackable.Health <= 0.0f; }
+    }
+
+    private void SetFace(FaceState face)
+    {
+        FaceIdle.SetActive(false);
+        FacePain.SetActive(false);
+        switch (face)
+        {
+            case FaceState.Pain:
+                FacePain.SetActive(true);
+                break;
+            case FaceState.Idle:
+            default:
+                FaceIdle.SetActive(true);
+                break;
+        }
+    }
+
+    private void SetBody(BodyState body)
+    {
+        // Avoid churn by activating/deactivating unneccesarily.
+        if(body == _currentBodyState) { return; }
+
+        foreach (var state in BodyStates)
+        {
+            state.SetActiveRecursively(false); //(false);
+        }
+        switch (body)
+        {
+            case BodyState.WellDone:
+                BodyStates[3].SetActiveRecursively(true);
+                break;
+            case BodyState.Medium:
+                BodyStates[2].SetActiveRecursively(true);
+                break;
+            case BodyState.Rare:
+                BodyStates[1].SetActiveRecursively(true);
+                break;
+            case BodyState.Raw:
+            default:
+                BodyStates[0].SetActiveRecursively(true);
+                break;
+        }
+        _currentBodyState = body;
     }
 }
