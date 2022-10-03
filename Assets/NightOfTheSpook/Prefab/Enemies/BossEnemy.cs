@@ -33,7 +33,6 @@ public class BossEnemy : MonoBehaviour
     private float _previousDPSCheckTime = 0.0f;
     private float _previousHealthValue = 0.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         _previousHealthValue = Attackable.Health;
@@ -41,10 +40,44 @@ public class BossEnemy : MonoBehaviour
         ConfigureTeleportAnimation();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateTeleport();
+        UpdateWinState();
+    }
+
+    private void UpdateTeleport()
+    {
+        if (IsTeleporting)
+        {
+            // need to wait for the callback to complete.
+            return;
+        }
+
+        if (ShouldTeleport())
+        {
+            _teleportAnimation.enabled = true;
+        }
+    }
+
+    private void UpdateWinState()
+    {
+        if (IsDead)
+        {
+            // Cancel the teleportation animation so we don't try to yeet the boss
+            // somewhere that won't exist momentarily.
+            _teleportAnimation.enabled = false;
+
+            // TODO: play a "boss is kill" animation here?
+
+            // Show the end screen.
+            var gm = GameManager.instance;
+            if(gm != null)
+            {
+                var sgm = FindObjectOfType<SpookyGameManager>();
+                gm.ShowWinScreen(sgm.state);
+            }
+        }
     }
 
     private bool ShouldTeleport()
@@ -59,20 +92,6 @@ public class BossEnemy : MonoBehaviour
         _previousHealthValue = Attackable.Health;
         _previousDPSCheckTime = Time.time;
         return result;
-    }
-
-    private void UpdateTeleport()
-    {
-        if(IsTeleporting)
-        {
-            // need to wait for the callback to complete.
-            return;
-        }
-
-        if(ShouldTeleport())
-        {
-            _teleportAnimation.enabled = true;
-        }
     }
 
     private bool IsTeleporting
@@ -97,5 +116,10 @@ public class BossEnemy : MonoBehaviour
         _teleportAnimation.duration = TeleportAnimationDuration;
         _teleportAnimation.OnAnimationFinished = HandleTeleportAnimationFinished;
         _teleportAnimation.enabled = false;
+    }
+
+    private bool IsDead
+    {
+        get { return Attackable.Health <= 0.0f; }
     }
 }
