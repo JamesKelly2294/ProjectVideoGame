@@ -26,12 +26,12 @@ public class UpgraderUI : MonoBehaviour
     }
 
     public void PickNewUpgrades() {
-        betaDaddy.SetActive(true);
         List<UpgradeOption> options = upgradeManager.GetRandomOptions(3);
         for (int i = 0; i < options.Count; i++) {
             if (i == 0) {           first.upgradeOption  = options[i]; 
             } else if (i == 1) {    second.upgradeOption = options[i]; 
             } else {                third.upgradeOption  = options[i]; }
         }
+        betaDaddy.SetActive(true);
     }
 }
