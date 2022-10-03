@@ -10,10 +10,12 @@ public class GameTimer : MonoBehaviour
     // Lol this should not be calculated here...
     private float _gameTime = 0;
 
+    private WaveManager waveManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        waveManager = GameObject.FindObjectOfType<WaveManager>();
     }
 
     // Update is called once per frame
@@ -25,5 +27,9 @@ public class GameTimer : MonoBehaviour
         var seconds = Mathf.FloorToInt(_gameTime - (minutes * 60.0f));
 
         text.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+
+        if (waveManager != null) {
+            text.text += " - Wave " + (waveManager.waveIndex + 1);
+        }
     }
 }

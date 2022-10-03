@@ -14,7 +14,7 @@ public class WaveManager : MonoBehaviour
     public Wave ActiveWave;
     public float ElapsedTime;
 
-    private int waveIndex = 0;
+    public int waveIndex = 0;
     public List<Wave> Waves = new List<Wave>();
 
     // Start is called before the first frame update

@@ -1337,6 +1337,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7077412210675636191, guid: d64c99b45d71640628190a84c37a5635, type: 3}
+      propertyPath: m_text
+      value: 1:30 - Wave 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077412210675636191, guid: d64c99b45d71640628190a84c37a5635, type: 3}
       propertyPath: m_VerticalAlignment
       value: 2048
       objectReference: {fileID: 0}
