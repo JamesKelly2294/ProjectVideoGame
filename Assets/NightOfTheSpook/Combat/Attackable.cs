@@ -88,7 +88,7 @@ public class Attackable : MonoBehaviour
         //     particles.transform.LookAt(beam.gameObject.transform.position * -1);
         // }
 
-        float ran = Random.Range(0, 1);
+        float ran = UnityEngine.Random.Range(0, 1);
         if (wasDamagedCooldown <= 0 && audioSource != null) {
             if (Health <= 0.0f && ran <= deathSoundChance && deathSound != null) {
                 audioSource.PlayOneShot(deathSound, deathSoundVolume);
