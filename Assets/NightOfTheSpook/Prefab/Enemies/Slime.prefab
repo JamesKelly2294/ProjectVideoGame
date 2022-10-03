@@ -95,9 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalHealth: 5
-  deathSound: {fileID: 0}
-  deathSoundChance: 0
-  deathSoundVolume: 0
+  deathSound: {fileID: 8300000, guid: 95df0bcc1f9ec4538ae44411460cf6d0, type: 3}
+  deathSoundChance: 0.4
+  deathSoundVolume: 0.25
   hurtSound: {fileID: 0}
   hurtSoundChance: 0
   hurtSoundVolume: 0
