@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,8 +15,8 @@ public enum SceneIndices
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject loadingScreen;
-    public Slider progressBar;
+    public GameObject transitionalLoadingScreen;
+    public GameObject introLoadingScreen;
 
     public string loadGameSceneName;
 
@@ -31,9 +32,12 @@ public class GameManager : MonoBehaviour
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
 
+    private GameObject _activeLoadingScreen;
+
     public void LoadGame()
     {
-        loadingScreen.SetActive(true);
+        _activeLoadingScreen = introLoadingScreen;
+        _activeLoadingScreen.SetActive(true);
         scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndices.TitleScreen));
 
         if (loadGameSceneName == null)
@@ -49,8 +53,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowLoseScreen(SpookyGameSummaryState state)
     {
+        _activeLoadingScreen = transitionalLoadingScreen;
         pastState = state;
-        loadingScreen.SetActive(true);
+        _activeLoadingScreen.SetActive(true);
         scenesLoading.Add(SceneManager.UnloadSceneAsync(loadGameSceneName));
 
         scenesLoading.Add(SceneManager.LoadSceneAsync("LoseScene", LoadSceneMode.Additive));
@@ -60,8 +65,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowWinScreen(SpookyGameSummaryState state)
     {
+        _activeLoadingScreen = transitionalLoadingScreen;
         pastState = state;
-        loadingScreen.SetActive(true);
+        _activeLoadingScreen.SetActive(true);
         scenesLoading.Add(SceneManager.UnloadSceneAsync(loadGameSceneName));
 
         scenesLoading.Add(SceneManager.LoadSceneAsync("RealWinScene", LoadSceneMode.Additive));
@@ -71,7 +77,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowMainWindow()
     {
-        loadingScreen.SetActive(true);
+        _activeLoadingScreen = transitionalLoadingScreen;
+        _activeLoadingScreen.SetActive(true);
 
         // Absolute fucking hack
         if (SceneManager.GetSceneByName(loadGameSceneName).isLoaded)
@@ -88,6 +95,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GetSceneLoadProgress());
     }
 
+    bool _waitingForSpaceToContinue;
     public IEnumerator GetSceneLoadProgress()
     {
         foreach(var sceneLoad in scenesLoading)
@@ -99,12 +107,52 @@ public class GameManager : MonoBehaviour
                 {
                     totalProgress += operation.progress;
                 }
-                progressBar.value = (totalProgress / scenesLoading.Count);
+                _activeLoadingScreen.GetComponentInChildren<Slider>().value = (totalProgress / scenesLoading.Count);
                 yield return null;
             }
         }
 
-        loadingScreen.gameObject.SetActive(false);
-        scenesLoading.Clear();
+        if(_activeLoadingScreen == transitionalLoadingScreen)
+        {
+            _activeLoadingScreen.gameObject.SetActive(false);
+            scenesLoading.Clear();
+        }
+        else
+        {
+            // O M E G A L U L
+            _activeLoadingScreen.GetComponentInChildren<Slider>().value = 1.0f;
+            var loading = _activeLoadingScreen.transform.FindDeepChild("Loading");
+            loading.GetComponent<TextMeshProUGUI>().text= "press space to continue";
+            _waitingForSpaceToContinue = true;
+            Time.timeScale = 0.0f;
+        }
+    }
+
+    private void Update()
+    {
+        if (_waitingForSpaceToContinue && Input.GetKeyDown(KeyCode.Space))
+        {
+            _activeLoadingScreen.gameObject.SetActive(false);
+            scenesLoading.Clear();
+            Time.timeScale = 1.0f;
+        }
+    }
+}
+
+public static class TransformDeepChildExtension
+{
+    public static Transform FindDeepChild(this Transform aParent, string aName)
+    {
+        Queue<Transform> queue = new Queue<Transform>();
+        queue.Enqueue(aParent);
+        while (queue.Count > 0)
+        {
+            var c = queue.Dequeue();
+            if (c.name == aName)
+                return c;
+            foreach (Transform t in c)
+                queue.Enqueue(t);
+        }
+        return null;
     }
 }
