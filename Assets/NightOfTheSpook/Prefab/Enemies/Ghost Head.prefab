@@ -95,15 +95,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalHealth: 35
-  deathSound: {fileID: 8300000, guid: ac846da46dd854831819a65f47117f56, type: 3}
+  audioSource: {fileID: 6035154379906156342}
+  DeathSoundID: SFX/GhostHeadDeath
   deathSoundChance: 1
   deathSoundVolume: 0.25
-  hurtSound: {fileID: 0}
+  HurtSoundID: 
   hurtSoundChance: 0
   hurtSoundVolume: 0
-  audioSource: {fileID: 6035154379906156342}
   Health: 35
   IsPlayer: 0
+  innerRenderer: {fileID: 0}
 --- !u!114 &7881687491104594979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
