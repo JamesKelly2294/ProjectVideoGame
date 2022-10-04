@@ -52,8 +52,15 @@ public class EnemySpawnManager : MonoBehaviour
     /// <param name="count">The number of enemies that should be spawned.</param>
     public void TriggerSpawner(EnemySpawner spawner, int count)
     {
+        Debug.Log("I should try...");
+        Debug.Log(spawner.gameObject.activeInHierarchy);
+        Debug.Log(spawner.enabled);
+        Debug.Log(spawner.isActiveAndEnabled);
+        Debug.Log(spawner.SpawnWhenVisible);
+        Debug.Log(spawner.IsReadyToSpawn);
         if (spawner != null && spawner.isActiveAndEnabled && (spawner.SpawnWhenVisible ? spawner.IsEligibleForSpawn : spawner.IsReadyToSpawn))
         {
+            Debug.Log("I tried...");
             spawner.TriggerGroupSpawn(count);
         }
     }

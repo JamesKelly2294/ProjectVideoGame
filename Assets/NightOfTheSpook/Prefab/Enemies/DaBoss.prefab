@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291b09cc05f134c98b354142c6282370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalHealth: 500
+  TotalHealth: 200
   deathSound: {fileID: 8300000, guid: cf81482b55f175d4bb815e18a0d84e3d, type: 3}
   deathSoundChance: 0
   deathSoundVolume: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   hurtSoundChance: 0
   hurtSoundVolume: 0
   audioSource: {fileID: 230030106281035495}
-  Health: 500
+  Health: 200
   IsPlayer: 0
   innerRenderer: {fileID: 0}
 --- !u!114 &7881687491104594979
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attackable: {fileID: 7881687491104595004}
   TeleportLocations: []
-  DamagePerSecondBeforeTeleport: 10
+  DamagePerSecondBeforeTeleport: 100
   TeleportAnimationDuration: 1
   TeleportAnimationCurve:
     serializedVersion: 2

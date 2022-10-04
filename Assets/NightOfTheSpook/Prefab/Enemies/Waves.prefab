@@ -3706,6 +3706,7 @@ MonoBehaviour:
     WaveGO: {fileID: 0}
     EndTime: 0
   ElapsedTime: 0
+  waveIndex: 0
   Waves:
   - WaveGO: {fileID: 7065574245868621235}
     EndTime: 60
@@ -9157,7 +9158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7065574245928202659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.330002, y: 0.57, z: -57.4}
+  m_LocalPosition: {x: 31.330002, y: 0.57, z: -52.54}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9183,7 +9184,7 @@ MonoBehaviour:
   CoolDownTime: 0
   DelaySpawningUntilAfterSeconds: 0
   StopSpawningAfterSeconds: 10000
-  SpawnWhenVisible: 0
+  SpawnWhenVisible: 1
   IsVisible: 1
 --- !u!23 &7065574245928202671
 MeshRenderer:
