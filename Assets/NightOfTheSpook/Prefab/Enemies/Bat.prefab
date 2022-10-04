@@ -104,6 +104,7 @@ MonoBehaviour:
   audioSource: {fileID: 1810180660112781566}
   Health: 2
   IsPlayer: 0
+  innerRenderer: {fileID: 0}
 --- !u!114 &895822701002909424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

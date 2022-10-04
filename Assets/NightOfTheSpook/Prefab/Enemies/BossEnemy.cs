@@ -27,7 +27,7 @@ public class BossEnemy : MonoBehaviour
     /// <summary>
     /// Animation curve to use when playing the teleport animation arbl garbl warble.
     /// </summary>
-    public AnimationCurve TeleportAnimationCurve; // = AnimationCurve.EaseInOut(1.0f, 0.0f, 0.0f, 1.0f);
+    public AnimationCurve TeleportAnimationCurve;
 
     public enum FaceState
     {
@@ -47,25 +47,16 @@ public class BossEnemy : MonoBehaviour
     public List<GameObject> BodyStates;
     private BodyState _currentBodyState = BodyState.Raw;
 
-    public AudioClip SpawnSound;
-    public List<AudioClip> PainSounds;
-
-    /// <summary>
-    /// List of sounds to pull from for idle sounds while them monster is roaming around.
-    /// </summary>
-    public List<AudioClip> IdleSounds;
-
     /// <summary>
     /// How often to play the idle sound.
     /// </summary>
     public float IdleSoundFrequency = 10.0f;
-    private float _idleSoundLastPlayedTime = 5.0f;
 
+    private float _idleSoundLastPlayedTime = 5.0f;
     private BossTeleportAnimation _teleportAnimation;
     private float _previousDPSCheckTime = 0.0f;
     private float _previousHealthValue = 0.0f;
-
-    private bool _isKill = false;
+    private bool _triggeredWinScreen = false;
 
     void Start()
     {
@@ -143,14 +134,14 @@ public class BossEnemy : MonoBehaviour
 
     private void UpdateWinState()
     {
-        if (IsDead && !_isKill)
+        if (IsDead && !_triggeredWinScreen)
         {
             // Cancel the teleportation animation so we don't try to yeet the boss
             // somewhere that won't exist momentarily.
             _teleportAnimation.enabled = false;
 
             // Prevent the win state from being updated repetitively.
-            _isKill = true;
+            _triggeredWinScreen = true;
 
             // TODO: play a "boss is kill" animation here?
 
@@ -258,27 +249,34 @@ public class BossEnemy : MonoBehaviour
         _currentBodyState = body;
     }
 
-    private void PlayRandomSoundFromList(List<AudioClip> sounds)
-    {
-        var soundIndex = Random.Range(0, sounds.Count);
-        var clip = sounds[soundIndex];
-        Attackable.audioSource.PlayOneShot(clip, 1.0f);
-    }
-
     private void PlaySpawnSound()
     {
-        Attackable.audioSource.PlayOneShot(SpawnSound, 1.0f);
+        //Attackable.audioSource.PlayOneShot(SpawnSound, 1.0f);
+        AudioManager.Instance.Play("SFX/MallowIdleNoises",
+            pitchMin: 0.9f, pitchMax: 1.1f,
+            volumeMin: 1.0f, volumeMax: 1.0f,
+            position: transform.position,
+            minDistance: 10, maxDistance: 20);
     }
 
     private void PlayIdleSound()
     {
-        PlayRandomSoundFromList(IdleSounds);
+        //PlayRandomSoundFromList(IdleSounds);
+        AudioManager.Instance.Play("SFX/MallowIdleNoises",
+            pitchMin: 0.9f, pitchMax: 1.1f,
+            volumeMin: 1.0f, volumeMax: 1.0f,
+            position: transform.position,
+            minDistance: 10, maxDistance: 20);
         _idleSoundLastPlayedTime = Time.time;
     }
 
     private void PlayPainSound()
     {
-        PlayRandomSoundFromList(PainSounds);
+        AudioManager.Instance.Play("SFX/MallowPainNoises",
+            pitchMin: 0.9f, pitchMax: 1.1f,
+            volumeMin: 1.0f, volumeMax: 1.0f,
+            position: transform.position,
+            minDistance: 10, maxDistance: 20);
     }
 
     private bool ShouldPlayIdleSound

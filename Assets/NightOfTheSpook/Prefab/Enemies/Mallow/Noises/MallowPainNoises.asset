@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c41cf80029352441b39ad9e2522d7a4, type: 3}
+  m_Name: MallowPainNoises
+  m_EditorClassIdentifier: 
+  id: SFX/MallowPainNoises
+  audioMixerGroup: {fileID: 4674431572857700961, guid: a0420a807fa813e4cb71d6b63902ac1c, type: 2}
+  audioClips:
+  - {fileID: 8300000, guid: ef743071373dff646a4178c1eaac08b9, type: 3}
+  - {fileID: 8300000, guid: e1d6bc8aa9123ca4181d441150368145, type: 3}
+  - {fileID: 8300000, guid: 6781600e1f9654c45802f7a0192d67b7, type: 3}
+  - {fileID: 8300000, guid: 0c5ee035f948ddf409404b9d72c930c3, type: 3}
+  - {fileID: 8300000, guid: 786db3dcdaf04124bbf03cba2f62b00f, type: 3}
