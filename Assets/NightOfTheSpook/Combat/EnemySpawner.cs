@@ -133,16 +133,4 @@ public class EnemySpawner : MonoBehaviour
             return pastDelay && beforeShutoffTime && isNotCoolingDown;
         }
     }
-
-    //void OnBecameVisible()
-    //{
-    //    Debug.Log($"{name} is visible");
-    //    _isVisible = true;
-    //}
-
-    //void OnBecameInvisible()
-    //{
-    //    Debug.Log($"{name} is not visible");
-    //    _isVisible = false;
-    //}
 }
