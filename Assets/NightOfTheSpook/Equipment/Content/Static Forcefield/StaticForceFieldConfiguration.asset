@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664f968163dd14ed38e7122c1b9c0f3a, type: 3}
   m_Name: StaticForceFieldConfiguration
   m_EditorClassIdentifier: 
-  displayName: Static Forcefield
+  displayName: Forcefield
   type: 0
   pickupPrefab: {fileID: 8742746091072468152, guid: 7a1d971a9e47148768f2c57383ee664f, type: 3}
   deployedPrefab: {fileID: 2210557486056277234, guid: ac480bffd134c42048ed6b0aff62ae65, type: 3}

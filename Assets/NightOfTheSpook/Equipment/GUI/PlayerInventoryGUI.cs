@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInventoryGUI : MonoBehaviour
 {
     public GameObject slots;
+    public TextMeshProUGUI label;
 
     public GameObject inventorySlotPrefab;
 
@@ -79,6 +81,20 @@ public class PlayerInventoryGUI : MonoBehaviour
 
             go.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
+
+        label.text = "";
+        if (_playerInventory.SelectedSlot != null && _playerInventory.SelectedSlot.configuration != null) {
+            label.text = "Click or press Space to ";
+
+            if (_playerInventory.SelectedSlot.configuration.type == EquipmentConfiguration.EquipmentType.Deployable) {
+                label.text += "Deploy";
+            } else {
+                label.text += "Throw";
+            }
+
+            label.text += " the " + _playerInventory.SelectedSlot.configuration.displayName;
+        }
+        
     }
 
     // Update is called once per frame
