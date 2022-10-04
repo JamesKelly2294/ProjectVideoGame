@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour
         pastState = state;
         loadingScreen.SetActive(true);
         scenesLoading.Add(SceneManager.UnloadSceneAsync(loadGameSceneName));
-        
+
         scenesLoading.Add(SceneManager.LoadSceneAsync("LoseScene", LoadSceneMode.Additive));
- 
+
         StartCoroutine(GetSceneLoadProgress());
     }
 

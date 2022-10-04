@@ -11,6 +11,8 @@ public class CameraDeathAnimation : MonoBehaviour
     void Start() {
     }
 
+    bool _showedLoseScreen;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +22,15 @@ public class CameraDeathAnimation : MonoBehaviour
             gameObject.transform.localPosition += new Vector3(0, speed * Time.deltaTime, -speed * Time.deltaTime);
         } else {
             // End the game...
-            GameObject.FindObjectOfType<GameManager>().ShowLoseScreen(GameObject.FindObjectOfType<SpookyGameManager>().state);
+            if (_showedLoseScreen)
+            {
+                return;
+            }
+            else
+            {
+                _showedLoseScreen = true;
+                GameObject.FindObjectOfType<GameManager>().ShowLoseScreen(GameObject.FindObjectOfType<SpookyGameManager>().state);
+            }
         }
     }
 }
