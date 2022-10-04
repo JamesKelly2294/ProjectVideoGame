@@ -95,13 +95,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalHealth: 6
-  deathSound: {fileID: 8300000, guid: 55b8bd511641344409e34cfd5e1e6e06, type: 3}
+  audioSource: {fileID: 2270825026361690260}
+  DeathSoundID: SFX/SkellyDeath
   deathSoundChance: 0.4
   deathSoundVolume: 0.25
-  hurtSound: {fileID: 0}
+  HurtSoundID: 
   hurtSoundChance: 0
   hurtSoundVolume: 0
-  audioSource: {fileID: 2270825026361690260}
   Health: 6
   IsPlayer: 0
   innerRenderer: {fileID: 0}

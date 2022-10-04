@@ -228,7 +228,7 @@ public class BossEnemy : MonoBehaviour
 
         foreach (var state in BodyStates)
         {
-            state.SetActive(false); //(false);
+            state.SetActive(false);
         }
         switch (body)
         {
@@ -251,7 +251,6 @@ public class BossEnemy : MonoBehaviour
 
     private void PlaySpawnSound()
     {
-        //Attackable.audioSource.PlayOneShot(SpawnSound, 1.0f);
         AudioManager.Instance.Play("SFX/MallowIdleNoises",
             pitchMin: 0.9f, pitchMax: 1.1f,
             volumeMin: 1.0f, volumeMax: 1.0f,
@@ -261,7 +260,6 @@ public class BossEnemy : MonoBehaviour
 
     private void PlayIdleSound()
     {
-        //PlayRandomSoundFromList(IdleSounds);
         AudioManager.Instance.Play("SFX/MallowIdleNoises",
             pitchMin: 0.9f, pitchMax: 1.1f,
             volumeMin: 1.0f, volumeMax: 1.0f,

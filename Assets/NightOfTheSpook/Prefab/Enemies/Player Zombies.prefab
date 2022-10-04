@@ -95,15 +95,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalHealth: 10
-  deathSound: {fileID: 8300000, guid: ca7ea8330e9c942fe837fa51b9074166, type: 3}
+  audioSource: {fileID: 3164184951140890133}
+  DeathSoundID: SFX/PlayerZombieDeath
   deathSoundChance: 0.3
   deathSoundVolume: 0.25
-  hurtSound: {fileID: 0}
+  HurtSoundID: 
   hurtSoundChance: 0
   hurtSoundVolume: 0
-  audioSource: {fileID: 3164184951140890133}
   Health: 10
   IsPlayer: 0
+  innerRenderer: {fileID: 0}
 --- !u!114 &895822701002909424
 MonoBehaviour:
   m_ObjectHideFlags: 0

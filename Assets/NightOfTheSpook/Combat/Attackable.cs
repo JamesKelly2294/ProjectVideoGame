@@ -8,24 +8,31 @@ public class Attackable : MonoBehaviour
     /// <summary>
     /// The number of points of health the attackable entity can have. The range is somewhat arbitrary.
     /// </summary>
-    public float TotalHealth = 3f;
-
-
-    public AudioClip deathSound;
-    public float deathSoundChance, deathSoundVolume;
-    public AudioClip hurtSound;
-    public float hurtSoundChance, hurtSoundVolume;
+    public float TotalHealth = 3.0f;
+    
+    /// <summary>
+    /// The AudioSource that is attached to this component's GameObject. Used to play sound effects (coordinated with the <see cref="AudioManager"/>).
+    /// </summary>
     public AudioSource audioSource;
+
+    /// <summary>
+    /// Identifier for the sound effect that is played when the attackable is killed (e.g. "SFX/EntityNameDeath")
+    /// </summary>
+    public string DeathSoundID = "";
+    public float deathSoundChance, deathSoundVolume;
+
+    /// <summary>
+    /// Identifier for the sound effect that is played when the attackable is hurt (e.g. "SFX/EntityNameHurt")
+    /// </summary>
+    public string HurtSoundID = "";
+    public float hurtSoundChance, hurtSoundVolume;
 
     /// <summary>
     /// Check to see if the attackable entity is still alive.
     /// </summary>
     public bool IsAlive
     {
-        get
-        {
-            return Health > 0;
-        }
+        get { return Health > 0; }
     }
 
     /// <summary>
@@ -33,14 +40,21 @@ public class Attackable : MonoBehaviour
     /// </summary>
     public float Health = 3f;
 
+    /// <summary>
+    /// Is this Attackable the player?
+    /// </summary>
     public bool IsPlayer = false;
 
-    private float wasDamagedCooldown = 0f;
-    private AnimationCurve wasDamagedAnimationCurve;
-    private Color damagedColor = new Color(1f,0,0,1f);
+    /// <summary>
+    /// The Renderer component that is attached to the Attackable GameObject.
+    /// Used for playing with emissivity.
+    /// </summary>
     public Renderer innerRenderer;
 
     private Color _cachedEmissiveColor;
+    private float wasDamagedCooldown = 0f;
+    private AnimationCurve wasDamagedAnimationCurve;
+    private Color damagedColor = new Color(1f, 0, 0, 1f);
 
     void Start() {
         Health = TotalHealth;
@@ -88,12 +102,13 @@ public class Attackable : MonoBehaviour
         //     particles.transform.LookAt(beam.gameObject.transform.position * -1);
         // }
 
-        float ran = UnityEngine.Random.Range(0, 1);
         if (wasDamagedCooldown <= 0 && audioSource != null) {
-            if (Health <= 0.0f && ran <= deathSoundChance && deathSound != null) {
-                audioSource.PlayOneShot(deathSound, deathSoundVolume);
-            } else if (Health > 0.0f && ran <= hurtSoundChance && hurtSound != null) {
-                audioSource.PlayOneShot(hurtSound, hurtSoundChance);
+            if(ShouldPlayDeathSound)
+            {
+                PlayDeathSound();
+            }
+            else if (ShouldPlayHurtSound) {
+                PlayHurtSound();
             }
         }
 
@@ -124,5 +139,33 @@ public class Attackable : MonoBehaviour
             _animatingDamage = true;
             wasDamagedCooldown = 0.2f;
         }
+    }
+
+    private bool ShouldPlayDeathSound
+    {
+        get { return Health <= 0.0f && (UnityEngine.Random.Range(0, 1) <= deathSoundChance) && DeathSoundID != ""; }
+    }
+
+    private bool ShouldPlayHurtSound
+    {
+        get { return Health > 0.0f && (UnityEngine.Random.Range(0, 1) <= hurtSoundChance) && HurtSoundID != ""; }
+    }
+
+    private void PlayDeathSound()
+    {
+        AudioManager.Instance.Play(DeathSoundID,
+            pitchMin: 0.9f, pitchMax: 1.1f,
+            volumeMin: deathSoundVolume, volumeMax: deathSoundVolume,
+            position: transform.position,
+            minDistance: 10, maxDistance: 20);
+    }
+
+    private void PlayHurtSound()
+    {
+        AudioManager.Instance.Play(HurtSoundID,
+            pitchMin: 0.9f, pitchMax: 1.1f,
+            volumeMin: hurtSoundVolume, volumeMax: hurtSoundVolume,
+            position: transform.position,
+            minDistance: 10, maxDistance: 20);
     }
 }
