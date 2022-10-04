@@ -35,12 +35,14 @@ public class BossTeleportAnimation : MonoBehaviour
 
         float pct = _deltaTime / duration;
 
-        transform.localScale = _startingScale * scaleCurve.Evaluate(pct);
+        
 
         if (pct >= 1.0)
         {
             OnAnimationFinished();
             Destroy(this);
+        } else {
+            transform.localScale = _startingScale * scaleCurve.Evaluate(pct);
         }
     }
 }

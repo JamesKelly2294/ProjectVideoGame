@@ -59,7 +59,7 @@ public class BossEnemy : MonoBehaviour
     /// How often to play the idle sound.
     /// </summary>
     public float IdleSoundFrequency = 10.0f;
-    private float _idleSoundLastPlayedTime = 0.0f;
+    private float _idleSoundLastPlayedTime = 5.0f;
 
     private BossTeleportAnimation _teleportAnimation;
     private float _previousDPSCheckTime = 0.0f;
@@ -182,6 +182,8 @@ public class BossEnemy : MonoBehaviour
     private void HandleTeleportAnimationFinished()
     {
 
+        transform.localScale = Vector3.one;
+
         if ( TeleportLocations == null || TeleportLocations.Count == 0) {
             TeleportLocations = new List<Transform>();
             EquipmentSpawner[] spawns = (EquipmentSpawner[])GameObject.FindObjectsOfTypeAll(typeof(EquipmentSpawner));
@@ -193,13 +195,6 @@ public class BossEnemy : MonoBehaviour
         var nextLocationIndex = Random.Range(0, TeleportLocations.Count);
         var nextLocation = TeleportLocations[nextLocationIndex];
         gameObject.transform.position = nextLocation.position;
-
-        // Reset the face back to normal.
-        SetFace(FaceState.Idle);
-        CapsuleCollider col = GetComponent<CapsuleCollider>();
-        col.center = Vector3.down * 2;
-        col.radius = 2f;
-        col.height = 6.6f;
 
         // The previous animation will destroy itself so we need a new one.
         ConfigureTeleportAnimation();
@@ -266,7 +261,7 @@ public class BossEnemy : MonoBehaviour
     private void PlayRandomSoundFromList(List<AudioClip> sounds)
     {
         var soundIndex = Random.Range(0, sounds.Count);
-        var clip = PainSounds[soundIndex];
+        var clip = sounds[soundIndex];
         Attackable.audioSource.PlayOneShot(clip, 1.0f);
     }
 

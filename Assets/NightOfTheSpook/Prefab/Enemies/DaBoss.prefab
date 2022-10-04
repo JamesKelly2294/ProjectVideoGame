@@ -403,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attackable: {fileID: 7881687491104595004}
   TeleportLocations: []
-  DamagePerSecondBeforeTeleport: 100
+  DamagePerSecondBeforeTeleport: 10
   TeleportAnimationDuration: 1
   TeleportAnimationCurve:
     serializedVersion: 2
@@ -446,7 +446,7 @@ MonoBehaviour:
       outWeight: 0.11556237
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -465,7 +465,6 @@ MonoBehaviour:
   - {fileID: 7156507099729824880}
   SpawnSound: {fileID: 8300000, guid: 632f8e6a6377bb14cb62673bbbaf08bd, type: 3}
   PainSounds:
-  - {fileID: 8300000, guid: d6ece98c3e12c694b96736afe9025cf9, type: 3}
   - {fileID: 8300000, guid: e1d6bc8aa9123ca4181d441150368145, type: 3}
   - {fileID: 8300000, guid: ef743071373dff646a4178c1eaac08b9, type: 3}
   - {fileID: 8300000, guid: 6781600e1f9654c45802f7a0192d67b7, type: 3}
