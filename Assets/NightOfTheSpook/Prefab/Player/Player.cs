@@ -41,28 +41,44 @@ public class Player : MonoBehaviour
         a.Health = Mathf.Min(100, a.Health);
 
         Vector3 movement = Vector3.zero;
-        if (Input.GetKey("w"))
-        {
-            movement += Vector3.forward;
-        }
 
-        if (Input.GetKey("s"))
-        {
-            movement += Vector3.back;
-        }
+        var vertical = Input.GetAxis("Joystick Vertical Movement");
+        var horizontal = Input.GetAxis("Joystick Horizontal Movement");
+        var controllerMovement = vertical != 0 || horizontal != 0;
 
-        if (Input.GetKey("a"))
+        if (controllerMovement)
         {
-            movement += Vector3.left;
-        }
+            movement = -vertical * Vector3.forward + horizontal * Vector3.right;
+            var joystickSpeed = Mathf.Clamp01(movement.magnitude);
 
-        if (Input.GetKey("d"))
+            movement = Quaternion.Euler(0, -45, 0) * movement.normalized;
+            transform.position += movement * Time.deltaTime * speed * joystickSpeed;
+        }
+        else
         {
-            movement += Vector3.right;
-        }
+            if (Input.GetKey("w"))
+            {
+                movement += Vector3.forward;
+            }
 
-        movement = Quaternion.Euler(0, -45, 0) * movement.normalized;
-        transform.position += movement * Time.deltaTime * speed;
+            if (Input.GetKey("s"))
+            {
+                movement += Vector3.back;
+            }
+
+            if (Input.GetKey("a"))
+            {
+                movement += Vector3.left;
+            }
+
+            if (Input.GetKey("d"))
+            {
+                movement += Vector3.right;
+            }
+
+            movement = Quaternion.Euler(0, -45, 0) * movement.normalized;
+            transform.position += movement * Time.deltaTime * speed;
+        }
 
         // Animate walk
         if (movement != Vector3.zero) {
@@ -91,16 +107,31 @@ public class Player : MonoBehaviour
         float innerVerticalOffet = walkVertical.Evaluate(walkVerticalTime / walkVerticalTotalTime);
         inner.transform.position = new Vector3(inner.transform.position.x, innerVerticalOffet, inner.transform.position.z);
 
-        float distance;
-        Vector3 cursorLoc = Vector3.zero;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (plane.Raycast(ray, out distance))
+        var verticalAim = Input.GetAxis("Joystick Aim Vertical Movement");
+        var horizontalAim = Input.GetAxis("Joystick Aim Horizontal Movement");
+        var controllerAim = verticalAim != 0 || horizontalAim != 0;
+
+        if(controllerAim)
         {
-            cursorLoc = ray.GetPoint(distance);
+            if (Mathf.Abs(verticalAim) > 0.5 || Mathf.Abs(horizontalAim) > 0.5)
+            {
+                var aimAt = Quaternion.Euler(0, -45, 0) * new Vector3(horizontalAim, 0.0f, -verticalAim);
+                inner.transform.LookAt(inner.transform.position + aimAt * 10.0f);
+            }
+        }
+        else if (Input.GetAxis("Mouse X") != 0.0f || Input.GetAxis("Mouse Y") != 0.0f)
+        {
+            Vector3 cursorLoc = Vector3.zero;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (plane.Raycast(ray, out float distance))
+            {
+                cursorLoc = ray.GetPoint(distance);
+            }
+
+            cursorLoc = new Vector3(cursorLoc.x, inner.transform.position.y, cursorLoc.z);
+            inner.transform.LookAt(cursorLoc);
         }
 
-        cursorLoc = new Vector3(cursorLoc.x, inner.transform.position.y, cursorLoc.z);
-        inner.transform.LookAt(cursorLoc);
         Vector3 eulerRotation = inner.transform.rotation.eulerAngles;
         inner.transform.rotation = Quaternion.Euler(new Vector3(eulerRotation.x, eulerRotation.y, walkWobble.Evaluate(walkVerticalTime / walkVerticalTotalTime) * 90));
     }
